@@ -5,8 +5,55 @@
       <artifact name="psms:jar" />
     </artifacts-to-build>
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1da062b-823f-4da1-a51c-84bc091a96fe" name="Default Changelist" comment="" />
+    <list default="true" id="c1da062b-823f-4da1-a51c-84bc091a96fe" name="Default Changelist" comment="西湖后勤人事管理系统">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysAttendanceTimeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysAttendanceTimeMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysAttendanceTimeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysAttendanceTimeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysAttendanceTimeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84b4d803-b02a-4c66-a4f6-07bda2582ec2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84b4d803-b02a-4c66-a4f6-07bda2582ec2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/SecurityUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/SecurityUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/Test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/Test1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/aspectj/DataScopeAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/aspectj/DataScopeAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDeptController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDeptController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysRoleTimeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRoleTimeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysAttendanceTime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysRoleTimeMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysRoleTimeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysRoleTimeServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/SecurityUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/SecurityUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/Test1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/Test1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysDeptController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysDeptController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysRoleTimeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysUserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRoleTimeManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/mapper/SysRoleTimeMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/ISysRoleTimeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/impl/SysRoleTimeServiceImpl.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -140,12 +187,38 @@
       <workItem from="1608260972245" duration="17450000" />
       <workItem from="1608463378277" duration="144000" />
       <workItem from="1608513289942" duration="2997000" />
-      <workItem from="1608516311729" duration="1174000" />
+      <workItem from="1608516311729" duration="4149000" />
+      <workItem from="1608520836204" duration="13090000" />
+      <workItem from="1608539776978" duration="4453000" />
     </task>
+    <task id="LOCAL-00001" summary="西湖后勤人事管理系统">
+      <created>1608517856170</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608517856170</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="西湖后勤人事管理系统" />
+    <option name="LAST_COMMIT_MESSAGE" value="西湖后勤人事管理系统" />
   </component>
   <component name="WindowStateProjectService">
     <state x="651" y="274" key="#Notifications" timestamp="1608516536490">
@@ -160,22 +233,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="473" y="212" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1607594019947" />
-    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1608280550618">
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1608541138836">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1608280550618" />
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1608541138836" />
     <state x="499" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607258512403">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1607258512403" />
-    <state x="532" y="305" width="473" height="221" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1608026999455">
+    <state x="532" y="305" width="473" height="221" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1608542318719">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="532" y="305" width="473" height="221" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1608026999455" />
+    <state x="532" y="305" width="473" height="221" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1608542318719" />
     <state x="410" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1607917582352">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="410" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1607917582352" />
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1608542428826">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1608542428826" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1608517467410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -188,58 +265,62 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="453" y="321" key="Gitee.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1608517451702" />
-    <state width="1493" height="2" key="GridCell.Tab.0.bottom" timestamp="1608515485683">
+    <state width="1493" height="102" key="GridCell.Tab.0.bottom" timestamp="1608543545568">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608515485683" />
-    <state width="1493" height="2" key="GridCell.Tab.0.center" timestamp="1608515485683">
+    <state width="1493" height="102" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608543545568" />
+    <state width="1493" height="102" key="GridCell.Tab.0.center" timestamp="1608543545568">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1608515485683" />
-    <state width="1493" height="2" key="GridCell.Tab.0.left" timestamp="1608515485683">
+    <state width="1493" height="102" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1608543545568" />
+    <state width="1493" height="102" key="GridCell.Tab.0.left" timestamp="1608543545568">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1608515485683" />
-    <state width="1493" height="2" key="GridCell.Tab.0.right" timestamp="1608515485683">
+    <state width="1493" height="102" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1608543545568" />
+    <state width="1493" height="102" key="GridCell.Tab.0.right" timestamp="1608543545568">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1608515485683" />
-    <state width="1493" height="2" key="GridCell.Tab.1.bottom" timestamp="1608515485556">
+    <state width="1493" height="102" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1608543545568" />
+    <state width="1493" height="102" key="GridCell.Tab.1.bottom" timestamp="1608543545445">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608515485556" />
-    <state width="1493" height="2" key="GridCell.Tab.1.center" timestamp="1608515485556">
+    <state width="1493" height="102" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608543545445" />
+    <state width="1493" height="102" key="GridCell.Tab.1.center" timestamp="1608543545445">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1608515485556" />
-    <state width="1493" height="2" key="GridCell.Tab.1.left" timestamp="1608515485556">
+    <state width="1493" height="102" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1608543545445" />
+    <state width="1493" height="102" key="GridCell.Tab.1.left" timestamp="1608543545445">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1608515485556" />
-    <state width="1493" height="2" key="GridCell.Tab.1.right" timestamp="1608515485556">
+    <state width="1493" height="102" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1608543545445" />
+    <state width="1493" height="102" key="GridCell.Tab.1.right" timestamp="1608543545445">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1608515485556" />
-    <state width="1493" height="2" key="GridCell.Tab.2.bottom" timestamp="1608515485556">
+    <state width="1493" height="102" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1608543545445" />
+    <state width="1493" height="102" key="GridCell.Tab.2.bottom" timestamp="1608543545445">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608515485556" />
-    <state width="1493" height="2" key="GridCell.Tab.2.center" timestamp="1608515485556">
+    <state width="1493" height="102" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608543545445" />
+    <state width="1493" height="102" key="GridCell.Tab.2.center" timestamp="1608543545445">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1608515485556" />
-    <state width="1493" height="2" key="GridCell.Tab.2.left" timestamp="1608515485556">
+    <state width="1493" height="102" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1608543545445" />
+    <state width="1493" height="102" key="GridCell.Tab.2.left" timestamp="1608543545445">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1608515485556" />
-    <state width="1493" height="2" key="GridCell.Tab.2.right" timestamp="1608515485556">
+    <state width="1493" height="102" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1608543545445" />
+    <state width="1493" height="102" key="GridCell.Tab.2.right" timestamp="1608543545445">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="2" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1608515485556" />
+    <state width="1493" height="102" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1608543545445" />
     <state x="283" y="4" width="914" height="814" key="SettingsEditor" timestamp="1608517000435">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="283" y="4" width="914" height="814" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1608517000435" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1608517964887">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1608517964887" />
     <state x="349" y="67" key="com.intellij.database.dbimport.ImportDialog" timestamp="1608098424474">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -248,20 +329,42 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="234" y="1" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1608106554360" />
-    <state x="517" y="140" width="602" height="532" key="find.popup" timestamp="1608261895477">
+    <state x="313" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1608533161201">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="517" y="140" width="602" height="532" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1608261895477" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1607680088502">
+    <state x="313" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1608533161201" />
+    <state x="517" y="140" width="602" height="532" key="find.popup" timestamp="1608537637300">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1607680088502" />
+    <state x="517" y="140" width="602" height="532" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1608537637300" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1608538024154">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1608538024154" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1608541943611">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1608541943611" />
     <state x="567" y="95" key="svn.repositoryBrowser" timestamp="1608463520322">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="567" y="95" key="svn.repositoryBrowser/0.0.1536.824@0.0.1536.824" timestamp="1608463520322" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/psms/project/common/CaptchaController.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo typeName="org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest" fieldName="request" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="((SysRole)((Object[])param_3)[0]).menuCheckStrictly" custom="com.jeethink.project.system.domain.SysRole,java.lang.Object[]" />

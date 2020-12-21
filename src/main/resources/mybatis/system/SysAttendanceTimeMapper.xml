@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.system.mapper.SysAttendanceTimeMapper">
+    <resultMap id="timeResult" type="com.psms.project.system.domain.SysAttendanceTime">
+        <id property="timeId" column="time_id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="roleName" column="role_name"/>
+        <result property="roleKey" column="role_key"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    <sql id="timeVo">
+        select t.time_id,t.role_id,t.start_time,t.end_time,
+        r.role_name,r.role_key,r.status
+        from sys_attendance_time t
+        left join sys_role r on t.role_id=r.role_id
+    </sql>
+    <insert id="addTime" parameterType="com.psms.project.system.domain.SysAttendanceTime">
+        insert into sys_attendance_time(role_id,start_time,end_time)
+         values (#{roleId},#{startTime},#{endTime})
+    </insert>
+    <update id="updateTime">
+        update sys_attendance_time set
+        role_id=#{roleId},
+        start_time=#{startTime},
+        end_time=#{endTime}
+        where time_id=#{timeId}
+    </update>
+    <delete id="delTime">
+        delete from sys_attendance_time where
+        time_id=#{timeId}
+    </delete>
+    <select id="timeList" parameterType="com.psms.project.system.domain.SysAttendanceTime" resultMap="timeResult">
+       <include refid="timeVo"/>
+       where r.status=0
+       order by role_id
+    </select>
+    <select id="timeInfo"  parameterType="int" resultMap="timeResult">
+        <include refid="timeVo"/>
+        where t.time_id=#{timeId} and r.status=0
+    </select>
+
+</mapper>

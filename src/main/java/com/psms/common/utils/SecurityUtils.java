@@ -81,11 +81,11 @@ public class SecurityUtils
     /**
      * 是否为管理员
      * 
-     * @param userId 用户ID
+     * @param roleId 用户ID
      * @return 结果
      */
-    public static boolean isAdmin(Long userId)
+    public static boolean isAdmin(Long roleId)
     {
-        return userId != null && 1L == userId;
+        return roleId != null && 1L == roleId;
     }
 }

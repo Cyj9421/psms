@@ -115,7 +115,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/*/api-docs").anonymous()
                 .antMatchers("/druid/**").anonymous()
                 .antMatchers("/system/user/**").permitAll()
-//                .antMatchers("/system/dept/**").permitAll()
+                .antMatchers("/system/dept/**").permitAll()
                 .antMatchers("/system/role/**").permitAll()
                 .antMatchers("/system/post/**").permitAll()
                 .antMatchers("/system/menu/**").permitAll()

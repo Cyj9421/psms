@@ -181,9 +181,9 @@ public class SysUserController extends BaseController
     @PutMapping("/resetPwd")
     public AjaxResult resetPwd(@RequestBody SysUser user)
     {
-//        userService.checkUserAllowed(user);
-//        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
-//        user.setUpdateBy(SecurityUtils.getUsername());
+        userService.checkUserAllowed(user);
+        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+        user.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(userService.resetPwd(user));
     }
 
@@ -195,8 +195,8 @@ public class SysUserController extends BaseController
     @PutMapping("/changeStatus")
     public AjaxResult changeStatus(@RequestBody SysUser user)
     {
-//        userService.checkUserAllowed(user);
-//        user.setUpdateBy(SecurityUtils.getUsername());
+        userService.checkUserAllowed(user);
+        user.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(userService.updateUserStatus(user));
     }
 }
