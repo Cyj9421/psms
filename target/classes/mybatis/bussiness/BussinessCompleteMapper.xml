@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.bussiness.mapper.BussinessCompleteMapper">
+    <resultMap type="com.psms.project.bussiness.domain.BussinessComplete" id="BussinessCompleteResult">
+        <id property="destroyId"           column="destroy_id"/>
+        <result property="tripId"          column="trip_id"/>
+        <result property="destroyStatus"   column="destroy_status"/>
+        <result property="createDestroyBy"        column="create_destroy_by"/>
+        <result property="createDestroyTime"      column="create_destroy_time"/>
+        <result property="updateDestroyBy"        column="update_destroy_by"/>
+        <result property="updateDestroyTime"      column="update_destroy_time"/>
+        <association property="trips" column="trip_id" resultMap="BussinessTripResult"/>
+    </resultMap>
+    <resultMap type="com.psms.project.bussiness.domain.BussinessTrip" id="BussinessTripResult">
+        <id property="tripId"           column="trip_id"/>
+        <result property="workNum"      column="work_num"/>
+        <result property="deptName"     column="dept_name"/>
+        <result property="postName"     column="post_name"/>
+        <result property="deptLeader"   column="dept_leader"/>
+        <result property="tripAddress"  column="trip_address"/>
+        <result property="reason"       column="reason"/>
+        <result property="tripStatus"   column="trip_status"/>
+        <result property="startTime"    column="start_time"/>
+        <result property="endTime"      column="end_time"/>
+        <result property="createTripBy"     column="create_trip_by"/>
+        <result property="createTripTime"   column="create_trip_time"/>
+        <result property="updateTripBy"     column="update_trip_by"/>
+        <result property="updateTripTime"   column="update_trip_time"/>
+    </resultMap>
+    <sql id="selectBussinessVo">
+         select b.trip_id,b.work_num,b.dept_name,b.post_name,b.dept_leader,b.trip_address,b.reason,b.trip_status,b.start_time,b.end_time,b.create_trip_by,b.create_trip_time,b.update_trip_by,b.update_trip_time,
+         c.destroy_id,c.destroy_status,c.create_destroy_by,c.create_destroy_time,c.update_destroy_by,c.update_destroy_time
+         from bussiness_trip b
+         right join bussiness_complete c on b.trip_id=c.trip_id
+    </sql>
+    <insert id="addDestroy" parameterType="com.psms.project.bussiness.domain.BussinessComplete">
+            insert into bussiness_complete(trip_id,create_destroy_by,create_destroy_time)
+            values(#{tripId},#{createDestroyBy},#{createDestroyTime})
+    </insert>
+    <update id="updateDestroy" parameterType="com.psms.project.bussiness.domain.BussinessComplete">
+            update bussiness_complete
+            set destroy_status=#{destroyStatus},update_destroy_by=#{updateDestroyBy},update_destroy_time=#{updateDestroyTime}
+            where destroy_id=#{destroyId} and destroy_status=1
+    </update>
+    <select id="destroyList" parameterType="com.psms.project.bussiness.domain.BussinessComplete" resultMap="BussinessCompleteResult">
+        <include refid="selectBussinessVo"/>
+    </select>
+    <select id="destroyInfo" parameterType="int" resultMap="BussinessCompleteResult">
+        select c.destroy_id,c.trip_id,c.destroy_status,c.create_destroy_by,c.create_destroy_time,c.update_destroy_by,c.update_destroy_time
+        from bussiness_complete c
+        where  c.destroy_id=#{destroyId}
+    </select>
+</mapper>

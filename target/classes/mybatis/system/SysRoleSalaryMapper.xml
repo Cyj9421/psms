@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.system.mapper.SysRoleSalaryMapper">
+    <resultMap id="salaryResult" type="com.psms.project.system.domain.SysRoleSalary">
+        <id property="salaryId" column="salary_id"/>
+        <result property="workId" column="work_id"/>
+        <result property="baseSalary" column="base_salary"/>
+        <result property="overtimeSalary" column="overtime_salary"/>
+        <result property="bonus" column="bonus"/>
+        <result property="penalty" column="penalty"/>
+        <result property="lateSalary" column="late_salary"/>
+        <result property="earlySalary" column="early_salary"/>
+        <result property="afdSalary" column="afd_salary"/>
+        <result property="remark" column="remark"/>
+        <result property="salary" column="salary"/>
+        <result property="getStatus" column="get_status"/>
+        <result property="getTime" column="get_time"/>
+        <result property="workNum" column="work_num"/>
+        <result property="fullName" column="full_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="postName" column="post_name"/>
+        <result property="postCode" column="post_code"/>
+    </resultMap>
+    <resultMap id="summaryResult" type="com.psms.project.bussiness.domain.AttendnceSummary">
+        <id property="summaryId" column="summary_id"/>
+        <result property="workId" column="work_id"/>
+        <result property="rpId" column="rp_id"/>
+        <result property="lateNum" column="late_num"/>
+        <result property="earlyNum" column="early_num"/>
+        <result property="afdNum" column="afd_num"/>
+        <result property="overtime" column="overtime"/>
+        <result property="rewardsNum" column="rewards_num"/>
+        <result property="punishmentNum" column="punishment_num"/>
+        <result property="btNum" column="bt_num"/>
+    </resultMap>
+    <sql id="selectSalaryVo">
+        select s.salary_id,s.work_id,s.base_salary,s.overtime_salary,s.bonus,s.penalty,s.late_salary,s.early_salary,s.afd_salary,s.remark,s.salary,s.get_status,s.get_time,
+        n.work_num,n.full_name,
+        d.dept_name,d.leader,
+        p.post_code,p.post_name
+        from sys_role_salary s
+            left join sys_user_number n on s.work_id=n.work_id
+            left join sys_dept d on n.dept_id=d.dept_id
+            left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <insert id="addSalary" parameterType="com.psms.project.system.domain.SysRoleSalary">
+        insert into sys_role_salary(work_id,base_salary,overtime_salary,bonus,penalty,late_salary,early_salary,afd_salary,remark,salary)
+        values (#{workId},#{baseSalary},#{overtimeSalary},#{bonus},#{penalty},#{lateSalary},#{earlySalary},#{afdSalary},#{remark},#{salary})
+    </insert>
+    <update id="getSalary" parameterType="com.psms.project.system.domain.SysRoleSalary">
+        update sys_role_salary set
+        get_status=#{getStatus},
+        get_time=#{getTime}
+        where salary_id=#{salaryId} and get_status=1
+    </update>
+    <select id="salaryList" resultMap="salaryResult">
+        <include refid="selectSalaryVo"/>
+    </select>
+    <select id="salaryInfo" resultMap="salaryResult">
+        <include refid="selectSalaryVo"/>
+        where salary_id=#{salaryId}
+    </select>
+    <select id="calcSummary" parameterType="int" resultMap="summaryResult">
+        select a.late_num,a.early_num,a.afd_num,a.overtime,a.rewards_num,a.punishment_num
+        from attendance_summary a where work_id=#{workId}
+    </select>
+</mapper>

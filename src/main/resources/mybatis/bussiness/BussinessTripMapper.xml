@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.bussiness.mapper.BussinessTripMapper">
+    <resultMap type="com.psms.project.bussiness.domain.BussinessTrip" id="BussinessTripResult">
+        <id property="tripId"           column="trip_id"/>
+        <result property="workNum"      column="work_num"/>
+        <result property="deptName"     column="dept_name"/>
+        <result property="postName"     column="post_name"/>
+        <result property="deptLeader"   column="dept_leader"/>
+        <result property="tripAddress"  column="trip_address"/>
+        <result property="reason"       column="reason"/>
+        <result property="tripStatus"   column="trip_status"/>
+        <result property="startTime"    column="start_time"/>
+        <result property="endTime"      column="end_time"/>
+        <result property="createTripBy"     column="create_trip_by"/>
+        <result property="createTripTime"   column="create_trip_time"/>
+        <result property="updateTripBy"     column="update_trip_by"/>
+        <result property="updateTripTime"   column="update_trip_time"/>
+    </resultMap>
+    <sql id="selectTripVo">
+        select b.trip_id,b.work_num,b.dept_name,b.post_name,b.dept_leader,b.trip_address,b.reason,b.trip_status,b.start_time,b.end_time,b.create_trip_by,b.create_trip_time,b.update_trip_by,b.update_trip_time
+        from bussiness_trip b
+    </sql>
+    <sql id="updateStatusVo">
+           update bussiness_trip set
+            trip_status=#{tripStatus},
+            update_trip_by=#{updateTripBy},
+	        update_trip_time=#{updateTripTime}
+	    where trip_id=#{tripId}
+    </sql>
+    <select id="selectTripList" parameterType="com.psms.project.bussiness.domain.BussinessTrip" resultMap="BussinessTripResult">
+        <include refid="selectTripVo"/>
+        where b.trip_status=1
+    </select>
+    <select id="selectTripInfo" parameterType="int" resultMap="BussinessTripResult">
+        <include refid="selectTripVo"/>
+        where b.trip_id=#{tripId}
+    </select>
+    <insert id="addTrip" parameterType="com.psms.project.bussiness.domain.BussinessTrip">
+        INSERT INTO bussiness_trip (work_num,dept_name,post_name,dept_leader,trip_address,reason,start_time,end_time,create_trip_by,create_trip_time)
+        VALUES(#{workNum},#{deptName},#{postName},#{deptLeader},#{tripAddress},#{reason},#{startTime},#{endTime},#{createTripBy},#{createTripTime})
+    </insert>
+    <update id="updateTrip" parameterType="com.psms.project.bussiness.domain.BussinessTrip">
+        update bussiness_trip set
+            trip_id=#{tripId},
+	        work_num=#{workNum},
+	        dept_name=#{deptName},
+	        post_name=#{postName},
+	        dept_leader=#{deptLeader},
+	        trip_address=#{tripAddress},
+	        reason=#{reason},
+	        start_time=#{startTime},
+	        end_time=#{endTime},
+	        update_trip_by=#{updateTripBy},
+	        update_trip_time=#{updateTripTime}
+	    where trip_id=#{tripId}
+    </update>
+    <update id="updateStatus" parameterType="com.psms.project.bussiness.domain.BussinessTrip">
+        <include refid="updateStatusVo"/>
+        and trip_status=1
+    </update>
+    <update id="bussinessDestroy" parameterType="com.psms.project.bussiness.domain.BussinessTrip">
+        <include refid="updateStatusVo"/>
+        and trip_status=0
+    </update>
+</mapper>

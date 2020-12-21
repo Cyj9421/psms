@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.system.mapper.SysUserNumberMapper">
+    <resultMap id="numberResult" type="com.psms.project.system.domain.SysUserNumber">
+        <id property="workId" column="work_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="workNumHead" column="work_num_head"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="postId" column="post_id"/>
+        <result property="fullName" column="full_name"/>
+        <result property="useStatus" column="use_status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="postCode" column="post_code"/>
+        <result property="postName" column="post_name"/>
+    </resultMap>
+    <sql id="numberVo">
+        select n.work_id,n.work_num,n.work_num_head,n.dept_id,n.post_id,n.full_name,n.use_status,n.create_by,n.create_time,n.update_by,n.update_time,
+        d.dept_name,d.leader,
+        p.post_code,p.post_name
+        from sys_user_number n
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <insert id="addNumber" parameterType="com.psms.project.system.domain.SysUserNumber">
+        insert into sys_user_number(work_num,work_num_head,dept_id,post_id,full_name,
+        create_by,create_time)
+        values(#{workNum},#{workNumHead},#{deptId},#{postId},#{fullName},
+        #{createBy},#{createTime})
+    </insert>
+    <update id="saveNewNum" parameterType="com.psms.project.system.domain.SysUserNumber">
+        update sys_user_number
+        set work_num=#{workNum},
+        use_status=0,
+        update_by=#{updateBy},
+        update_time=#{updateTime}
+        where work_id=#{workId} and use_status=1
+    </update>
+    <select id="numberList" parameterType="com.psms.project.system.domain.SysUserNumber" resultMap="numberResult">
+        <include refid="numberVo"/>
+        where n.use_status=0
+    </select>
+    <select id="numberInfo" resultMap="numberResult">
+        <include refid="numberVo"/>
+        where n.work_id=#{workId} and n.use_status=0
+    </select>
+    <select id="checkNum" parameterType="java.lang.String" resultMap="numberResult">
+        <include refid="numberVo"/>
+        where n.full_name=#{fullName} and n.use_status=1
+    </select>
+</mapper>
