@@ -1,10 +1,12 @@
 package com.psms.project.system.controller;
 
+import com.psms.common.utils.SecurityUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.system.domain.SysUserNumber;
 import com.psms.project.system.service.ISysUserNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,7 @@ public class SysUserNumberController extends BaseController {
      */
     @GetMapping("/list")
     public AjaxResult numberList(SysUserNumber sysUserNumber){
+        startPage();
         return AjaxResult.success(sysUserNumberService.numberList(sysUserNumber));
     }
 
@@ -50,7 +53,7 @@ public class SysUserNumberController extends BaseController {
     public AjaxResult addNumber(@RequestBody SysUserNumber sysUserNumber){
         SysUserNumber numberinfo=sysUserNumberService.checkNum(sysUserNumber.getFullName());
         if(numberinfo != null){
-            numberinfo.setUpdateBy("cyj");
+            numberinfo.setUpdateBy(SecurityUtils.getUsername());
             numberinfo.setUpdateTime(new Date());
             sysUserNumberService.saveNewNum(numberinfo);
             return AjaxResult.error("老员工,已生成新的工号");
@@ -62,5 +65,16 @@ public class SysUserNumberController extends BaseController {
         sysUserNumber.setCreateBy("root");
         sysUserNumber.setCreateTime(new Date());
         return toAjax(sysUserNumberService.addNumber(sysUserNumber));
+    }
+
+    /**
+     * 注销工号
+     * @param sysUserNumber
+     * @return
+     */
+    @PutMapping
+    public AjaxResult delNumber(@RequestBody SysUserNumber sysUserNumber){
+        sysUserNumber.setUpdateBy(SecurityUtils.getUsername());
+        return toAjax(sysUserNumberService.delNumbers(sysUserNumber));
     }
 }

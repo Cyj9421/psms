@@ -46,6 +46,16 @@ public class SysUserNumberServiceImpl implements ISysUserNumberService {
     }
 
     /**
+     * 批量注销工号
+     * @param sysUserNumber
+     * @return
+     */
+    @Override
+    public int delNumbers(SysUserNumber sysUserNumber) {
+        return sysUserNumberMapper.delNumbers(sysUserNumber);
+    }
+
+    /**
      * 检查员工是否为老员工
      * @param fullName
      * @return

@@ -1,7 +1,12 @@
 package com.psms.project.system.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import com.psms.project.monitor.domain.SysLock;
+import com.psms.project.monitor.service.ISysLockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +44,9 @@ public class SysLoginController
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private ISysLockService sysLockService;
 
     /**
      * 登录方法

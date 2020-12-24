@@ -37,10 +37,18 @@
     <update id="saveNewNum" parameterType="com.psms.project.system.domain.SysUserNumber">
         update sys_user_number
         set work_num=#{workNum},
-        use_status=0,
-        update_by=#{updateBy},
-        update_time=#{updateTime}
+            use_status=0,
+            update_by=#{updateBy},
+            update_time=#{updateTime}
         where work_id=#{workId} and use_status=1
+    </update>
+    <update id="delNumbers" parameterType="com.psms.project.system.domain.SysUserNumber">
+        update sys_user_number
+        set use_status=1,
+            update_by=#{updateBy},
+            update_time=sysdate()
+        where work_id=#{workId}
+
     </update>
     <select id="numberList" parameterType="com.psms.project.system.domain.SysUserNumber" resultMap="numberResult">
         <include refid="numberVo"/>

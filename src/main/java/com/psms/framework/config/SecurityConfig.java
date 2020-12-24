@@ -124,6 +124,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/bussiness/trip/**").permitAll()
                 .antMatchers("/bussiness/complete/**").permitAll()
                 .antMatchers("/system/user/work/**").permitAll()
+                .antMatchers("/system/time/**").permitAll()
+                .antMatchers("/system/lock/**").permitAll()
+                .antMatchers("/system/notice/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()

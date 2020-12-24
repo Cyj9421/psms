@@ -1,5 +1,9 @@
 package com.psms.common.utils;
 
+import com.psms.project.monitor.service.ISysLockService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,12 +14,13 @@ public class Test1 {
 //        String encryptPassword=securityUtils.encryptPassword(password);
 //        boolean result=securityUtils.matchesPassword(password,encryptPassword);
 //        System.out.println(encryptPassword);
-//        Date now=new Date();
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-//        String tablename=dateFormat.format(now);
-//        String head="YF";
-        SecurityUtils securityUtils=new SecurityUtils();
-        String result=securityUtils.encryptPassword("9421");
-        System.out.println(result);
+        Date now=new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+        String tablename=dateFormat.format(now);
+        String head="YF";
+        System.out.println(tablename);
+//        SecurityUtils securityUtils=new SecurityUtils();
+//        String result=securityUtils.encryptPassword("9421");
+//        System.out.println(result);
     }
 }

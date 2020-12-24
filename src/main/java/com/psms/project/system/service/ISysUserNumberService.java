@@ -30,6 +30,13 @@ public interface ISysUserNumberService {
     public int addNumber(SysUserNumber sysUserNumber);
 
     /**
+     * 批量注销工号
+     * @param sysUserNumber
+     * @return
+     */
+    public int delNumbers(SysUserNumber sysUserNumber);
+
+    /**
      * 根据姓名查找老员工
      * @param fullName
      * @return

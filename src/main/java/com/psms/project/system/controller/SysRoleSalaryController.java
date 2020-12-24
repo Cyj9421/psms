@@ -28,6 +28,7 @@ public class SysRoleSalaryController extends BaseController {
      */
     @GetMapping("/list")
     public AjaxResult salaryList(SysRoleSalary sysRoleSalary){
+        startPage();
         List<SysRoleSalary> info=sysRoleSalaryService.salaryList(sysRoleSalary);
         return AjaxResult.success(info);
     }

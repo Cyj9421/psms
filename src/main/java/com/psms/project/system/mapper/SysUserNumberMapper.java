@@ -30,7 +30,12 @@ public interface SysUserNumberMapper {
      * @return
      */
     public int addNumber(SysUserNumber sysUserNumber);
-
+    /**
+     * 注销工号
+     * @param sysUserNumber
+     * @return
+     */
+    public int delNumbers(SysUserNumber sysUserNumber);
     /**
      * 根据姓名查找老员工
      * @param fullName
