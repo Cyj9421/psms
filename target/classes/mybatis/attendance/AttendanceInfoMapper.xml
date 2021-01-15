@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceInfoMapper">
+    <resultMap id="infoResult" type="com.psms.project.attendance.domain.AttendanceInfo">
+        <id property="attendanceId" column="attendance_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="isOvertime" column="is_overtime"/>
+        <result property="isLate" column="is_late"/>
+        <result property="isEarly" column="is_early"/>
+        <result property="isAbsenteeism" column="is_absenteeism"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="attendanceDate" column="attendance_date"/>
+        <result property="attendanceStatus" column="attendance_status"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="postName" column="post_name"/>
+        <result property="postCode" column="post_code"/>
+        <result property="fullName" column="full_name"/>
+    </resultMap>
+    <sql id="attendanceVo">
+        select i.attendance_id,i.work_num,i.is_overtime,i.is_late,i.is_early,i.is_absenteeism,i.start_time,
+        i.end_time,i.attendance_date,i.attendance_status,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code,
+               n.full_name
+        from attendance_info i
+        left join sys_user_number n on i.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <insert id="startAttendance" parameterType="com.psms.project.attendance.domain.AttendanceInfo">
+        insert into attendance_info (work_num,start_time,attendance_date)
+        values (#{workNum},#{startTime},#{attendanceDate})
+    </insert>
+    <update id="endAttendance" parameterType="com.psms.project.attendance.domain.AttendanceInfo">
+        update attendance_info set end_time=#{endTime}
+               where attendance_id=#{attendanceId}
+    </update>
+    <update id="updateAttendance" parameterType="com.psms.project.attendance.domain.AttendanceInfo">
+        update attendance_info set
+        <if test="isOvertime != null and isOvertime != 0">is_overtime = #{isOvertime},</if>
+        <if test="isLate != null and isLate != 0">is_late = #{isLate},</if>
+        <if test="isEarly != null and isEarly != 0">is_early = #{isEarly},</if>
+        <if test="isAbsenteeism != null and isAbsenteeism != 0">is_absenteeism = #{isAbsenteeism},</if>
+        attendance_status = #{attendanceStatus}
+        where attendance_id=#{attendanceId}
+    </update>
+    <select id="attendanceList" parameterType="com.psms.project.attendance.domain.AttendanceInfo" resultMap="infoResult" >
+        <include refid="attendanceVo"/>
+        <where>
+            <if test="workNum != null and workNum != ''">
+                AND i.work_num like concat('%', #{workNum}, '%')
+            </if>
+            <if test="attendanceStatus !=null and attendanceStatus!=''">
+                AND i.attendance_status=#{attendanceStatus}
+            </if>
+            <if test="attendanceDate != null">
+                AND i.attendance_date=#{attendanceDate}
+            </if>
+        </where>
+        order by i.attendance_date desc
+    </select>
+    <select id="attendanceInfo" parameterType="int" resultMap="infoResult">
+        <include refid="attendanceVo"/>
+        where i.attendance_id=#{attendanceId}
+    </select>
+</mapper>

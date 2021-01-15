@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceScheduleOrderMapper">
+    <resultMap id="orderResult" type="com.psms.project.attendance.domain.AttendanceScheduleOrder">
+        <id property="orderId" column="order_id"/>
+        <result property="scheduleDate" column="schedule_date"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="selectOrderVo">
+        select order_id,schedule_date,start_time,end_time,create_by,create_time,update_by,update_time
+        from attendance_schedule_order
+    </sql>
+    <insert id="addOrder" parameterType="com.psms.project.attendance.domain.AttendanceScheduleOrder">
+        insert into attendance_schedule_order(
+          schedule_date,start_time,end_time,create_by,create_time
+        ) values (
+        #{scheduleDate},#{startTime},#{endTime},#{createBy},sysdate()
+        )
+    </insert>
+    <update id="updateOrder" parameterType="com.psms.project.attendance.domain.AttendanceScheduleOrder">
+        update attendance_schedule_order set
+               schedule_date=#{scheduleDate},
+               start_time=#{startTime},
+               end_time=#{endTime},
+               update_by=#{updateBy},
+               update_time=sysdate()
+        where order_id=#{orderId}
+    </update>
+    <delete id="delOrder">
+        delete from attendance_schedule_order where order_id=#{orderId}
+    </delete>
+    <select id="orderList" parameterType="com.psms.project.attendance.domain.AttendanceScheduleOrder" resultMap="orderResult">
+        <include refid="selectOrderVo"/>
+        <where>
+            <if test="scheduleDate != null">
+                AND schedule_date = #{scheduleDate}
+            </if>
+        </where>
+        order by order_id desc
+    </select>
+    <select id="orderInfo" parameterType="int" resultMap="orderResult">
+        <include refid="selectOrderVo"/>
+        where order_id=#{orderId}
+    </select>
+</mapper>

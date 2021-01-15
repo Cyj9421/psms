@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceCardRepMapper">
+    <resultMap id="cardResult" type="com.psms.project.attendance.domain.AttendanceCardRep">
+        <id property="replacementId" column="replacement_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="dept_leader"/>
+        <result property="postName" column="post_name"/>
+        <result property="postCode" column="post_code"/>
+        <result property="fullName" column="full_name"/>
+        <result property="reason" column="reason"/>
+        <result property="repType" column="rep_type"/>
+        <result property="cardStatus" column="care_status"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="nickTime" column="nick_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="cardRepVo">
+        select cr.replacement_id,cr.work_num,cr.reason,cr.rep_type,cr.card_status,cr.nick_name,cr.nick_time,cr.update_by,cr.update_time,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code,
+               n.full_name
+        from attendance_card_rep cr
+        left join sys_user_number n on cr.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <insert id="addCardRep" parameterType="com.psms.project.attendance.domain.AttendanceCardRep">
+        insert into attendance_card_rep(work_num,reason,rep_type,nick_name,nick_time)
+        values (#{workNum},#{reason},#{repType},#{nickName},sysdate())
+    </insert>
+    <update id="updateCard">
+        update attendance_card_rep set
+        card_status=#{cardStatus},
+        update_by=#{updateBy},
+        update_time=sysdate()
+        where replacement_id=#{replacementId} and card_status=1
+    </update>
+    <select id="cardRepList" resultMap="cardResult" parameterType="com.psms.project.attendance.domain.AttendanceCardRep">
+        <include refid="cardRepVo"/>
+        <where>
+            <if test="workNum != null and workNum != ''">
+                AND cr.work_num like concat('%', #{workNum}, '%')
+            </if>
+            <if test="deptName != null and deptName != ''">
+                AND d.dept_name like concat('%', #{deptName}, '%')
+            </if>
+            <if test="fullName != null and fullName != ''">
+                AND n.full_name like concat('%', #{fullName}, '%')
+            </if>
+            <if test="repType != null and repType != ''">
+                AND cr.rep_type=#{repType}
+            </if>
+            <if test="nickTime != null and nickTime != ''">
+                AND cr.nick_time=#{nickTime}
+            </if>
+            and card_status=1
+        </where>
+        order by cr.replacement_id desc
+    </select>
+    <select id="cardRepInfo" resultMap="cardResult" parameterType="int">
+        <include refid="cardRepVo"/>
+        where cr.replacement_id=#{replacementId}
+    </select>
+</mapper>

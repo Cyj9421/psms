@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceLateMapper">
+    <resultMap id="lateResult" type="com.psms.project.attendance.domain.AttendanceLate">
+        <id property="lateId" column="late_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="lateTime" column="late_time"/>
+        <result property="lateDate" column="late_date"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="postName" column="post_name"/>
+        <result property="postCode" column="post_code"/>
+        <result property="fullName" column="full_name"/>
+    </resultMap>
+    <sql id="lateVo">
+        select l.late_id,l.work_num,l.late_time,l.late_date,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code,
+               n.full_name
+        from attendance_late l
+        left join sys_user_number n on l.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <insert id="addLate" parameterType="com.psms.project.attendance.domain.AttendanceLate">
+        insert into attendance_late(work_num,late_time,late_date)
+        values (#{workNum},#{lateTime},#{lateDate})
+    </insert>
+    <delete id="delLate" parameterType="int">
+        delete from attendance_late where late_id=#{lateId}
+    </delete>
+    <select id="lateInfo" parameterType="int" resultMap="lateResult">
+    <include refid="lateVo"/>
+    where l.late_id=#{lateId}
+  </select>
+    <select id="lateList" resultMap="lateResult" parameterType="com.psms.project.attendance.domain.AttendanceLate">
+        <include refid="lateVo"/>
+        <where>
+            <if test="workNum != null and workNum != ''">
+                and l.work_num like concat('%',#{workNum},'%')
+            </if>
+            <if test="lateDate != null ">
+                and l.late_date = #{lateDate}
+            </if>
+            <if test="deptName != null and deptName != ''">
+                AND d.dept_name like concat('%', #{deptName}, '%')
+            </if>
+            <if test="fullName != null and fullName != ''">
+                AND n.full_name like concat('%', #{fullName}, '%')
+            </if>
+        </where>
+        order by l.late_id desc
+    </select>
+</mapper>

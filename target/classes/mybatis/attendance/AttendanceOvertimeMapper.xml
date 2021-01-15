@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceOvertimeMapper">
+    <resultMap id="overtimeResult" type="com.psms.project.attendance.domain.AttendanceOvertime">
+        <id property="overtimeId" column="overtime_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="clockTime" column="clock_time"/>
+        <result property="overTime" column="over_time"/>
+        <result property="clockDate" column="clock_date"/>
+        <result property="fullName" column="full_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="postName" column="post_name"/>
+        <result property="postCode" column="post_code"/>
+    </resultMap>
+    <sql id="overtimeVo">
+        select o.overtime_id,o.work_num,o.clock_time,o.over_time,o.clock_date,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code,
+               n.full_name
+        from attendance_overtime o
+        left join sys_user_number n on o.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <insert id="addOvertime">
+        insert into attendance_overtime(work_num,clock_time,over_time,clock_date)
+        values (#{workNum},#{clockTime},#{overTime},#{clockDate})
+    </insert>
+    <select id="overtimeList" parameterType="com.psms.project.attendance.domain.AttendanceOvertime" resultMap="overtimeResult">
+        <include refid="overtimeVo"/>
+        <where>
+            <if test="workNum != null and workNum != ''">
+                AND o.work_num like concat('%', #{workNum}, '%')
+            </if>
+            <if test="clockDate != null">
+                AND o.clock_date=#{clockDate}
+            </if>
+            <if test="deptName != null and deptName != ''">
+                AND d.dept_name like concat('%', #{deptName}, '%')
+            </if>
+            <if test="fullName != null and fullName != ''">
+                AND n.full_name like concat('%', #{fullName}, '%')
+            </if>
+        </where>
+        group by o.work_num order by o.overtime_id desc
+    </select>
+    <select id="overtimeInfo" parameterType="int" resultMap="overtimeResult">
+        <include refid="overtimeVo"/>
+        where o.overtime_id=#{overtimeId}
+    </select>
+    <select id="sumTime" parameterType="string" resultType="java.lang.Double">
+        select IFNULL(sum(over_time),0) from attendance_overtime where
+        work_num = #{workNum}
+    </select>
+    <select id="isOverTime" parameterType="string" resultType="java.lang.String">
+        select work_num from attendance_overtime
+        where work_num=#{workNum}
+    </select>
+
+
+</mapper>

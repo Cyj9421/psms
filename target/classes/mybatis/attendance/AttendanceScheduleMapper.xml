@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceScheduleMapper">
+    <resultMap id="scheduleResult" type="com.psms.project.attendance.domain.AttendanceSchedule">
+        <id property="scheduleId" column="schedule_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="postName" column="post_name"/>
+        <result property="postCode" column="post_code"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="fullName" column="full_name"/>
+        <result property="workNum" column="work_num"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <association property="orderList" column="order_id" resultMap="orderResult"/>
+    </resultMap>
+    <resultMap id="orderResult" type="com.psms.project.attendance.domain.AttendanceScheduleOrder">
+        <id property="orderId" column="order_id"/>
+        <result property="scheduleDate" column="schedule_date"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="selectScheduleVo">
+        select s.schedule_id,s.order_id,s.post_id,s.start_time,s.end_time,s.create_by,s.create_time,s.update_by,s.update_time,
+               so.order_id,so.schedule_date,so.start_time,so.end_time,so.create_by,so.create_time,so.update_by,so.update_time,
+               p.post_name,p.post_code,
+               d.dept_name,
+               n.full_name,s.work_num
+        from attendance_schedule s
+        left join attendance_schedule_order so on s.order_id=so.order_id
+        left join sys_post p on s.post_id=p.post_id
+        left join sys_user_number n on s.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+    </sql>
+    <insert id="addSchedule" parameterType="com.psms.project.attendance.domain.AttendanceSchedule">
+        insert into attendance_schedule(order_id,post_id,start_time,end_time,create_by,create_time)
+        values (#{orderId},#{workNum},#{postId},#{startTime},#{endTime},#{createBy},sysdate())
+    </insert>
+    <update id="updateSchedule" parameterType="com.psms.project.attendance.domain.AttendanceSchedule">
+        update attendance_schedule set
+        work_num=#{workNum}
+        order_id=#{orderId},
+        post_id=#{postId},
+        start_time=#{startTime},
+        end_time=#{endTime},
+        update_by=#{updateBy},
+        update_time=sysdate()
+        where schedule_id=#{scheduleId}
+    </update>
+    <delete id="delSchedule" parameterType="int">
+        delete from attendance_schedule where schedule_id=#{scheduleId}
+    </delete>
+    <select id="scheduleList" parameterType="com.psms.project.attendance.domain.AttendanceSchedule" resultMap="scheduleResult">
+        <include refid="selectScheduleVo"/>
+        <where>
+            <if test="workNum !=null and workNum !=''">
+            AND s.work_num like concat('%',#{workNum},'%')
+            </if>
+        </where>
+    </select>
+    <select id="scheduleInfo" parameterType="string" resultMap="scheduleResult">
+        <include refid="selectScheduleVo"/>
+        where s.work_num=#{workNum}
+    </select>
+</mapper>

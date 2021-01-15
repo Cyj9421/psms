@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceEarlyMapper">
+    <resultMap id="earlyResult" type="com.psms.project.attendance.domain.AttendanceEarly">
+        <id property="earlyId" column="early_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="postName" column="post_name"/>
+        <result property="postCode" column="post_code"/>
+        <result property="fullName" column="full_name"/>
+        <result property="earlyTime" column="early_time"/>
+        <result property="earlyDate" column="early_date"/>
+    </resultMap>
+    <sql id="earlyVo">
+        select e.early_id,e.work_num,e.early_time,e.early_date,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code,
+               n.full_name
+        from attendance_early e
+        left join sys_user_number n on e.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <insert id="addEarly">
+        insert into attendance_early(work_num,early_time,early_date)
+        values (#{workNum},#{earlyTime},#{earlyDate})
+    </insert>
+    <select id="earlyList" parameterType="com.psms.project.attendance.domain.AttendanceEarly" resultMap="earlyResult">
+        <include refid="earlyVo"/>
+        <where>
+            <if test="workNum != null and workNum != ''">
+                AND e.work_num like concat('%', #{workNum}, '%')
+            </if>
+            <if test="deptName != null and deptName != ''">
+                AND d.dept_name like concat('%', #{deptName}, '%')
+            </if>
+            <if test="earlyDate != null">
+                AND e.early_date=#{earlyDate}
+            </if>
+            <if test="fullName != null and fullName != ''">
+                AND n.full_name like concat('%', #{fullName}, '%')
+            </if>
+        </where>
+        order by early_id desc
+    </select>
+    <select id="earlyInfo" resultMap="earlyResult" parameterType="int">
+            <include refid="earlyVo"/>
+            where e.early_id=#{earlyId}
+    </select>
+</mapper>

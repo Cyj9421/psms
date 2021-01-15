@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceFingerprintMapper">
+    <resultMap id="fingerprintResult" type="com.psms.project.attendance.domain.AttendanceFingerprint">
+        <id property="fingerprintId" column="fingerprint_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="fingerprintName" column="fingerprint_name"/>
+        <result property="useStatus" column="use_status"/>
+        <result property="fullName" column="full_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="postCode" column="post_code"/>
+        <result property="postName" column="post_name"/>
+    </resultMap>
+    <insert id="addFingerprint" parameterType="com.psms.project.attendance.domain.AttendanceFingerprint">
+        insert into attendance_fingerprint(work_num,fingerprint_name)
+        values(#{workNum},#{fingerprintName})
+    </insert>
+    <update id="delFingerprint" parameterType="string">
+        update attendance_fingerprint set use_status=1
+        where work_num=#{workNum}
+    </update>
+    <select id="fingerprintInfo" parameterType="string" resultMap="fingerprintResult">
+        select f.fingerprint_id,f.work_num,f.fingerprint_name,f.use_status,
+               n.full_name,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code
+        from attendance_fingerprint f
+        left join sys_user_number n on f.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+        where f.work_num=#{workNum} and f.use_status=0
+    </select>
+    <select id="fingerprintList" resultType="string">
+        select fingerprint_name from attendance_fingerprint where use_status=0
+    </select>
+    <select id="identifyFingerprint" parameterType="string" resultMap="fingerprintResult">
+        select f.fingerprint_id,f.work_num,f.fingerprint_name,f.use_status,
+               n.full_name,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code
+        from attendance_fingerprint f
+        left join sys_user_number n on f.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+        where f.fingerprint_name=#{fingerprintName} and f.use_status=0
+    </select>
+
+</mapper>

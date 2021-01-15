@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.system.mapper.SysDeviceMapper">
+    <resultMap id="deviceResult" type="com.psms.project.system.domain.SysDevice">
+        <id property="deviceId" column="device_id"/>
+        <result property="deviceName" column="device_name"/>
+        <result property="deviceStatus" column="device_status"/>
+        <result property="deviceCreateTime" column="device_create_time"/>
+        <result property="deviceUpdateTime" column="device_update_time"/>
+    </resultMap>
+    <insert id="addDevice" parameterType="com.psms.project.system.domain.SysDevice">
+        insert into sys_device(device_name,device_create_time)
+        values(#{deviceName},sysdate())
+    </insert>
+    <update id="deviceManager" parameterType="com.psms.project.system.domain.SysDevice">
+        update sys_device set
+        <if test="deviceName !=null and deviceName !=''">
+            device_name=#{deviceName},
+        </if>
+        <if test="deviceStatus !=null and deviceStatus !=''">
+            device_status=#{deviceStatus},
+        </if>
+            device_update_time=sysdate()
+        where device_id=#{deviceId}
+    </update>
+    <select id="deviceList" resultMap="deviceResult" parameterType="com.psms.project.system.domain.SysDevice">
+        select device_id,device_name,device_status,device_create_time,device_update_time
+        from sys_device
+        <where>
+            <if test="deviceName !=null and deviceName !=''">
+                AND device_name like concat ('%',#{deviceName},'%')
+            </if>
+            <if test="deviceStatus !=null and deviceStatus !=''">
+                AND device_status=#{deviceStatus}
+            </if>
+            AND device_status !=3
+        </where>
+    </select>
+</mapper>
