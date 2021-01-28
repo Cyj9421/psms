@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceCardMapper">
+    <resultMap id="cardResult" type="com.psms.project.attendance.domain.AttendanceCard">
+        <id property="cardId" column="card_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="cardNum" column="card_num"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="fullName" column="full_name"/>
+        <result property="postCode" column="post_code"/>
+        <result property="postName" column="post_name"/>
+    </resultMap>
+    <sql id="cardVo">
+        select c.card_id,c.work_num,c.card_num,
+               n.full_name,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code
+        from attendance_card c
+        left join sys_user_number n on c.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <insert id="addCard" parameterType="com.psms.project.attendance.domain.AttendanceCard">
+        insert into attendance_card(work_num,card_num)
+        values (#{workNum},#{cardNum})
+    </insert>
+    <delete id="delCard" parameterType="int">
+        delete from attendance_card where card_id in
+        <foreach collection="array" item="cardId" open="(" separator="," close=")">
+            #{cardId}
+        </foreach>
+    </delete>
+    <select id="cardList" resultMap="cardResult" parameterType="com.psms.project.attendance.domain.AttendanceCard">
+        <include refid="cardVo"/>
+        <where>
+            <if test="workNum !=null and workNum!=''">
+                AND c.work_num like concat('%',#{workNum},'%')
+            </if>
+            <if test="cardNum !=null and cardNum!=''">
+                AND c.card_num like concat('%',#{cardNum},'%')
+            </if>
+            <if test="deptName !=null and deptName!=''">
+                AND d.dept_name like concat('%',#{deptName},'%')
+            </if>
+        </where>
+    </select>
+    <select id="cardInfo" resultMap="cardResult" parameterType="int">
+        <include refid="cardVo"/>
+        where c.card_id=#{cardId}
+    </select>
+    <select id="attendanceCardInfo" resultMap="cardResult" parameterType="string">
+        <include refid="cardVo"/>
+        where c.card_num=#{cardNum}
+    </select>
+
+</mapper>

@@ -1,7 +1,12 @@
 package com.psms.project.system.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.psms.project.system.domain.SysUserNumber;
+import com.psms.project.system.domain.SysWorkNumHead;
+import com.psms.project.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,14 +34,10 @@ import com.psms.framework.web.domain.AjaxResult;
 import com.psms.framework.web.page.TableDataInfo;
 import com.psms.project.system.domain.SysRole;
 import com.psms.project.system.domain.SysUser;
-import com.psms.project.system.service.ISysPostService;
-import com.psms.project.system.service.ISysRoleService;
-import com.psms.project.system.service.ISysUserService;
 
 /**
  * 用户信息
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/system/user")
@@ -54,10 +55,18 @@ public class SysUserController extends BaseController
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private ISysUserNumberService sysUserNumberService;
+
+    @Autowired
+    private ISysWorkNumHeadService sysWorkNumHeadService;
+    //设置编号开头从1开始
+    private int i=1;
+    private String workHead;
     /**
      * 获取用户列表
      */
-//    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @PreAuthorize("@ss.hasPermi('system:user:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysUser user)
     {
@@ -99,7 +108,7 @@ public class SysUserController extends BaseController
     /**
      * 根据用户编号获取详细信息
      */
-//    @PreAuthorize("@ss.hasPermi('system:user:query')")
+    @PreAuthorize("@ss.hasPermi('system:user:query')")
     @GetMapping(value = { "/", "/{userId}" })
     public AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId)
     {
@@ -119,8 +128,8 @@ public class SysUserController extends BaseController
     /**
      * 新增用户
      */
-//    @PreAuthorize("@ss.hasPermi('system:user:add')")
-//    @Log(title = "用户管理", businessType = BusinessType.INSERT)
+    @PreAuthorize("@ss.hasPermi('system:user:add')")
+    @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysUser user)
     {
@@ -136,9 +145,38 @@ public class SysUserController extends BaseController
         {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
+        SysWorkNumHead sysWorkNumHead=sysWorkNumHeadService.selectHeadByDeptId(user.getDeptId());
+        String head=sysWorkNumHead.getWorkNumHead();
+        //根据部门id查找工号开头
+        if(workHead!=null && !workHead.equals(head)) {
+            i=1;
+        }
+        String body=String.format("%06d",i);
+        String workNum=head+body;
+        //生成工号
+        SysUserNumber sysUserNumber=new SysUserNumber();
+        sysUserNumber.setWorkNum(workNum);
+        sysUserNumber.setHeadId(sysWorkNumHead.getHeadId());
+        sysUserNumber.setPostId(user.getPostId());
+        sysUserNumber.setDeptId(user.getDeptId());
+        sysUserNumber.setFullName(user.getNickName());
+        sysUserNumber.setCreateBy(SecurityUtils.getUsername());
+        sysUserNumber.setCreateTime(new Date());
+        SysUserNumber numberinfo=sysUserNumberService.checkNum(sysUserNumber.getFullName());
+        if(numberinfo != null){
+            numberinfo.setUpdateBy(SecurityUtils.getUsername());
+            numberinfo.setUpdateTime(new Date());
+            sysUserNumberService.saveNewNum(numberinfo);
+            return AjaxResult.error("老员工,已生成新的工号");
+        }
+        sysUserNumberService.addNumber(sysUserNumber);
+        i++;
+        workHead=head;
         user.setCreateBy(SecurityUtils.getUsername());
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
-        return toAjax(userService.insertUser(user));
+        user.setWorkNum(workNum);
+        int res=userService.insertUser(user);
+        return toAjax(res);
     }
 
     /**
@@ -176,7 +214,7 @@ public class SysUserController extends BaseController
     /**
      * 重置密码
      */
-//    @PreAuthorize("@ss.hasPermi('system:user:edit')")
+    @PreAuthorize("@ss.hasPermi('system:user:edit')")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/resetPwd")
     public AjaxResult resetPwd(@RequestBody SysUser user)
@@ -190,7 +228,7 @@ public class SysUserController extends BaseController
     /**
      * 状态修改
      */
-//    @PreAuthorize("@ss.hasPermi('system:user:edit')")
+    @PreAuthorize("@ss.hasPermi('system:user:edit')")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
     public AjaxResult changeStatus(@RequestBody SysUser user)

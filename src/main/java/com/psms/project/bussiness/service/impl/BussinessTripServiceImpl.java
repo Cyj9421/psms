@@ -63,4 +63,9 @@ public class BussinessTripServiceImpl implements IBussinessTripService {
     public int bussinessDestroy(BussinessTrip bussinessTrip) {
         return bussinessTripMapper.bussinessDestroy(bussinessTrip);
     }
+
+    @Override
+    public int delTrips(int[] tripIds) {
+        return bussinessTripMapper.delTrips(tripIds);
+    }
 }

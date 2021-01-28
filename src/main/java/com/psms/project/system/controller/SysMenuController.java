@@ -29,8 +29,7 @@ import com.psms.project.system.service.ISysMenuService;
 
 /**
  * 菜单信息
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/system/menu")
@@ -58,7 +57,7 @@ public class SysMenuController extends BaseController
     /**
      * 根据菜单编号获取详细信息
      */
-//    @PreAuthorize("@ss.hasPermi('system:menu:query')")
+    @PreAuthorize("@ss.hasPermi('system:menu:query')")
     @GetMapping(value = "/{menuId}")
     public AjaxResult getInfo(@PathVariable Long menuId)
     {
@@ -94,7 +93,7 @@ public class SysMenuController extends BaseController
     /**
      * 新增菜单
      */
-//    @PreAuthorize("@ss.hasPermi('system:menu:add')")
+    @PreAuthorize("@ss.hasPermi('system:menu:add')")
     @Log(title = "菜单管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysMenu menu)
@@ -115,7 +114,7 @@ public class SysMenuController extends BaseController
     /**
      * 修改菜单
      */
-//    @PreAuthorize("@ss.hasPermi('system:menu:edit')")
+    @PreAuthorize("@ss.hasPermi('system:menu:edit')")
     @Log(title = "菜单管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysMenu menu)
@@ -140,7 +139,7 @@ public class SysMenuController extends BaseController
     /**
      * 删除菜单
      */
-//    @PreAuthorize("@ss.hasPermi('system:menu:remove')")
+    @PreAuthorize("@ss.hasPermi('system:menu:remove')")
     @Log(title = "菜单管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{menuId}")
     public AjaxResult remove(@PathVariable("menuId") Long menuId)

@@ -1,8 +1,8 @@
 package com.psms.project.system.service;
 
-import com.psms.project.bussiness.domain.AttendnceSummary;
+import com.psms.project.attendance.domain.AttendanceSummary;
 import com.psms.project.system.domain.SysRoleSalary;
-import com.psms.project.system.domain.vo.SalaryVo;
+import com.psms.project.system.domain.SysUnitPrice;
 
 import java.util.List;
 
@@ -29,21 +29,25 @@ public interface ISysRoleSalaryService {
      */
     public int addSalary(SysRoleSalary sysRoleSalary);
     /**
+     * 更新工资数据
+     * @param sysRoleSalary
+     * @return
+     */
+    public int updateSalary(SysRoleSalary sysRoleSalary);
+    /**
      * 领取工资
      * @param sysRoleSalary
      * @return
      */
     public int getSalary(SysRoleSalary sysRoleSalary);
-    /**
-     * 计算工资
-     * @return
-     */
-    public int calcSalary(SalaryVo salaryVo);
+
     /**
      * 统计考勤
      * @return
      */
-    public AttendnceSummary calcSummary(int workNumId);
-
+    public AttendanceSummary calcSummary(AttendanceSummary attendanceSummary);
 
 }
+
+
+

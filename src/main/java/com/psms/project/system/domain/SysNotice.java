@@ -9,8 +9,7 @@ import com.psms.framework.web.domain.BaseEntity;
 
 /**
  * 通知公告表 sys_notice
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysNotice extends BaseEntity
 {

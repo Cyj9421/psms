@@ -8,6 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+/**
+ * 补卡表
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

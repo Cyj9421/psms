@@ -1,11 +1,10 @@
 package com.psms.project.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.psms.project.bussiness.domain.AttendnceSummary;
+import com.psms.project.attendance.domain.AttendanceSummary;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.Date;
 import java.util.List;
@@ -19,8 +18,6 @@ import java.util.List;
 public class SysRoleSalary {
     /** 工资id */
     private int salaryId;
-    /** 员工工号id */
-    private int workId;
     /** 底薪 */
     private double baseSalary;
     /** 加班总额 */
@@ -39,7 +36,7 @@ public class SysRoleSalary {
     private double remark;
     /** 工资总额 */
     private double salary;
-    /** 领取状态(0已领取,1未发放,2未领取)(默认1) */
+    /** 领取状态(1领取,2未发放,3未领取）(默认2) */
     private int getStatus;
     /** 领取时间 */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
@@ -58,4 +55,8 @@ public class SysRoleSalary {
     private String postName;
     /** 岗位编码 */
     private String postCode;
+    /** 薪资单价列表 */
+    private List<SysUnitPrice> sysUnitPrices;
+    /** 考勤列表 */
+    private List<AttendanceSummary> attendanceSummaries;
 }

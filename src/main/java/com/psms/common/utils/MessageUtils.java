@@ -7,8 +7,7 @@ import com.psms.common.utils.spring.SpringUtils;
 
 /**
  * 获取i18n资源文件
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class MessageUtils
 {

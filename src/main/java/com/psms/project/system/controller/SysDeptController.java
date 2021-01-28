@@ -2,18 +2,14 @@ package com.psms.project.system.controller;
 
 import java.util.Iterator;
 import java.util.List;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.psms.common.constant.UserConstants;
 import com.psms.common.utils.SecurityUtils;
@@ -27,8 +23,7 @@ import com.psms.project.system.service.ISysDeptService;
 
 /**
  * 部门信息
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/system/dept")
@@ -40,18 +35,17 @@ public class SysDeptController extends BaseController
     /**
      * 获取部门列表
      */
-//    @PreAuthorize("@ss.hasPermi('system:dept:list')")
+    @PreAuthorize("@ss.hasPermi('system:dept:list')")
     @GetMapping("/list")
-    public AjaxResult list(SysDept dept)
-    {
-        List<SysDept> depts = deptService.selectDeptList(dept);
-        return AjaxResult.success(depts);
+    public AjaxResult list(SysDept dept){
+        startPage();
+        return AjaxResult.success(deptService.selectDeptList(dept));
     }
 
     /**
      * 查询部门列表（排除节点）
      */
-//   @PreAuthorize("@ss.hasPermi('system:dept:list')")
+   @PreAuthorize("@ss.hasPermi('system:dept:list')")
     @GetMapping("/list/exclude/{deptId}")
     public AjaxResult excludeChild(@PathVariable(value = "deptId", required = false) Long deptId)
     {
@@ -72,7 +66,7 @@ public class SysDeptController extends BaseController
     /**
      * 根据部门编号获取详细信息
      */
-//    @PreAuthorize("@ss.hasPermi('system:dept:query')")
+    @PreAuthorize("@ss.hasPermi('system:dept:query')")
     @GetMapping(value = "/{deptId}")
     public AjaxResult getInfo(@PathVariable Long deptId)
     {
@@ -105,7 +99,7 @@ public class SysDeptController extends BaseController
     /**
      * 新增部门
      */
-//    @PreAuthorize("@ss.hasPermi('system:dept:add')")
+    @PreAuthorize("@ss.hasPermi('system:dept:add')")
     @Log(title = "部门管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDept dept)
@@ -121,7 +115,7 @@ public class SysDeptController extends BaseController
     /**
      * 修改部门
      */
-//    @PreAuthorize("@ss.hasPermi('system:dept:edit')")
+    @PreAuthorize("@ss.hasPermi('system:dept:edit')")
     @Log(title = "部门管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDept dept)
@@ -146,7 +140,7 @@ public class SysDeptController extends BaseController
     /**
      * 删除部门
      */
-//    @PreAuthorize("@ss.hasPermi('system:dept:remove')")
+    @PreAuthorize("@ss.hasPermi('system:dept:remove')")
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{deptId}")
     public AjaxResult remove(@PathVariable Long deptId)

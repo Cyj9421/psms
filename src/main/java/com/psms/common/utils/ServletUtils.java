@@ -12,8 +12,7 @@ import com.psms.common.core.text.Convert;
 
 /**
  * 客户端工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class ServletUtils
 {

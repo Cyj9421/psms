@@ -11,8 +11,7 @@ import com.psms.framework.web.domain.BaseEntity;
 
 /**
  * 角色表 sys_role
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysRole extends BaseEntity
 {

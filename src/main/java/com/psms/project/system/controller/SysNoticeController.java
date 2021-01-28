@@ -1,17 +1,14 @@
 package com.psms.project.system.controller;
 
 import java.util.List;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.psms.project.system.domain.SysDevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.psms.common.utils.SecurityUtils;
 import com.psms.framework.aspectj.lang.annotation.Log;
@@ -24,8 +21,7 @@ import com.psms.project.system.service.ISysNoticeService;
 
 /**
  * 公告 信息操作处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/system/notice")
@@ -39,12 +35,14 @@ public class SysNoticeController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:notice:list')")
     @GetMapping("/list")
-    public TableDataInfo list(SysNotice notice)
-    {
-        startPage();
+    public AjaxResult list(SysNotice notice,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+                              @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<SysNotice> list = noticeService.selectNoticeList(notice);
-        return getDataTable(list);
+        PageInfo pageInfo = new PageInfo(list);
+        return AjaxResult.success(pageInfo);
     }
+
 
     /**
      * 根据通知公告编号获取详细信息

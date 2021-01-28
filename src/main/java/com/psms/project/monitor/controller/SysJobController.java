@@ -27,8 +27,7 @@ import com.psms.project.monitor.service.ISysJobService;
 
 /**
  * 调度任务信息操作处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/monitor/job")

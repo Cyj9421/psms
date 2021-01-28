@@ -1,26 +1,28 @@
 package com.psms.common.utils;
 
-import com.psms.project.monitor.service.ISysLockService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.psms.project.system.domain.vo.SysIndexVo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.Resource;
+import java.io.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
 
+import static io.netty.handler.codec.DateFormatter.format;
+
+@Slf4j
 public class Test1 {
-    public static void main(String[] args) {
-//        SecurityUtils securityUtils=new SecurityUtils();
-//        String password="9421";
-//        String encryptPassword=securityUtils.encryptPassword(password);
-//        boolean result=securityUtils.matchesPassword(password,encryptPassword);
-//        System.out.println(encryptPassword);
-        Date now=new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-        String tablename=dateFormat.format(now);
-        String head="YF";
-        System.out.println(tablename);
-//        SecurityUtils securityUtils=new SecurityUtils();
-//        String result=securityUtils.encryptPassword("9421");
-//        System.out.println(result);
+    public static void main(String[] args) throws ParseException, IOException {
+        LocalTime time = LocalTime.now(); // gets the current time
+
     }
+
 }

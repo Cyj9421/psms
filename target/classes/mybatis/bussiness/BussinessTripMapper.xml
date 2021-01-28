@@ -8,7 +8,9 @@
         <result property="workNum"      column="work_num"/>
         <result property="deptName"     column="dept_name"/>
         <result property="postName"     column="post_name"/>
-        <result property="deptLeader"   column="dept_leader"/>
+        <result property="postCode" column="post_code"/>
+        <result property="fullName" column="full_name"/>
+        <result property="leader"   column="leader"/>
         <result property="tripAddress"  column="trip_address"/>
         <result property="reason"       column="reason"/>
         <result property="tripStatus"   column="trip_status"/>
@@ -20,8 +22,14 @@
         <result property="updateTripTime"   column="update_trip_time"/>
     </resultMap>
     <sql id="selectTripVo">
-        select b.trip_id,b.work_num,b.dept_name,b.post_name,b.dept_leader,b.trip_address,b.reason,b.trip_status,b.start_time,b.end_time,b.create_trip_by,b.create_trip_time,b.update_trip_by,b.update_trip_time
+        select b.trip_id,b.work_num,b.trip_address,b.reason,b.trip_status,b.start_time,b.end_time,b.create_trip_by,b.create_trip_time,b.update_trip_by,b.update_trip_time,
+               n.full_name,
+               d.dept_name,d.leader,
+               p.post_name,p.post_code
         from bussiness_trip b
+        left join sys_user_number n on b.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
     </sql>
     <sql id="updateStatusVo">
            update bussiness_trip set
@@ -30,25 +38,38 @@
 	        update_trip_time=#{updateTripTime}
 	    where trip_id=#{tripId}
     </sql>
+    <delete id="delTrips" parameterType="int">
+        delete from bussiness_trip where trip_id in
+        <foreach collection="array" item="tripId" open="(" separator="," close=")">
+            #{tripId}
+        </foreach>
+    </delete>
     <select id="selectTripList" parameterType="com.psms.project.bussiness.domain.BussinessTrip" resultMap="BussinessTripResult">
         <include refid="selectTripVo"/>
-        where b.trip_status=1
+        <where>
+        <if test="workNum !=null and workNum !=''">
+            AND b.work_num like concat('%',#{workNum},'%')
+        </if>
+        <if test="tripStatus !=null and tripStatus !=''">
+            AND b.trip_status=#{tripStatus}
+        </if>
+        <if test="deptName !=null and deptName !=''">
+            AND d.dept_name like concat('%',#{deptName},'%')
+        </if>
+        </where>
+        order by b.trip_id desc
     </select>
     <select id="selectTripInfo" parameterType="int" resultMap="BussinessTripResult">
         <include refid="selectTripVo"/>
         where b.trip_id=#{tripId}
     </select>
     <insert id="addTrip" parameterType="com.psms.project.bussiness.domain.BussinessTrip">
-        INSERT INTO bussiness_trip (work_num,dept_name,post_name,dept_leader,trip_address,reason,start_time,end_time,create_trip_by,create_trip_time)
-        VALUES(#{workNum},#{deptName},#{postName},#{deptLeader},#{tripAddress},#{reason},#{startTime},#{endTime},#{createTripBy},#{createTripTime})
+        INSERT INTO bussiness_trip (work_num,trip_address,reason,start_time,end_time,create_trip_by,create_trip_time)
+        VALUES(#{workNum},#{tripAddress},#{reason},#{startTime},#{endTime},#{createTripBy},#{createTripTime})
     </insert>
     <update id="updateTrip" parameterType="com.psms.project.bussiness.domain.BussinessTrip">
         update bussiness_trip set
-            trip_id=#{tripId},
 	        work_num=#{workNum},
-	        dept_name=#{deptName},
-	        post_name=#{postName},
-	        dept_leader=#{deptLeader},
 	        trip_address=#{tripAddress},
 	        reason=#{reason},
 	        start_time=#{startTime},
@@ -59,10 +80,10 @@
     </update>
     <update id="updateStatus" parameterType="com.psms.project.bussiness.domain.BussinessTrip">
         <include refid="updateStatusVo"/>
-        and trip_status=1
+        and trip_status=2
     </update>
     <update id="bussinessDestroy" parameterType="com.psms.project.bussiness.domain.BussinessTrip">
         <include refid="updateStatusVo"/>
-        and trip_status=0
+        and trip_status=1
     </update>
 </mapper>

@@ -20,8 +20,7 @@ import com.psms.project.monitor.service.ISysOperLogService;
 
 /**
  * 操作日志记录
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/monitor/operlog")
@@ -36,7 +35,7 @@ public class SysOperlogController extends BaseController
      * @param operLog
      * @return
      */
-//    @PreAuthorize("@ss.hasPermi('monitor:operlog:list')")
+    @PreAuthorize("@ss.hasPermi('monitor:operlog:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysOperLog operLog)
     {
@@ -52,7 +51,7 @@ public class SysOperlogController extends BaseController
      * @return
      * author cyj
      */
-//  @PreAuthorize("@ss.hasPermi('monitor.operlog.query')")
+  @PreAuthorize("@ss.hasPermi('monitor.operlog.query')")
     @GetMapping(value = "/{operId}")
     public AjaxResult getInfo(@PathVariable Long operId){
         return AjaxResult.success(operLogService.selectOperLogById(operId));

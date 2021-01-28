@@ -24,10 +24,14 @@ public class BussinessTrip {
     private String workNum;
     /** 部门名称  */
     private String deptName;
-    /** 职位名称  */
+    /** 员工姓名  */
+    private String fullName;
+    /** 岗位编号 */
+    private String postCode;
+    /** 职位名称 */
     private String postName;
     /** 部门领导  */
-    private String deptLeader;
+    private String leader;
     /** 出差地点  */
     private String tripAddress;
     /** 申请原因  */
@@ -43,11 +47,11 @@ public class BussinessTrip {
     /** 申请人  */
     private String createTripBy;
     /** 申请时间  */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:MM:ss")
     private Date createTripTime;
     /** 审核人  */
     private String updateTripBy;
     /** 审核时间  */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:MM:ss")
     private Date updateTripTime;
 }

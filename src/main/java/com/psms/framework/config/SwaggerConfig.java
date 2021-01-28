@@ -22,8 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Swagger2的接口配置
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Configuration
 @EnableSwagger2
@@ -37,9 +36,9 @@ public class SwaggerConfig
     @Value("${swagger.enabled}")
     private boolean enabled;
 
-    /** 设置请求的统一前缀 */
-    @Value("${swagger.pathMapping}")
-    private String pathMapping;
+//    /** 设置请求的统一前缀 */
+//    @Value("${swagger.pathMapping}")
+//    private String pathMapping;
 
     /**
      * 创建API
@@ -54,17 +53,18 @@ public class SwaggerConfig
                 .apiInfo(apiInfo())
                 // 设置哪些接口暴露给Swagger展示
                 .select()
-                // 扫描所有有注解的api，用这种方式更灵活
-                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-                // 扫描指定包中的swagger注解
-                // .apis(RequestHandlerSelectors.basePackage("com.psms.project.tool.swagger"))
+//                // 扫描所有有注解的api，用这种方式更灵活
+//                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                 //扫描指定包中的swagger注解
+                 .apis(RequestHandlerSelectors.basePackage("com.psms.project.attendance"))
                 // 扫描所有 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
                 /* 设置安全模式，swagger可以设置访问token */
                 .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts())
-                .pathMapping(pathMapping);
+                .groupName("考勤")
+                .securityContexts(securityContexts());
+//                .pathMapping(pathMapping);
     }
 
     /**
@@ -112,9 +112,9 @@ public class SwaggerConfig
         // 用ApiInfoBuilder进行定制
         return new ApiInfoBuilder()
                 // 设置标题
-                .title("标题：吉想管理系统_接口文档")
+                .title("标题：西湖后勤人事管理系统")
                 // 描述
-                .description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
+                .description("描述：用于管理集团旗下公司的人员信息")
                 // 作者信息
                 .contact(new Contact(psmsConfig.getName(), null, null))
                 // 版本

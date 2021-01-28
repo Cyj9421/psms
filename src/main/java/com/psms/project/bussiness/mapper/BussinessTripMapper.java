@@ -46,4 +46,11 @@ public interface BussinessTripMapper {
      * @return
      */
     public int bussinessDestroy(BussinessTrip bussinessTrip);
+
+    /**
+     * 批量删除出差信息
+     * @param tripIds
+     * @return
+     */
+    public int delTrips(int [] tripIds);
 }

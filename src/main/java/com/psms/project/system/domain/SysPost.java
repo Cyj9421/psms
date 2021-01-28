@@ -11,8 +11,7 @@ import com.psms.framework.web.domain.BaseEntity;
 
 /**
  * 岗位表 sys_post
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysPost extends BaseEntity
 {
@@ -30,9 +29,9 @@ public class SysPost extends BaseEntity
     @Excel(name = "岗位名称")
     private String postName;
 
-    /** 岗位排序 */
-    @Excel(name = "岗位排序")
-    private String postSort;
+//    /** 岗位排序 */
+//    @Excel(name = "岗位排序")
+//    private String postSort;
 
     /** 状态（0正常 1停用） */
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
@@ -75,16 +74,16 @@ public class SysPost extends BaseEntity
         this.postName = postName;
     }
 
-    @NotBlank(message = "显示顺序不能为空")
-    public String getPostSort()
-    {
-        return postSort;
-    }
+//    @NotBlank(message = "显示顺序不能为空")
+//    public String getPostSort()
+//    {
+//        return postSort;
+//    }
 
-    public void setPostSort(String postSort)
-    {
-        this.postSort = postSort;
-    }
+//    public void setPostSort(String postSort)
+//    {
+//        this.postSort = postSort;
+//    }
 
     public String getStatus()
     {
@@ -112,7 +111,7 @@ public class SysPost extends BaseEntity
             .append("postId", getPostId())
             .append("postCode", getPostCode())
             .append("postName", getPostName())
-            .append("postSort", getPostSort())
+//            .append("postSort", getPostSort())
             .append("status", getStatus())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())

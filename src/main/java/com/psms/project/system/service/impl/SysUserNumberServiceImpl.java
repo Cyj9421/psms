@@ -1,5 +1,6 @@
 package com.psms.project.system.service.impl;
 
+import com.psms.framework.aspectj.lang.annotation.DataScope;
 import com.psms.project.system.domain.SysUserNumber;
 import com.psms.project.system.mapper.SysUserNumberMapper;
 import com.psms.project.system.service.ISysUserNumberService;
@@ -33,6 +34,16 @@ public class SysUserNumberServiceImpl implements ISysUserNumberService {
     @Override
     public SysUserNumber numberInfo(int  WorkId) {
         return sysUserNumberMapper.numberInfo(WorkId);
+    }
+
+    /**
+     * 工号详情
+     * @param workNum
+     * @return
+     */
+    @Override
+    public SysUserNumber numberByWorkNum(String workNum) {
+        return sysUserNumberMapper.numberByWorkNum(workNum);
     }
 
     /**
@@ -73,5 +84,14 @@ public class SysUserNumberServiceImpl implements ISysUserNumberService {
     @Override
     public int saveNewNum(SysUserNumber sysUserNumber) {
         return sysUserNumberMapper.saveNewNum(sysUserNumber);
+    }
+
+    /**
+     * 返回所有的工号
+     * @return
+     */
+    @Override
+    public List<String> numList() {
+        return sysUserNumberMapper.numList();
     }
 }

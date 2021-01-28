@@ -2,8 +2,7 @@ package com.psms.common.utils;
 
 /**
  * 处理并记录日志文件
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class LogUtils
 {

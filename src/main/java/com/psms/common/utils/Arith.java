@@ -5,8 +5,7 @@ import java.math.RoundingMode;
 
 /**
  * 精确的浮点数运算
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class Arith
 {

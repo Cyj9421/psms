@@ -10,8 +10,7 @@ import com.psms.project.system.domain.SysDictData;
 
 /**
  * 字典工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class DictUtils
 {

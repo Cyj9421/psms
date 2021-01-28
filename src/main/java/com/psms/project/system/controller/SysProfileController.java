@@ -26,8 +26,7 @@ import com.psms.project.system.service.ISysUserService;
 
 /**
  * 个人信息 业务处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/system/user/profile")

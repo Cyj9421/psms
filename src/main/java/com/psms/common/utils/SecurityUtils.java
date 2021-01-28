@@ -10,8 +10,7 @@ import com.psms.framework.security.LoginUser;
 
 /**
  * 安全服务工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SecurityUtils
 {

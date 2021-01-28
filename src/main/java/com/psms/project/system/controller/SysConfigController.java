@@ -26,8 +26,7 @@ import com.psms.project.system.service.ISysConfigService;
 
 /**
  * 参数配置 信息操作处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/system/config")

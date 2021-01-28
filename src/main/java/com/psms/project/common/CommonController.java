@@ -20,8 +20,7 @@ import com.psms.framework.web.domain.AjaxResult;
 
 /**
  * 通用请求处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 public class CommonController

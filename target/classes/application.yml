@@ -35,13 +35,16 @@ logging:
   level:
     com.psms: debug
     org.springframework: warn
-
+web:
+  filepath: src/main/resources/fingerprintMaps
 # Spring配置
 spring:
   # 资源信息
   messages:
     # 国际化资源文件路径
     basename: i18n/messages
+  resources:
+    static-locations: file:${web.filepath}
   profiles: 
     active: druid
   # 文件上传
@@ -89,7 +92,7 @@ token:
 # MyBatis配置
 mybatis:
     # 搜索指定包别名
-    typeAliasesPackage: com.psms.project.**.domain
+    typeAliasesPackage: com.psms.project.**.domain,com.psms.project.**.domain.vo
     # 配置mapper的扫描，找到所有的mapper.xml映射文件
     mapperLocations: classpath*:mybatis/**/*Mapper.xml
     # 加载全局的配置文件
@@ -106,8 +109,8 @@ pagehelper:
 swagger:
   # 是否开启swagger
   enabled: true
-  # 请求前缀
-  pathMapping: /dev-api
+#  # 请求前缀
+#  pathMapping: /dev-api
 
 # 防止XSS攻击
 xss: 

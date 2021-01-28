@@ -20,8 +20,7 @@ import com.psms.framework.web.domain.AjaxResult;
 
 /**
  * 验证码操作处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 public class CaptchaController

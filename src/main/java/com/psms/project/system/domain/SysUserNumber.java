@@ -1,5 +1,6 @@
 package com.psms.project.system.domain;
 
+import com.psms.framework.web.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,13 +14,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SysUserNumber {
+public class SysUserNumber extends BaseEntity {
     /** 工号id */
     private int workId;
     /** 工号 */
     private String workNum;
-    /** 工号开头 */
-    private String workNumHead;
+    /** 工号开头id */
+    private int headId;
     /** 部门id */
     private Long deptId;
     /** 岗位id */

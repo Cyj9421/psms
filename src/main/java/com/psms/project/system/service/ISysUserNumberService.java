@@ -23,6 +23,13 @@ public interface ISysUserNumberService {
     public SysUserNumber numberInfo(int WorkId);
 
     /**
+     * 员工工号详情
+     * @param workNum
+     * @return
+     */
+    public SysUserNumber numberByWorkNum(String workNum);
+
+    /**
      * 新增工号
      * @param sysUserNumber
      * @return
@@ -49,6 +56,12 @@ public interface ISysUserNumberService {
      * @return
      */
     public int saveNewNum(SysUserNumber sysUserNumber);
+
+    /**
+     * 查询所有的工号
+     * @return
+     */
+    public List<String> numList();
 
 }
 

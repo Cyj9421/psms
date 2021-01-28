@@ -1,8 +1,11 @@
 package com.psms.project.system.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.psms.common.utils.SecurityUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
+import com.psms.project.system.domain.SysRoleSalary;
 import com.psms.project.system.domain.SysUserNumber;
 import com.psms.project.system.service.ISysUserNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 员工工号
@@ -28,9 +32,12 @@ public class SysUserNumberController extends BaseController {
      * @return
      */
     @GetMapping("/list")
-    public AjaxResult numberList(SysUserNumber sysUserNumber){
-        startPage();
-        return AjaxResult.success(sysUserNumberService.numberList(sysUserNumber));
+    public AjaxResult numberList(SysUserNumber sysUserNumber,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+                                 @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SysUserNumber> list = sysUserNumberService.numberList(sysUserNumber);
+        PageInfo pageInfo = new PageInfo(list);
+        return AjaxResult.success(pageInfo);
     }
 
     /**
@@ -41,30 +48,6 @@ public class SysUserNumberController extends BaseController {
     @GetMapping("/info")
     public AjaxResult numberInfo(@RequestBody SysUserNumber sysUserNumber){
         return AjaxResult.success(sysUserNumberService.numberInfo(sysUserNumber.getWorkId()));
-    }
-
-    /**
-     * 新增工号
-     * @param sysUserNumber
-     * @return
-     */
-//    @PreAuthorize("@ss.hasPermi('system:user:work:add')")
-    @PostMapping("/add")
-    public AjaxResult addNumber(@RequestBody SysUserNumber sysUserNumber){
-        SysUserNumber numberinfo=sysUserNumberService.checkNum(sysUserNumber.getFullName());
-        if(numberinfo != null){
-            numberinfo.setUpdateBy(SecurityUtils.getUsername());
-            numberinfo.setUpdateTime(new Date());
-            sysUserNumberService.saveNewNum(numberinfo);
-            return AjaxResult.error("老员工,已生成新的工号");
-        }
-        Date now=new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        String body=dateFormat.format(now);
-        sysUserNumber.setWorkNum(sysUserNumber.getWorkNumHead()+body);
-        sysUserNumber.setCreateBy("root");
-        sysUserNumber.setCreateTime(new Date());
-        return toAjax(sysUserNumberService.addNumber(sysUserNumber));
     }
 
     /**

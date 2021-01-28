@@ -55,4 +55,14 @@ public class BussinessCompleteServiceImpl implements IBussinessCompleteService {
     public int updateDestroy(BussinessComplete bussinessComplete) {
         return bussinessCompleteMapper.updateDestroy(bussinessComplete);
     }
+
+    /**
+     * 批量删除销差信息
+     * @param destroyIds
+     * @return
+     */
+    @Override
+    public int delDestroys(int[] destroyIds) {
+        return bussinessCompleteMapper.delDestroys(destroyIds);
+    }
 }

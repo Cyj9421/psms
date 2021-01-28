@@ -5,8 +5,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 用户和角色关联 sys_user_role
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysUserRole
 {

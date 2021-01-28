@@ -25,4 +25,14 @@ public @interface DataScope
      * 用户表的别名
      */
     public String userAlias() default "";
+
+    /**
+     * 岗位表的别名
+     */
+    public String postAlias() default "";
+
+    /**
+     * 工号表的别名
+     */
+    public String userNumAlias() default "";
 }

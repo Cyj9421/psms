@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.system.mapper.SysIndexMapper">
+	<resultMap id="deptVoResult" type="com.psms.project.system.domain.vo.SysDeptVo">
+		<result property="deptName" column="dept_name"/>
+		<result property="employees" column="employees"/>
+		<result property="workTime" column="work_time"/>
+		<result property="attendanceDate" column="attendance_date"/>
+	</resultMap>
+    <select id="onWork" resultType="java.lang.Integer">
+        select count(work_num) as employees from sys_user_number
+        where use_status=1
+    </select>
+    <select id="workTime" resultType="java.lang.Double" parameterType="com.psms.project.system.domain.vo.SysIndexVo">
+    SELECT
+	    sum( workTime )
+    FROM
+	( SELECT ( TIMESTAMPDIFF(minute ,start_time,end_time)/60 ) AS workTime
+	FROM attendance_info
+	WHERE attendance_date BETWEEN #{startDate} AND #{endDate}
+	group by attendance_id) AS work_time
+    </select>
+    <select id="salaryCost" resultType="java.lang.Double">
+        select sum(base_salary) from sys_role_salary
+    </select>
+    <select id="departure" resultType="java.lang.Integer" parameterType="com.psms.project.system.domain.vo.SysIndexVo">
+        select count(work_num) as employees from sys_user_number
+        where use_status=2 and update_time between #{startTime} and #{endTime}
+    </select>
+    <select id="expectedTime" resultType="double" parameterType="com.psms.project.system.domain.vo.SysIndexVo">
+        SELECT
+	        sum( wt.workTime )
+        FROM
+	    (
+	    SELECT
+		    ( TIMESTAMPDIFF(minute ,o.start_time,o.end_time)/60) AS workTime
+	    FROM
+		    attendance_schedule_order o
+	    RIGHT JOIN attendance_schedule s ON o.order_id = s.order_id
+	    WHERE
+		#{attendanceDate} BETWEEN s.start_date and s.end_date
+	    ) AS wt
+    </select>
+    <select id="actualTime" resultType="java.lang.Double" parameterType="com.psms.project.system.domain.vo.SysIndexVo">
+        select sum(wt.workTime) from
+        (
+        select (TIMESTAMPDIFF(minute ,start_time,end_time)/60) as workTime
+        from attendance_info
+        where attendance_date=#{attendanceDate}
+         )as wt
+    </select>
+    <select id="deptNum" resultMap="deptVoResult" >
+        SELECT
+	        d.dept_name,
+	        count( n.work_num ) AS employees
+        FROM
+	        sys_user_number n
+	    LEFT JOIN sys_dept d ON n.dept_id = d.dept_id
+	    WHERE n.use_status=1
+        GROUP BY
+	        d.dept_name
+    </select>
+    <select id="expectedTimeByDept" resultMap="deptVoResult" parameterType="com.psms.project.system.domain.vo.SysIndexVo">
+        SELECT
+	        sum(work_time )as work_time,wt.dept_name
+        FROM
+	    (
+	    SELECT
+		    (TIMESTAMPDIFF(minute ,o.start_time,o.end_time)/60) AS work_time,d.dept_name
+	    FROM
+		    attendance_schedule_order o
+	    RIGHT JOIN attendance_schedule s ON o.order_id = s.order_id
+	    left join sys_user_number n on s.work_num=n.work_num
+	    left join sys_dept d on n.dept_id=d.dept_id
+	    WHERE
+			#{attendanceDate} between s.start_date and s.end_date
+	    ) AS wt
+			GROUP BY wt.dept_name
+    </select>
+    <select id="actualTimeByDept" resultMap="deptVoResult" parameterType="com.psms.project.system.domain.vo.SysIndexVo">
+        SELECT
+	        sum(work_time )as work_time,wt.dept_name
+        FROM
+	    (
+	    SELECT
+		    (TIMESTAMPDIFF(minute ,i.start_time,i.end_time)/60) AS work_time,d.dept_name
+	    FROM
+		    attendance_info i
+	    left join sys_user_number n on i.work_num=n.work_num
+	    left join sys_dept d on n.dept_id=d.dept_id
+	    WHERE
+			i.attendance_date=#{attendanceDate}
+	    ) AS wt
+			GROUP BY wt.dept_name
+    </select>
+
+</mapper>

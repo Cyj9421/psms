@@ -1,8 +1,8 @@
 package com.psms.project.system.service.impl;
 
-import com.psms.project.bussiness.domain.AttendnceSummary;
+import com.psms.project.attendance.domain.AttendanceSummary;
 import com.psms.project.system.domain.SysRoleSalary;
-import com.psms.project.system.domain.vo.SalaryVo;
+import com.psms.project.system.domain.SysUnitPrice;
 import com.psms.project.system.mapper.SysRoleSalaryMapper;
 import com.psms.project.system.service.ISysRoleSalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +49,16 @@ public class SysRoleSalaryImpl implements ISysRoleSalaryService {
     }
 
     /**
+     * 更新工资数据
+     * @param sysRoleSalary
+     * @return
+     */
+    @Override
+    public int updateSalary(SysRoleSalary sysRoleSalary) {
+        return sysRoleSalaryMapper.updateSalary(sysRoleSalary);
+    }
+
+    /**
      * 领取工资
      * @param sysRoleSalary
      * @return
@@ -59,17 +69,12 @@ public class SysRoleSalaryImpl implements ISysRoleSalaryService {
     }
 
     /**
-     * 计算工资
-     * @param salaryVo
+     * 统计考勤
+     * @param attendanceSummary
      * @return
      */
     @Override
-    public int calcSalary(SalaryVo salaryVo) {
-        return sysRoleSalaryMapper.calcSalary(salaryVo);
-    }
-
-    @Override
-    public AttendnceSummary calcSummary(int workId) {
-        return sysRoleSalaryMapper.calcSummary(workId);
+    public AttendanceSummary calcSummary(AttendanceSummary attendanceSummary) {
+        return sysRoleSalaryMapper.calcSummary(attendanceSummary);
     }
 }

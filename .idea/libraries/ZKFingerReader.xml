@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ZKFingerReader">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Downloads/UtilFiles/ZKFinger SDK 5.0.0.32 windows开发包/Java/lib/ZKFingerReader.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

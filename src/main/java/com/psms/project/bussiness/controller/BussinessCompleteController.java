@@ -1,5 +1,8 @@
 package com.psms.project.bussiness.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.psms.common.utils.SecurityUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
@@ -31,8 +34,12 @@ public class BussinessCompleteController extends BaseController {
      * @return
      */
     @GetMapping("/list")
-    public AjaxResult destroyList(BussinessComplete bussinessComplete){
-        return AjaxResult.success(bussinessCompleteService.destroyList(bussinessComplete));
+    public AjaxResult destroyList(BussinessComplete bussinessComplete, @RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+                                  @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<BussinessComplete> list = bussinessCompleteService.destroyList(bussinessComplete);
+        PageInfo pageInfo = new PageInfo(list);
+        return AjaxResult.success(pageInfo);
     }
 
     /**
@@ -52,6 +59,7 @@ public class BussinessCompleteController extends BaseController {
      */
     @PostMapping("/add")
     public AjaxResult addDestroy(@RequestBody BussinessComplete bussinessComplete){
+        bussinessComplete.setCreateDestroyBy(SecurityUtils.getUsername());
         bussinessComplete.setCreateDestroyTime(new Date());
         return toAjax(bussinessCompleteService.addDestroy(bussinessComplete));
     }
@@ -62,19 +70,29 @@ public class BussinessCompleteController extends BaseController {
      */
     @PutMapping("/updateStatus")
     public AjaxResult updateDestroy(@RequestBody BussinessComplete bussinessComplete){
-//          bussinessComplete.setUpdateDestroyBy(SecurityUtils.getUsername());
-            bussinessComplete.setUpdateDestroyTime(new Date());
+          bussinessComplete.setUpdateDestroyBy(SecurityUtils.getUsername());
+          bussinessComplete.setUpdateDestroyTime(new Date());
         int res=bussinessCompleteService.updateDestroy(bussinessComplete);
         BussinessComplete bussinessCompleteinfo=bussinessCompleteService.destroyInfo(bussinessComplete.getDestroyId());
         BussinessTrip bussinessTrip=new BussinessTrip();
-        if(bussinessComplete.getDestroyStatus()==0){
+        if(bussinessComplete.getDestroyStatus()==1){
             bussinessTrip.setTripId(bussinessCompleteinfo.getTripId());
-            bussinessTrip.setTripStatus(3);
-//          bussinessTrip.setCreateTripBy(SecurityUtils.getUsername());
+            bussinessTrip.setTripStatus(4);
+            bussinessTrip.setCreateTripBy(SecurityUtils.getUsername());
             bussinessTrip.setUpdateTripTime(new Date());
             bussinessTripService.bussinessDestroy(bussinessTrip);
         }
         return toAjax(res);
 
+    }
+
+    /**
+     * 批量删除销差信息
+     * @param destroyIds
+     * @return
+     */
+    @DeleteMapping("/{destroyIds}")
+    public AjaxResult delDestroys(@PathVariable int [] destroyIds){
+        return toAjax(bussinessCompleteService.delDestroys(destroyIds));
     }
 }

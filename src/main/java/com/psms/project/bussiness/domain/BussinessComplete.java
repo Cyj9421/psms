@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString
 public class BussinessComplete {
     /**  销差id  */
     private int destroyId;

@@ -8,8 +8,7 @@ import com.psms.framework.web.domain.BaseEntity;
 
 /**
  * 系统访问记录表 sys_logininfor
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysLogininfor extends BaseEntity
 {

@@ -8,8 +8,7 @@ import com.psms.framework.web.domain.BaseEntity;
 
 /**
  * 操作日志记录表 oper_log
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysOperLog extends BaseEntity
 {

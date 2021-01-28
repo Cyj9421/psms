@@ -1,5 +1,6 @@
 package com.psms;
 
+import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -18,7 +19,8 @@ public class PSMSApplication
     public static void main(String[] args)
     {
         // System.setProperty("spring.devtools.restart.enabled", "false");
-        SpringApplication.run(PSMSApplication.class, args);
-        System.out.println("(♥◠‿◠)ﾉﾞ  吉想 启动成功   ლ(´ڡ`ლ)ﾞ  \n");
+        SpringApplication app=new SpringApplication(Application.class);
+        app.run(PSMSApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ   启动成功   ლ(´ڡ`ლ)ﾞ  \n");
     }
 }

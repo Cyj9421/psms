@@ -35,4 +35,11 @@ public interface BussinessCompleteMapper {
      * @return 结果
      */
     public int updateDestroy(BussinessComplete bussinessComplete);
+
+    /**
+     * 批量删除销差信息
+     * @param destroyIds
+     * @return
+     */
+    public int delDestroys(int [] destroyIds);
 }

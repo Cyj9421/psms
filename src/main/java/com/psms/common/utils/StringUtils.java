@@ -11,8 +11,7 @@ import com.psms.common.core.text.StrFormatter;
 
 /**
  * 字符串工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils
 {

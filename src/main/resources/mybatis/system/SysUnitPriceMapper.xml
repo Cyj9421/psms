@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psms.project.system.mapper.SysUnitPriceMapper">
+    <resultMap id="priceResult" type="com.psms.project.system.domain.SysUnitPrice">
+        <id property="priceId" column="price_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="baseSalary" column="base_salary"/>
+        <result property="afdPrice" column="afd_price"/>
+        <result property="earlyPrice" column="early_price"/>
+        <result property="latePrice" column="late_price"/>
+        <result property="overtimePrice" column="overtime_price"/>
+        <result property="remark" column="remark"/>
+        <result property="fullName" column="full_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="leader" column="leader"/>
+        <result property="postName" column="post_name"/>
+        <result property="postCode" column="post_code"/>
+    </resultMap>
+    <sql id="priceVo">
+        select up.price_id,up.work_num,up.base_salary,up.overtime_price,up.afd_price,up.late_price,up.early_price,up.remark,
+                n.full_name,
+                d.dept_name,d.leader,
+                p.post_code,p.post_name
+            from sys_unit_price up
+            left join sys_user_number n on up.work_num=n.work_num
+            left join sys_dept d on n.dept_id=d.dept_id
+            left join sys_post p on n.post_id=p.post_id
+    </sql>
+    <delete id="delPrice" parameterType="int">
+        delete from sys_unit_price where price_id in
+        <foreach collection="array" item="priceId" open="(" separator="," close=")">
+            #{priceId}
+        </foreach>
+    </delete>
+    <select id="priceList" resultMap="priceResult" parameterType="com.psms.project.system.domain.SysUnitPrice">
+        <include refid="priceVo"/>
+        <where>
+            <if test="workNum != null and workNum!=''">
+                AND up.work_num like concat ('%',#{workNum},'%')
+            </if>
+            <if test="deptName != null and deptName!=''">
+                AND d.dept_name like concat ('%',#{deptName},'%')
+            </if>
+            <if test="fullName != null and fullName!=''">
+                AND n.full_name like concat ('%',#{fullName},'%')
+            </if>
+        </where>
+    </select>
+    <select id="priceInfo" resultMap="priceResult" parameterType="string">
+        <include refid="priceVo"/>
+        where up.work_num=#{workNum}
+    </select>
+    <insert id="addPrice" parameterType="com.psms.project.system.domain.SysUnitPrice">
+        insert into sys_unit_price(work_num,base_salary,overtime_price,afd_price,late_price,early_price)
+        values (#{workNum},#{baseSalary},#{overtimePrice},#{afdPrice},#{latePrice},#{earlyPrice}
+        )
+    </insert>
+    <update id="updatePrice" parameterType="com.psms.project.system.domain.SysUnitPrice">
+        update sys_unit_price set
+        <if test="baseSalary !=null and baseSalary !=0">base_salary=#{baseSalary},</if>
+        <if test="overtimePrice !=null and overtimePrice !=0">overtime_price=#{overtimePrice},</if>
+        <if test="afdPrice !=null and afdPrice !=0">afd_price=#{afdPrice},</if>
+        <if test="latePrice !=null and latePrice !=0">late_price=#{latePrice},</if>
+        <if test="earlyPrice !=null and earlyPrice !=0">early_price=#{earlyPrice},</if>
+        <if test="remark !=null and remark !=0">remark=#{remark}</if>
+        where work_num=#{workNum}
+    </update>
+</mapper>

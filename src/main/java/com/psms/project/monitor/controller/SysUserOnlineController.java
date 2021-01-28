@@ -26,8 +26,7 @@ import com.psms.project.system.service.ISysUserOnlineService;
 
 /**
  * 在线用户监控
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/monitor/online")

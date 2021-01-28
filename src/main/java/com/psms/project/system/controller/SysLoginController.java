@@ -27,8 +27,7 @@ import com.psms.project.system.service.ISysMenuService;
 
 /**
  * 登录验证
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 public class SysLoginController

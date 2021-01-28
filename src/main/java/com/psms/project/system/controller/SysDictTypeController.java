@@ -26,8 +26,7 @@ import com.psms.project.system.service.ISysDictTypeService;
 
 /**
  * 数据字典信息
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/system/dict/type")

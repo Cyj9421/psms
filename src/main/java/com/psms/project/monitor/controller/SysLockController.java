@@ -1,10 +1,13 @@
 package com.psms.project.monitor.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.psms.common.utils.SecurityUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.monitor.domain.SysLock;
 import com.psms.project.monitor.service.ISysLockService;
+import com.psms.project.system.domain.SysUserNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +31,12 @@ public class SysLockController extends BaseController {
      * @return
      */
     @GetMapping("/list")
-    public AjaxResult lockList(SysLock sysLock){
-        return AjaxResult.success(sysLockService.lockList(sysLock));
+    public AjaxResult lockList(SysLock sysLock,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+                               @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SysLock> list = sysLockService.lockList(sysLock);
+        PageInfo pageInfo = new PageInfo(list);
+        return AjaxResult.success(pageInfo);
     }
     /**
      * 添加锁定日期
@@ -61,20 +68,5 @@ public class SysLockController extends BaseController {
     public AjaxResult delDates(@PathVariable int [] lockIds){
         return toAjax(sysLockService.delDates(lockIds));
     }
-    @PostMapping("/lock")
-    public AjaxResult lock(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-        String date=dateFormat.format(new Date());
-        sysLockService.isFlase();
-        List<String> list=sysLockService.dateList();
-        if(list.size()>0){
-            for (int i=0;i<list.size();i++) {
-                if(list.get(i).equals(date)){
-                    return toAjax(sysLockService.isTrue());
-                }else{
-                    return toAjax(sysLockService.isFlase());
-                }
-            }
-        }return AjaxResult.error("还没有设置锁定日期");
-    }
+
 }

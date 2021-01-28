@@ -17,8 +17,7 @@ import com.psms.framework.web.domain.BaseEntity;
 
 /**
  * 用户对象 sys_user
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysUser extends BaseEntity
 {
@@ -32,13 +31,21 @@ public class SysUser extends BaseEntity
     @Excel(name = "部门编号", type = Type.IMPORT)
     private Long deptId;
 
+    /** 岗位ID */
+    @Excel(name="岗位编号")
+    private Long postId;
+
+    /** 员工工号 */
+    @Excel(name="员工工号")
+    private String workNum;
+
     /** 用户账号 */
     @Excel(name = "登录名称")
     private String userName;
 
     /** 用户昵称 */
     @Excel(name = "用户名称")
-    private String nickName;
+    private String fullName;
 
     /** 用户邮箱 */
     @Excel(name = "用户邮箱")
@@ -112,6 +119,15 @@ public class SysUser extends BaseEntity
         this.userId = userId;
     }
 
+
+    public void setPostId(Long postId)
+    {
+        this.postId = postId;
+    }
+    public Long getPostId()
+    {
+        return postId;
+    }
     public boolean isAdmin()
     {
         return isAdmin(this.userId);
@@ -131,16 +147,21 @@ public class SysUser extends BaseEntity
     {
         this.deptId = deptId;
     }
-
+    public  String getWorkNum(){
+        return workNum;
+    }
+    public void setWorkNum(String workNum){
+        this.workNum=workNum;
+    }
     @Size(min = 0, max = 30, message = "用户昵称长度不能超过30个字符")
     public String getNickName()
     {
-        return nickName;
+        return fullName;
     }
 
     public void setNickName(String nickName)
     {
-        this.nickName = nickName;
+        this.fullName = nickName;
     }
 
     @NotBlank(message = "用户账号不能为空")

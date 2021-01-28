@@ -20,8 +20,7 @@ import com.psms.project.monitor.service.ISysLogininforService;
 
 /**
  * 系统访问记录
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/monitor/logininfor")
@@ -30,7 +29,7 @@ public class SysLogininforController extends BaseController
     @Autowired
     private ISysLogininforService logininforService;
 
-//    @PreAuthorize("@ss.hasPermi('monitor:logininfor:list')")
+    @PreAuthorize("@ss.hasPermi('monitor:logininfor:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysLogininfor logininfor)
     {
@@ -49,16 +48,16 @@ public class SysLogininforController extends BaseController
         return util.exportExcel(list, "登录日志");
     }
 
-//    @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
-//    @Log(title = "登录日志", businessType = BusinessType.DELETE)
+    @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
+    @Log(title = "登录日志", businessType = BusinessType.DELETE)
     @DeleteMapping("/{infoIds}")
     public AjaxResult remove(@PathVariable Long[] infoIds)
     {
         return toAjax(logininforService.deleteLogininforByIds(infoIds));
     }
 
-//    @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
-//    @Log(title = "登录日志", businessType = BusinessType.CLEAN)
+    @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
+    @Log(title = "登录日志", businessType = BusinessType.CLEAN)
     @DeleteMapping("/clean")
     public AjaxResult clean()
     {

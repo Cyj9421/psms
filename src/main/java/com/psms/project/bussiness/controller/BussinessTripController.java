@@ -1,5 +1,7 @@
 package com.psms.project.bussiness.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.psms.common.utils.SecurityUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
@@ -24,9 +26,12 @@ public class BussinessTripController extends BaseController {
      *查询出差列表
      */
     @GetMapping("/list")
-    public AjaxResult tripList(BussinessTrip bussinessTrip){
-        List<BussinessTrip> trips= bussinessTripService.selectTripList(bussinessTrip);
-        return AjaxResult.success(trips);
+    public AjaxResult tripList(BussinessTrip bussinessTrip, @RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+                               @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<BussinessTrip> list = bussinessTripService.selectTripList(bussinessTrip);
+        PageInfo pageInfo = new PageInfo(list);
+        return AjaxResult.success(pageInfo);
     }
 
     /**
@@ -45,7 +50,7 @@ public class BussinessTripController extends BaseController {
      */
     @PostMapping("/add")
     public AjaxResult addTrip(@RequestBody BussinessTrip bussinessTrip){
-//        bussinessTrip.setCreateTripBy(SecurityUtils.getUsername());
+        bussinessTrip.setCreateTripBy(SecurityUtils.getUsername());
         bussinessTrip.setCreateTripTime(new Date());
         return toAjax( bussinessTripService.addTrip(bussinessTrip));
     }
@@ -55,7 +60,7 @@ public class BussinessTripController extends BaseController {
      */
     @PutMapping("/update")
     public AjaxResult updateTrip(@RequestBody BussinessTrip bussinessTrip){
-//        bussinessTrip.setCreateTripBy(SecurityUtils.getUsername());
+        bussinessTrip.setCreateTripBy(SecurityUtils.getUsername());
         bussinessTrip.setCreateTripTime(new Date());
         return toAjax(bussinessTripService.updateTrip(bussinessTrip));
     }
@@ -65,8 +70,18 @@ public class BussinessTripController extends BaseController {
      */
     @PutMapping("/updateStatus")
     public AjaxResult updateStatus(@RequestBody BussinessTrip bussinessTrip){
-//        bussinessTrip.setUpdateTripBy(SecurityUtils.getUsername());
+        bussinessTrip.setUpdateTripBy(SecurityUtils.getUsername());
         bussinessTrip.setUpdateTripTime(new Date());
         return toAjax(bussinessTripService.updateStatus(bussinessTrip));
+    }
+
+    /**
+     * 批量删除出差信息
+     * @param tripIds
+     * @return
+     */
+    @DeleteMapping("/{tripIds}")
+    public AjaxResult delTrip(@PathVariable int[] tripIds){
+        return toAjax(bussinessTripService.delTrips(tripIds));
     }
 }

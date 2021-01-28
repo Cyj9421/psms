@@ -12,8 +12,7 @@ import com.psms.framework.web.domain.BaseEntity;
 
 /**
  * 部门表 sys_dept
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysDept extends BaseEntity
 {

@@ -104,6 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         "/*.html",
                         "/**/*.html",
                         "/**/*.css",
+                        "/**/*.bmp",
                         "/**/*.js"
                 ).permitAll()
                 .antMatchers("/profile/**").anonymous()
@@ -114,19 +115,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/webjars/**").anonymous()
                 .antMatchers("/*/api-docs").anonymous()
                 .antMatchers("/druid/**").anonymous()
-                .antMatchers("/system/user/**").permitAll()
-                .antMatchers("/system/dept/**").permitAll()
-                .antMatchers("/system/role/**").permitAll()
-                .antMatchers("/system/post/**").permitAll()
-                .antMatchers("/system/menu/**").permitAll()
-                .antMatchers("/monitor/operlog/**").permitAll()
-                .antMatchers("/monitor/logininfor/**").permitAll()
-                .antMatchers("/bussiness/trip/**").permitAll()
-                .antMatchers("/bussiness/complete/**").permitAll()
-                .antMatchers("/system/user/work/**").permitAll()
-                .antMatchers("/system/time/**").permitAll()
-                .antMatchers("/system/lock/**").permitAll()
-                .antMatchers("/system/notice/**").permitAll()
+                .antMatchers("/dev-api/**/**").anonymous()
+                .antMatchers("/attendance/**/**").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()

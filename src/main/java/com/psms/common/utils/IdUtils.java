@@ -4,8 +4,7 @@ import com.psms.common.core.lang.UUID;
 
 /**
  * ID生成器工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class IdUtils
 {

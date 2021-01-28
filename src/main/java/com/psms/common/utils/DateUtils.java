@@ -8,8 +8,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 
 /**
  * 时间工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils
 {

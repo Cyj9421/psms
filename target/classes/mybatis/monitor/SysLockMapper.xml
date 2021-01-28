@@ -23,10 +23,10 @@
     </update>
     <update id="isFlase">
         unlock tables;
-        update sys_lock set lock_status=1 where lock_status=0;
+        update sys_lock set lock_status=2 where lock_status=1;
     </update>
     <update id="isTrue">
-        update sys_lock set lock_status=0 where lock_status=1;
+        update sys_lock set lock_status=1 where lock_status=2;
         flush tables with read lock;
     </update>
     <delete id="delDates">

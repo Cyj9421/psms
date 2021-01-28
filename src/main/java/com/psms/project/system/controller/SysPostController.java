@@ -2,6 +2,7 @@ package com.psms.project.system.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,7 @@ import com.psms.project.system.service.ISysPostService;
 
 /**
  * 岗位信息操作处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/system/post")
@@ -38,7 +38,7 @@ public class SysPostController extends BaseController
     /**
      * 获取岗位列表
      */
-//    @PreAuthorize("@ss.hasPermi('system:post:list')")
+    @PreAuthorize("@ss.hasPermi('system:post:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysPost post)
     {
@@ -48,7 +48,7 @@ public class SysPostController extends BaseController
     }
     
     @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
-//    @PreAuthorize("@ss.hasPermi('system:post:export')")
+    @PreAuthorize("@ss.hasPermi('system:post:export')")
     @GetMapping("/export")
     public AjaxResult export(SysPost post)
     {
@@ -60,7 +60,7 @@ public class SysPostController extends BaseController
     /**
      * 根据岗位编号获取详细信息
      */
-//    @PreAuthorize("@ss.hasPermi('system:post:query')")
+    @PreAuthorize("@ss.hasPermi('system:post:query')")
     @GetMapping(value = "/{postId}")
     public AjaxResult getInfo(@PathVariable Long postId)
     {
@@ -70,7 +70,7 @@ public class SysPostController extends BaseController
     /**
      * 新增岗位
      */
-//    @PreAuthorize("@ss.hasPermi('system:post:add')")
+    @PreAuthorize("@ss.hasPermi('system:post:add')")
     @Log(title = "岗位管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysPost post)
@@ -90,10 +90,10 @@ public class SysPostController extends BaseController
     /**
      * 修改岗位
      */
-//    @PreAuthorize("@ss.hasPermi('system:post:edit')")
+    @PreAuthorize("@ss.hasPermi('system:post:edit')")
     @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@Validated @RequestBody SysPost post)
+    public AjaxResult edit(/** @Validated */ @RequestBody SysPost post)
     {
         if (UserConstants.NOT_UNIQUE.equals(postService.checkPostNameUnique(post)))
         {
@@ -110,7 +110,7 @@ public class SysPostController extends BaseController
     /**
      * 删除岗位
      */
-//    @PreAuthorize("@ss.hasPermi('system:post:remove')")
+    @PreAuthorize("@ss.hasPermi('system:post:remove')")
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{postIds}")
     public AjaxResult remove(@PathVariable Long[] postIds)

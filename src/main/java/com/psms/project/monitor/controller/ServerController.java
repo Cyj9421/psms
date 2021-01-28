@@ -11,8 +11,7 @@ import com.psms.framework.web.domain.Server;
 
 /**
  * 服务器监控
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestController
 @RequestMapping("/monitor/server")
