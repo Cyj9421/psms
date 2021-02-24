@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.induction.mapper.InductionCitizenshipMapper">
+    <resultMap id="citizenshipResult" type="com.psms.project.induction.domain.InductionCitizenship">
+        <id property="citizenshipId" column="citizenship_id"/>
+        <result property="citizenshipName" column="citizenship_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+    <sql id="citizenshipVo">
+        select citizenship_id,citizenship_name,create_time,update_time,remark
+        from induction_citizenship
+    </sql>
+    <insert id="addCitizenship" parameterType="com.psms.project.induction.domain.vo.CitizenshipVo">
+        insert into induction_citizenship(
+        <if test="citizenshipName != null and citizenshipName != ''">citizenship_name,</if>
+        <if test="remark !=null and remark != ''">remark,</if>
+        create_time
+        )values (
+        <if test="citizenshipName != null and citizenshipName != ''">#{citizenshipName},</if>
+        <if test="remark !=null and remark != ''">#{remark},</if>
+        sysdate()
+        )
+    </insert>
+    <update id="updateCitizenship" parameterType="com.psms.project.induction.domain.vo.CitizenshipVo">
+        update induction_citizenship set
+        <if test="citizenshipName != null and citizenshipName != ''">citizenship_name=#{citizenshipName},</if>
+        <if test="remark !=null and remark != ''">remark=#{remark},</if>
+        update_time=sysdate()
+        where citizenship_id=#{citizenshipId}
+    </update>
+    <delete id="delCitizenship" parameterType="int">
+        delete from induction_citizenship where citizenship_id in
+        <foreach collection="array" item="citizenshipId" open="(" separator="," close=")">
+            #{citizenshipId}
+        </foreach>
+    </delete>
+    <select id="citizenshipList" resultMap="citizenshipResult" parameterType="com.psms.project.induction.domain.vo.SelectCitizenshipVo">
+        <include refid="citizenshipVo"/>
+        <where>
+            <if test="citizenshipName != null and citizenshipName != ''">
+                AND citizenship_name like concat ('%',#{citizenshipName},'%')
+            </if>
+        </where>
+    </select>
+    <select id="citizenshipInfo" resultMap="citizenshipResult" parameterType="int">
+        <include refid="citizenshipVo"/>
+        where citizenship_id=#{citizenshipId}
+    </select>
+
+</mapper>

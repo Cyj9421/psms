@@ -33,6 +33,13 @@ public interface AttendanceCardMapper {
     public int addCard(AttendanceCard attendanceCard);
 
     /**
+     * 修改卡号信息
+     * @param attendanceCard
+     * @return
+     */
+    public int updateCard(AttendanceCard attendanceCard);
+
+    /**
      * 批量删除卡号
      * @param cardIds
      * @return

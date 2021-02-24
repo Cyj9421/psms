@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.induction.mapper.InductionCurrencyMapper">
+    <resultMap id="currencyResult" type="com.psms.project.induction.domain.InductionCurrency">
+        <id property="currencyId" column="currency_id"/>
+        <result property="currencyName" column="currency_name"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="currencyVo">
+        select currency_id,currency_name,remark,create_time,update_time
+        from induction_currency
+    </sql>
+    <insert id="addCurrency" parameterType="com.psms.project.induction.domain.vo.CurrencyVo">
+        insert into induction_currency(
+        <if test="currencyName != null and currencyName != ''">currency_name,</if>
+        <if test="remark != null and remark != ''">remark,</if>
+        create_time
+        )values (
+        <if test="currencyName != null and currencyName != ''">#{currencyName},</if>
+        <if test="remark != null and remark != ''">#{remark},</if>
+        sysdate()
+        )
+    </insert>
+    <update id="updateCurrency" parameterType="com.psms.project.induction.domain.vo.CurrencyVo">
+        update induction_currency set
+        <if test="currencyName != null and currencyName != ''">currency_name=#{currencyName},</if>
+        <if test="remark != null and remark != ''">remark=#{remark},</if>
+        update_time=sysdate()
+        where currency_id=#{currencyId}
+    </update>
+    <delete id="delCurrency" parameterType="int">
+        delete from induction_currency where currency_id in
+        <foreach collection="array" item="currencyId" open="(" separator="," close= ")">
+            #{currencyId}
+        </foreach>
+    </delete>
+    <select id="currencyList" resultMap="currencyResult" parameterType="com.psms.project.induction.domain.InductionCurrency">
+        <include refid="currencyVo"/>
+        <where>
+            <if test="currencyName != null and currencyName != ''">
+                AND currency_name like concat('%',#{currencyName},'%')
+            </if>
+        </where>
+    </select>
+    <select id="currencyInfo" resultMap="currencyResult" parameterType="int">
+        <include refid="currencyVo"/>
+        where currency_id=#{currencyId}
+    </select>
+</mapper>

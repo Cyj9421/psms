@@ -63,7 +63,8 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 权限列表
      */
     @Override
-    public Set<String> selectRolePermissionByUserId(Long userId)
+    public Set<String>
+    selectRolePermissionByUserId(Long userId)
     {
         List<SysRole> perms = roleMapper.selectRolePermissionByUserId(userId);
         Set<String> permsSet = new HashSet<>();

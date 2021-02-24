@@ -9,8 +9,7 @@ import com.psms.project.system.domain.SysUser;
 
 /**
  * 登录用户身份权限
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class LoginUser implements UserDetails
 {

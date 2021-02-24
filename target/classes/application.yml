@@ -10,6 +10,7 @@ psms:
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/psms/uploadPath，Linux配置 /home/psms/uploadPath）
   profile: D:/psms/uploadPath
+#  profile: /www/server/upload
   # 获取ip地址开关
   addressEnabled: false
   # 验证码类型 math 数组计算 char 字符验证
@@ -18,7 +19,7 @@ psms:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 8080
+  port: 28080
   servlet:
     # 应用的访问路径
     context-path: /
@@ -35,8 +36,7 @@ logging:
   level:
     com.psms: debug
     org.springframework: warn
-web:
-  filepath: src/main/resources/fingerprintMaps
+
 # Spring配置
 spring:
   # 资源信息
@@ -131,3 +131,4 @@ gen:
   autoRemovePre: false
   # 表前缀（生成类名不会包含表前缀，多个用逗号分隔）
   tablePrefix: sys_
+

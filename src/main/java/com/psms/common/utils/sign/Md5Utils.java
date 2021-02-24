@@ -6,8 +6,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Md5加密方法
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class Md5Utils
 {

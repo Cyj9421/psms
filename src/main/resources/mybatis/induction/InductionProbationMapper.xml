@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.induction.mapper.InductionProbationMapper">
+    <resultMap id="probationResult" type="com.psms.project.induction.domain.InductionProbation">
+        <id property="probationId" column="probation_id"/>
+        <result property="probationMonth" column="probation_month"/>
+        <result property="probationDay" column="probation_day"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="probationVo">
+        select probation_id,probation_month,probation_day,create_time,update_time
+        from induction_probation
+    </sql>
+    <insert id="addProbation" parameterType="com.psms.project.induction.domain.InductionProbation">
+        insert into induction_probation(
+        <if test="probationId != null and probationId != 0">probation_id,</if>
+        <if test="probationMonth != null and probationMonth != 0">probation_month,</if>
+        <if test="probationDay != null and probationDay != 0">probation_day,</if>
+        create_time
+        )values (
+        <if test="probationId != null and probationId != 0">#{probationId},</if>
+        <if test="probationMonth != null and probationMonth != 0">#{probationMonth},</if>
+        <if test="probationDay != null and probationDay != 0">#{probationDay},</if>
+        sysdate()
+        )
+    </insert>
+    <update id="updateProbation" parameterType="com.psms.project.induction.domain.InductionProbation">
+        update induction_probation set
+        <if test="probationMonth != null and probationMonth != 0">probation_month=#{probationMonth},</if>
+        <if test="probationDay != null and probationDay != 0">probation_day=#{probationDay},</if>
+        update_time=sysdate()
+        where probation_id=#{probationId}
+    </update>
+    <select id="probationList" resultMap="probationResult">
+        <include refid="probationVo"/>
+    </select>
+    <select id="probationInfo" resultMap="probationResult" parameterType="int">
+        <include refid="probationVo"/>
+        where probation_id=#{probationId}
+    </select>
+    <select id="maxProbationId" resultType="java.lang.Integer">
+        select max(probation_id) as probation_id from induction_probation
+    </select>
+</mapper>

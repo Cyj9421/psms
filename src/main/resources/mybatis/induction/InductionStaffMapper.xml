@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.induction.mapper.InductionStaffMapper">
+    <resultMap id="inductionStaffResult" type="com.psms.project.induction.domain.vo.InductionVo">
+        <id property="inductionId" column="induction_id"/>
+        <result property="currencyId" column="currency_id"/>
+        <result property="citizenshipId" column="citizenship_id"/>
+        <result property="postId" column="post_id"/>
+        <result property="probationId" column="probation_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="salary" column="salary"/>
+        <result property="fullName" column="full_name"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="personalPhoto" column="personal_photo"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+        <result property="deposit" column="deposit"/>
+        <result property="postName" column="post_name"/>
+        <result property="probationDay" column="probation_day"/>
+        <result property="probationMonth" column="probation_month"/>
+        <result property="citizenshipName" column="citizenship_name"/>
+        <result property="currencyName" column="currency_name"/>
+    </resultMap>
+    <sql id="inductionVo">
+        select a.induction_id,a.currency_id,a.citizenship_id,a.post_id,a.probation_id,a.work_num,
+               a.salary,a.full_name,a.sex,a.age,a.personal_photo,a.create_time,a.update_time,a.remark,
+               a.deposit,
+               b.post_name,
+               c.probation_day,c.probation_month,
+               d.citizenship_name,
+               e.currency_name
+        from induction_staff a
+        left join sys_post b on a.post_id=b.post_id
+        left join induction_probation c on a.probation_id=c.probation_id
+        left join induction_citizenship d on a.citizenship_id=d.citizenship_id
+        left join induction_currency e on a.currency_id=e.currency_id
+    </sql>
+    <insert id="addInduction" parameterType="com.psms.project.induction.domain.vo.InsertInductionVo">
+        insert into induction_staff(
+        <if test="currencyId != null and currencyId !=0">currency_id,</if>
+        <if test="citizenshipId != null and citizenshipId !=0">citizenship_id,</if>
+        <if test="postId != null and postId !=0">post_id,</if>
+        <if test="probationId != null and probationId !=0">probation_id,</if>
+        <if test="workNum != null and workNum != ''">work_num,</if>
+        <if test="salary != null and salary !=0">salary,</if>
+        <if test="deposit != null and deposit !=0">deposit,</if>
+        <if test="fullName != null and fullName != ''">full_name,</if>
+        <if test="sex != null and sex !=0">sex,</if>
+        <if test="age != null and age !=0">age,</if>
+        <if test="personalPhoto != null and personalPhoto != ''">persoal_photo,</if>
+        <if test="remark != null and remark != ''">remark,</if>
+        create_time
+        )values (
+        <if test="currencyId != null and currencyId !=0">#{currencyId},</if>
+        <if test="citizenshipId != null and citizenshipId !=0">#{citizenshipId},</if>
+        <if test="postId != null and postId !=0">#{postId},</if>
+        <if test="probationId != null and probationId !=0">#{probationId},</if>
+        <if test="workNum != null and workNum != ''">#{workNum},</if>
+        <if test="salary != null and salary !=0 ">#{salary},</if>
+        <if test="deposit != null and deposit !=0">#{deposit},</if>
+        <if test="fullName != null and fullName != ''">#{fullName},</if>
+        <if test="sex != null and sex !=0">#{sex},</if>
+        <if test="age != null and age !=0">#{age},</if>
+        <if test="personalPhoto != null and personalPhoto != ''">#{personalPhoto},</if>
+        <if test="remark != null and remark != ''">#{remark},</if>
+        sysdate()
+        )
+    </insert>
+    <update id="updateInduction" parameterType="com.psms.project.induction.domain.vo.UpdateInductionVo">
+        update induction_staff set
+        <if test="currencyId != null and currencyId !=0">currency_id=#{currencyId},</if>
+        <if test="citizenshipId != null and citizenshipId !=0">citizenship_id=#{citizenshipId},</if>
+        <if test="postId != null and postId !=0">post_id=#{postId},</if>
+        <if test="workNum != null and workNum != ''">work_num=#{workNum},</if>
+        <if test="salary != null and salary !=0">salary=#{salary},</if>
+        <if test="deposit != null and deposit !=0">deposit=#{deposit},</if>
+        <if test="fullName != null and fullName != ''">full_name=#{fullName},</if>
+        <if test="sex != null and sex !=0">sex=#{sex},</if>
+        <if test="age != null and age !=0">age=#{age},</if>
+        <if test="personalPhoto != null and personalPhoto != ''">persoal_photo=#{personalPhoto},</if>
+        <if test="remark != null and remark != ''">remark=#{remark},</if>
+        update_time=sysdate()
+        where induction_id=#{inductionId}
+    </update>
+    <delete id="delInductions" parameterType="int">
+        delete from induction_staff where induction_id in
+        <foreach collection="array" item="inductionId" open="(" separator="," close= ")">
+            #{inductionId}
+        </foreach>
+    </delete>
+    <select id="inductionList" resultMap="inductionStaffResult" parameterType="com.psms.project.induction.domain.vo.SelectInductionVo">
+        <include refid="inductionVo"/>
+        <where>
+            <if test="workNum != null and workNum != ''">
+                AND a.work_num like concat('%',#{workNum},'%')
+            </if>
+            <if test="fullName != null and fullName != ''">
+                AND a.full_name like concat('%',#{fullName},'%')
+            </if>
+            <if test="sex != null and sex !=0">
+                AND a.sex=#{sex}
+            </if>
+            <if test="citizenshipName != null and citizenshipName != ''">
+                AND d.citizenship_name like concat('%',#{citizenshipName},'%')
+            </if>
+        </where>
+    </select>
+    <select id="inductionInfo" resultMap="inductionStaffResult" parameterType="int">
+        <include refid="inductionVo"/>
+        where a.induction_id=#{inductionId}
+    </select>
+</mapper>

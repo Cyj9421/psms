@@ -18,7 +18,6 @@ import com.psms.project.system.service.ISysUserService;
 /**
  * 用户验证处理
  *
- * @author jeethink  官方网址：www.jeethink.vip
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService

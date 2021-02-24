@@ -11,17 +11,17 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
+import java.util.*;
 
 import static io.netty.handler.codec.DateFormatter.format;
 
 @Slf4j
 public class Test1 {
     public static void main(String[] args) throws ParseException, IOException {
-        LocalTime time = LocalTime.now(); // gets the current time
+        Map<String,Object> map=new HashMap<>();
+         map.put("1","map1");
+         System.out.println(map.get("1"));
+
 
     }
 

@@ -2,6 +2,9 @@ package com.psms.project.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,7 @@ import com.psms.framework.web.domain.AjaxResult;
  *
  */
 @RestController
+@Api(tags="工具包")
 public class CommonController
 {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);
@@ -37,6 +41,7 @@ public class CommonController
      * @param delete 是否删除
      */
     @GetMapping("common/download")
+    @ApiOperation(value = "下载工具")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request)
     {
         try
@@ -68,6 +73,7 @@ public class CommonController
      * 通用上传请求
      */
     @PostMapping("/common/upload")
+    @ApiOperation(value = "上传文件接口")
     public AjaxResult uploadFile(MultipartFile file) throws Exception
     {
         try

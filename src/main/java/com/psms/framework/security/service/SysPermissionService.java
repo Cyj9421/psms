@@ -11,8 +11,7 @@ import com.psms.project.system.service.ISysRoleService;
 
 /**
  * 用户权限处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Component
 public class SysPermissionService

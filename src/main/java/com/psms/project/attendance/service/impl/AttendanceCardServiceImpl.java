@@ -47,6 +47,16 @@ public class AttendanceCardServiceImpl implements IAttendanceCardService {
     }
 
     /**
+     * 修改卡号信息
+     * @param attendanceCard
+     * @return
+     */
+    @Override
+    public int updateCard(AttendanceCard attendanceCard) {
+        return attendanceCardMapper.updateCard(attendanceCard);
+    }
+
+    /**
      * 批量删除卡号
      * @param cardIds
      * @return

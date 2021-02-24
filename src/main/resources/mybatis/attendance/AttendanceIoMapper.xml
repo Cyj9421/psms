@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.attendance.mapper.AttendanceIoMapper">
+    <resultMap id="ioResult" type="com.psms.project.attendance.domain.AttendanceIo">
+        <id property="ioId" column="io_id"/>
+        <result property="ioName" column="io_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="ioVo">
+        select io_id,io_name,create_time,update_time from attendance_io
+    </sql>
+    <insert id="addIo" parameterType="com.psms.project.attendance.domain.AttendanceIo">
+        insert into attendance_io(
+        io_name,create_time
+        )values (
+        #{ioName},sysdate()
+        )
+    </insert>
+    <update id="updateIo" parameterType="com.psms.project.attendance.domain.AttendanceIo">
+        update attendance_io set
+        io_name=#{ioName},
+        update_time=#{updateTime}
+        where io_id=#{ioId}
+    </update>
+    <delete id="delIos" parameterType="int">
+        delete from attendance_io where io_id in
+        <foreach collection="array" item="ioId" open="(" separator="," close= ")">
+           #{ioId}
+        </foreach>
+    </delete>
+    <select id="ioList" resultMap="ioResult">
+        <include refid="ioVo"/>
+    </select>
+    <select id="ioInfo" resultMap="ioResult">
+        <include refid="ioVo"/>
+        where io_id=#{ioId}
+    </select>
+
+</mapper>

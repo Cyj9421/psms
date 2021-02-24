@@ -9,8 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 启动程序
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @EnableScheduling
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })

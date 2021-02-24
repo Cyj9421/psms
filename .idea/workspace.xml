@@ -31,316 +31,88 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1da062b-823f-4da1-a51c-84bc091a96fe" name="Default Changelist" comment="西湖后勤人事管理系统">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_mina_mina_core_2_0_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_11_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/ZKFingerReader.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceAskOffController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceCardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceCardRepController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceEarlyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceInfoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceLateController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceOvertimeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendancePrintController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceRpController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceScheduleAndOrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceSummaryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceAskOff.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceCardRep.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceEarly.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceFingerprint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceLate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceOvertime.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceRp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceSchedule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceScheduleOrder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceSummary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/vo/AttendanceReportDateVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceAskOffMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceCardMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceCardRepMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceEarlyMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceFingerprintMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceInfoMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceLateMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceOvertimeMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceRpMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceScheduleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceScheduleOrderMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceSummaryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceAskOffService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceCardRepService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceCardService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceEarlyService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceFingerprintService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceInfoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceLateService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceOvertimeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceRpService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceScheduleOrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceScheduleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceSummaryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceAskOffServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceCardRepServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceCardServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceEarlyServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceFingerprintServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceInfoServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceLateServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceOvertimeServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceRpServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceScheduleOrderServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceScheduleServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceSummaryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDeviceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysIndexController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysUnitPriceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysWorkNumHeadController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysDevice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysWorkNumHead.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/vo/SysIndexVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysDeviceMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysIndexMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysUnitPriceMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysWorkNumHeadMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysDeviceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysIndexService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysUnitPriceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysWorkNumHeadService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysDeviceServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysIndexServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysUnitServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysWorkNumHeadServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceAskOffMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceCardRepMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceEarlyMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceFingerprintMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceInfoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceLateMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceOvertimeMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceRpMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceScheduleMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceScheduleOrderMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceSummaryMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysDeviceMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysIndexMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysUnitPriceMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysWorkNumHeadMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/txt/card.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84b4d803-b02a-4c66-a4f6-07bda2582ec2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84b4d803-b02a-4c66-a4f6-07bda2582ec2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_15_10_36_[Default_Changelist]/YF20210111.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_15_10_36_[Default_Changelist]/YF20210112.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_15_10_36_[Default_Changelist]/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceCardMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_15_10_36_[Default_Changelist]/psms.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_15_10_36_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_15_10_36__Default_Changelist_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/UploadUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceIoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceIo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceIoMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceIoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceIoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/controller/InductionCitizenshipController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/controller/InductionCurrencyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/controller/InductionStaffController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/InductionCitizenship.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/InductionCurrency.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/InductionProbation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/InductionStaff.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/vo/CitizenshipVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/vo/CurrencyVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/vo/InductionVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/vo/InsertInductionVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/vo/SelectCitizenshipVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/vo/SelectInductionVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/domain/vo/UpdateInductionVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/mapper/InductionCitizenshipMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/mapper/InductionCurrencyMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/mapper/InductionProbationMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/mapper/InductionStaffMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/service/IInductionCitizenshipService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/service/IInductionCurrencyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/service/IInductionProbationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/service/IInductionStaffService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/service/impl/InductionCitizenshipServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/service/impl/InductionCurrencyServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/service/impl/InductionProbationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/induction/service/impl/InductionStaffServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceIoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/induction/InductionCitizenshipMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/induction/InductionCurrencyMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/induction/InductionProbationMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/induction/InductionStaffMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/psms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/psms.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/PSMSApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/PSMSApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/Arith.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/Arith.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/DateUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/DictUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/DictUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/ExceptionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/ExceptionUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/IdUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/IdUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/LogUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/LogUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/MessageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/MessageUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/SecurityUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/SecurityUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/ServletUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/ServletUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/StringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/StringUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/Test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/Test1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/Threads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/Threads.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/aspectj/lang/annotation/DataScope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/aspectj/lang/annotation/DataScope.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/config/PsmsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/config/PsmsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/sign/Md5Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/sign/Md5Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/spring/SpringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/common/utils/spring/SpringUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/aspectj/lang/annotation/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/aspectj/lang/annotation/Excel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/config/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/web/exception/SysLockException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/web/exception/SysLockException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/controller/BussinessCompleteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/controller/BussinessCompleteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/controller/BussinessTripController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/controller/BussinessTripController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/domain/AttendnceSummary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/domain/BussinessComplete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/domain/BussinessComplete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/domain/BussinessTrip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/domain/BussinessTrip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/mapper/BussinessCompleteMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/mapper/BussinessCompleteMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/mapper/BussinessTripMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/mapper/BussinessTripMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/service/IBussinessCompleteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/service/IBussinessCompleteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/service/IBussinessTripService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/service/IBussinessTripService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/service/impl/BussinessCompleteServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/service/impl/BussinessCompleteServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/service/impl/BussinessTripServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/bussiness/service/impl/BussinessTripServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/common/CaptchaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/common/CaptchaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/manager/factory/AsyncFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/manager/factory/AsyncFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/security/LoginUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/security/LoginUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/security/service/SysPermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/security/service/SysPermissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/framework/security/service/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/framework/security/service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceCardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/domain/AttendanceInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceCardMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/mapper/AttendanceCardMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceCardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/IAttendanceCardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceCardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/attendance/service/impl/AttendanceCardServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/common/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/common/CommonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysJobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysJobController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysJobLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysJobLogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysLockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysLockController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysLogininforController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysLogininforController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysOperlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysOperlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysUserOnlineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/controller/SysUserOnlineController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/domain/SysLogininfor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/domain/SysLogininfor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/domain/SysOperLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/monitor/domain/SysOperLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysAttendanceTimeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysConfigController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDeptController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDeptController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDictDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDictDataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDictTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysDictTypeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysNoticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysNoticeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysPostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysRoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysRoleSalaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysRoleSalaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysUserNumberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/controller/SysUserNumberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysAttendanceTime.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysCardRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysCardRep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysDept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysDept.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysNotice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysNotice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRoleDept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRoleDept.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRoleMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRoleMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRoleSalary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRoleSalary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysRoleSalaryFormula.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUserNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUserNumber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUserPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUserPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/vo/SalaryVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/SysUnitPrice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/vo/SysDeptVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/domain/vo/SysDeptVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysAttendanceTimeMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysRoleSalaryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysRoleSalaryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysUserNumberMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/mapper/SysUserNumberMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysAttendanceTimeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysRoleSalaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysRoleSalaryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysUserNumberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysUserNumberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysAttendanceTimeServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysRoleSalaryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysRoleSalaryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysUserNumberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysUserNumberServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/ISysRoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysRoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/psms/project/system/service/impl/SysRoleServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-druid.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-druid.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/banner.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/banner.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fingerprintMaps/YF20201226.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fingerprintMaps/YF20201227.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fingerprintMaps/YF20201228.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fingerprintMaps/YF20201231.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fingerprintMaps/YF20210101.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/bussiness/BussinessCompleteMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/bussiness/BussinessCompleteMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/bussiness/BussinessTripMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/bussiness/BussinessTripMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/monitor/SysLockMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/monitor/SysLockMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysAttendanceTimeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysPostMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysPostMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysRoleSalaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysRoleSalaryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysUserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysUserNumberMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SysUserNumberMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceCardMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/attendance/AttendanceCardMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application-druid.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-druid.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/banner.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/banner.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/psms/PSMSApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/PSMSApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/Arith.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/Arith.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/DateUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/DateUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/DictUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/DictUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/ExceptionUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/ExceptionUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/IdUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/IdUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/LogUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/LogUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/MessageUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/MessageUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/SecurityUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/SecurityUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/ServletUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/ServletUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/StringUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/StringUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/Test1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/Test1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/Threads.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/Threads.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/aspectj/lang/annotation/DataScope.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/aspectj/lang/annotation/DataScope.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/config/PsmsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/config/PsmsConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/sign/Md5Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/sign/Md5Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/common/utils/spring/SpringUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/common/utils/spring/SpringUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/aspectj/lang/annotation/Excel$ColumnType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/aspectj/lang/annotation/Excel$ColumnType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/aspectj/lang/annotation/Excel$Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/aspectj/lang/annotation/Excel$Type.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/config/SecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/config/SwaggerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/config/SwaggerConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/controller/BussinessCompleteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/controller/BussinessCompleteController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/controller/BussinessTripController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/controller/BussinessTripController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/domain/AttendnceSummary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/domain/BussinessComplete.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/domain/BussinessComplete.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/domain/BussinessTrip.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/domain/BussinessTrip.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/mapper/BussinessCompleteMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/mapper/BussinessCompleteMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/mapper/BussinessTripMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/mapper/BussinessTripMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/service/IBussinessCompleteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/service/IBussinessCompleteService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/service/IBussinessTripService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/service/IBussinessTripService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/service/impl/BussinessCompleteServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/service/impl/BussinessCompleteServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/service/impl/BussinessTripServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/bussiness/service/impl/BussinessTripServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/common/CaptchaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/common/CaptchaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/manager/factory/AsyncFactory$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/manager/factory/AsyncFactory$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/manager/factory/AsyncFactory$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/manager/factory/AsyncFactory$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/manager/factory/AsyncFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/manager/factory/AsyncFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/security/LoginUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/security/LoginUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/security/service/SysPermissionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/security/service/SysPermissionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/framework/security/service/UserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/framework/security/service/UserDetailsServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/common/CommonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/common/CommonController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/ServerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/ServerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysJobController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysJobController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysJobLogController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysJobLogController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysLogininforController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysLogininforController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysOperlogController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysOperlogController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysUserOnlineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/controller/SysUserOnlineController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/domain/SysLogininfor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/domain/SysLogininfor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/domain/SysOperLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/monitor/domain/SysOperLog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysConfigController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysConfigController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysDeptController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysDeptController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysDictDataController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysDictDataController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysDictTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysDictTypeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysLoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysLoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysMenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysNoticeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysNoticeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysPostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysPostController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysProfileController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysRoleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysRoleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysRoleSalaryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysRoleSalaryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysUserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysUserNumberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/controller/SysUserNumberController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysCardRep.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysCardRep.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysDept.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysDept.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysNotice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysNotice.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysPost.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysPost.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRoleDept.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRoleDept.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRoleMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRoleMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRoleSalary.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRoleSalary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysRoleSalaryFormula.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysUserNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysUserNumber.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysUserPost.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysUserPost.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysUserRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/SysUserRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/vo/SalaryVo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/vo/SysDeptVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/domain/vo/SysDeptVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/mapper/SysRoleSalaryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/mapper/SysRoleSalaryMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/mapper/SysUserNumberMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/mapper/SysUserNumberMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/ISysRoleSalaryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/ISysRoleSalaryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/ISysUserNumberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/ISysUserNumberService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/impl/SysRoleSalaryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/impl/SysRoleSalaryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/impl/SysUserNumberServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/impl/SysUserNumberServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fingerprintMaps/YF20201226.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fingerprintMaps/YF20201227.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fingerprintMaps/YF20201228.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fingerprintMaps/YF20201231.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fingerprintMaps/YF20210101.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fingerprintMaps/YF20210111.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fingerprintMaps/YF20210112.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceAskOffMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceAskOffMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceCardRepMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceCardRepMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceEarlyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceEarlyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceFingerprintMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceFingerprintMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceInfoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceLateMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceLateMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceOvertimeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceOvertimeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceRpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceRpMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceScheduleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceScheduleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceScheduleOrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceScheduleOrderMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceSummaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/attendance/AttendanceSummaryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/bussiness/BussinessCompleteMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/bussiness/BussinessCompleteMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/bussiness/BussinessTripMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/bussiness/BussinessTripMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/monitor/SysLockMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/monitor/SysLockMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/system/SysAttendanceTimeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/system/SysDeviceMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/system/SysDeviceMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/system/SysPostMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/system/SysPostMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/system/SysRoleSalaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/system/SysRoleSalaryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/system/SysUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/system/SysUserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/system/SysUserNumberMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/system/SysUserNumberMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/impl/SysRoleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/psms/project/system/service/impl/SysRoleServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/psms.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/psms.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/psms.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/psms.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/psms.jar.original" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -352,6 +124,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Mybatis Mapper" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -394,7 +167,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lxkj-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/mybatis/induction" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -415,30 +188,17 @@
       <recent name="D:\IdeaProject\psms\src\main\resources\mybatis\monitor" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.psms.common.utils" />
       <recent name="com.psms.project.attendance.service.impl" />
       <recent name="com.psms.project.attendance.service" />
       <recent name="com.psms.project.attendance.mapper" />
       <recent name="com.psms.project.attendance.domain" />
-      <recent name="com.psms.project.attendance.controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\IdeaProject\psms\src\main\resources\mybatis\attendance" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.PSMSApplication">
-    <configuration name="CardThreadUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.psms.common.utils.CardThreadUtils" />
-      <module name="psms" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.psms.common.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Test1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.psms.common.utils.Test1" />
       <module name="psms" />
@@ -469,12 +229,10 @@
     </configuration>
     <list>
       <item itemvalue="Application.Test1" />
-      <item itemvalue="Application.CardThreadUtils" />
       <item itemvalue="Spring Boot.PSMSApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CardThreadUtils" />
         <item itemvalue="Application.Test1" />
       </list>
     </recent_temporary>
@@ -535,7 +293,21 @@
       <workItem from="1611557083361" duration="10897000" />
       <workItem from="1611624282501" duration="36676000" />
       <workItem from="1611710864873" duration="15696000" />
-      <workItem from="1611800229218" duration="1167000" />
+      <workItem from="1611800229218" duration="1873000" />
+      <workItem from="1611832060792" duration="77000" />
+      <workItem from="1611832964416" duration="1963000" />
+      <workItem from="1612236363561" duration="4881000" />
+      <workItem from="1612341649939" duration="5253000" />
+      <workItem from="1612404401057" duration="7281000" />
+      <workItem from="1612512880867" duration="774000" />
+      <workItem from="1612859743425" duration="2341000" />
+      <workItem from="1612951169189" duration="1098000" />
+      <workItem from="1613008006162" duration="8339000" />
+      <workItem from="1613612675093" duration="1934000" />
+      <workItem from="1613644251178" duration="639000" />
+      <workItem from="1613728112979" duration="607000" />
+      <workItem from="1614044760988" duration="18015000" />
+      <workItem from="1614130086237" duration="24903000" />
     </task>
     <task id="LOCAL-00001" summary="西湖后勤人事管理系统">
       <created>1608517856170</created>
@@ -565,7 +337,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610680321099</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="西湖后勤人事管理系统">
+      <created>1611816961937</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1611816961937</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,6 +379,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="西湖后勤人事管理系统" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="395" y="90" key="#Inspections" timestamp="1614133296989">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="90" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1614133296989" />
     <state x="651" y="274" key="#Notifications" timestamp="1610680562375">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -608,18 +391,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1610680781014" />
-    <state x="323" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608261778902">
+    <state x="323" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614161584755">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="323" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1608261778902" />
+    <state x="323" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1614161584755" />
     <state x="473" y="212" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610766301347">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="473" y="212" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1610766301347" />
-    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1611646272473">
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1614157655034">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1611646272473" />
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1614157655034" />
     <state x="499" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607258512403">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -636,14 +419,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1611713201621" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1611713679895">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1614158760093">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1611713679895" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1611800251874">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1614158760093" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1614062928480">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611800251874" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1614062928480" />
     <state x="579" y="331" key="Gitee.CreateGistDialog" timestamp="1608517484375">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -652,54 +435,54 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="453" y="321" key="Gitee.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1608517451702" />
-    <state width="1484" height="143" key="GridCell.Tab.0.bottom" timestamp="1611742991967">
+    <state width="1493" height="297" key="GridCell.Tab.0.bottom" timestamp="1614161552900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1611742991967" />
-    <state width="1484" height="143" key="GridCell.Tab.0.center" timestamp="1611742991967">
+    <state width="1493" height="297" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1614161552900" />
+    <state width="1493" height="297" key="GridCell.Tab.0.center" timestamp="1614161552900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1611742991967" />
-    <state width="1484" height="143" key="GridCell.Tab.0.left" timestamp="1611742991967">
+    <state width="1493" height="297" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1614161552900" />
+    <state width="1493" height="297" key="GridCell.Tab.0.left" timestamp="1614161552900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1611742991967" />
-    <state width="1484" height="143" key="GridCell.Tab.0.right" timestamp="1611742991967">
+    <state width="1493" height="297" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1614161552900" />
+    <state width="1493" height="297" key="GridCell.Tab.0.right" timestamp="1614161552900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1611742991967" />
-    <state width="1484" height="143" key="GridCell.Tab.1.bottom" timestamp="1611742991968">
+    <state width="1493" height="297" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1614161552900" />
+    <state width="1493" height="297" key="GridCell.Tab.1.bottom" timestamp="1614161552900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1611742991968" />
-    <state width="1484" height="143" key="GridCell.Tab.1.center" timestamp="1611742991967">
+    <state width="1493" height="297" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1614161552900" />
+    <state width="1493" height="297" key="GridCell.Tab.1.center" timestamp="1614161552900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1611742991967" />
-    <state width="1484" height="143" key="GridCell.Tab.1.left" timestamp="1611742991967">
+    <state width="1493" height="297" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1614161552900" />
+    <state width="1493" height="297" key="GridCell.Tab.1.left" timestamp="1614161552900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1611742991967" />
-    <state width="1484" height="143" key="GridCell.Tab.1.right" timestamp="1611742991967">
+    <state width="1493" height="297" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1614161552900" />
+    <state width="1493" height="297" key="GridCell.Tab.1.right" timestamp="1614161552900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1611742991967" />
-    <state width="1484" height="143" key="GridCell.Tab.2.bottom" timestamp="1611742991968">
+    <state width="1493" height="297" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1614161552900" />
+    <state width="1493" height="297" key="GridCell.Tab.2.bottom" timestamp="1614161474510">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1611742991968" />
-    <state width="1484" height="143" key="GridCell.Tab.2.center" timestamp="1611742991968">
+    <state width="1493" height="297" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1614161474510" />
+    <state width="1493" height="297" key="GridCell.Tab.2.center" timestamp="1614161474510">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1611742991968" />
-    <state width="1484" height="143" key="GridCell.Tab.2.left" timestamp="1611742991968">
+    <state width="1493" height="297" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1614161474510" />
+    <state width="1493" height="297" key="GridCell.Tab.2.left" timestamp="1614161474510">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1611742991968" />
-    <state width="1484" height="143" key="GridCell.Tab.2.right" timestamp="1611742991968">
+    <state width="1493" height="297" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1614161474510" />
+    <state width="1493" height="297" key="GridCell.Tab.2.right" timestamp="1614161474510">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1484" height="143" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1611742991968" />
+    <state width="1493" height="297" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1614161474510" />
     <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1611541031505">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -708,14 +491,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="39" y="10" width="1188" height="814" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1610680221939" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1610678311235">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1611816981607">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1610678311235" />
-    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1611663841348">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1611816981607" />
+    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1613011038056">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1611663841348" />
+    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1613011038056" />
     <state x="349" y="67" key="com.intellij.database.dbimport.ImportDialog" timestamp="1608098424474">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -732,22 +515,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="313" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1608533161201" />
-    <state x="517" y="140" width="602" height="532" key="find.popup" timestamp="1611305142736">
+    <state x="517" y="140" width="602" height="532" key="find.popup" timestamp="1614149586621">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="517" y="140" width="602" height="532" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1611305142736" />
+    <state x="517" y="140" width="602" height="532" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1614149586621" />
     <state x="178" y="22" key="new project wizard" timestamp="1611212581216">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="178" y="22" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1611212581216" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1608620975074">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1614052423809">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1608620975074" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1611307994641">
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1614052423809" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1614132123246">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1611307994641" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1614132123246" />
     <state x="567" y="95" key="svn.repositoryBrowser" timestamp="1608463520322">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -757,9 +540,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/psms/project/attendance/controller/AttendanceCardController.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/psms/project/common/CaptchaController.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

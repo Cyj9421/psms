@@ -7,26 +7,64 @@
         <id property="cardId" column="card_id"/>
         <result property="workNum" column="work_num"/>
         <result property="cardNum" column="card_num"/>
+        <result property="carryNum" column="carry_num"/>
+        <result property="brushNum" column="brush_num"/>
+        <result property="totalNum" column="total_num"/>
+        <result property="defaultNum" column="default_num"/>
+        <result property="ioId" column="io_id"/>
         <result property="deptName" column="dept_name"/>
         <result property="leader" column="leader"/>
         <result property="fullName" column="full_name"/>
         <result property="postCode" column="post_code"/>
         <result property="postName" column="post_name"/>
+        <result property="ioName" column="io_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
     <sql id="cardVo">
-        select c.card_id,c.work_num,c.card_num,
+        select c.card_id,c.work_num,c.card_num,carry_num,brush_num,io_id,c.create_time,c.update_time,
                n.full_name,
                d.dept_name,d.leader,
-               p.post_name,p.post_code
+               p.post_name,p.post_code,
+               i.io_name
         from attendance_card c
         left join sys_user_number n on c.work_num=n.work_num
         left join sys_dept d on n.dept_id=d.dept_id
         left join sys_post p on n.post_id=p.post_id
+        left join attendance_io i on c.io_id=i.io_id
     </sql>
     <insert id="addCard" parameterType="com.psms.project.attendance.domain.AttendanceCard">
-        insert into attendance_card(work_num,card_num)
-        values (#{workNum},#{cardNum})
+        insert into attendance_card(
+        <if test="workNum != null and workNum != ''">work_num,</if>
+        <if test="cardNum != null and cardNum != ''">card_num,</if>
+        <if test="carryNum != null and carryNum != 0">carry_num,</if>
+        <if test="brushNum != null and brushNum != 0">brush_num,</if>
+        <if test="defaultNum != null and defaultNum !=0">default_num,</if>
+        <if test="ioId != null amd ioId !=0">io_id,</if>
+        create_time
+        )
+        values (
+        <if test="workNum != null and workNum != ''">#{workNum},</if>
+        <if test="cardNum != null and cardNum != ''">#{cardNum},</if>
+        <if test="carryNum != null and carryNum != 0">#{carryNum},</if>
+        <if test="brushNum != null and brushNum != 0">#{brushNum},</if>
+        <if test="defaultNum != null and defaultNum !=0">#{defaultNum},</if>
+        <if test="ioId != null amd ioId !=0">#{ioId},</if>
+        sysdate()
+      )
     </insert>
+    <update id="updateCard" parameterType="com.psms.project.attendance.domain.AttendanceCard">
+        update attendance_card set (
+        <if test="workNum != null and workNum != ''">work_num=#{workNum},</if>
+        <if test="cardNum != null and cardNum != ''">card_num=#{cardNum},</if>
+        <if test="carryNum != null and carryNum != 0">carry_num=#{carryNum},</if>
+        <if test="brushNum != null and brushNum != 0">brush_num=#{brushNum},</if>
+        <if test="defaultNum != null and defaultNum !=0">default_num=#{defaultNum},</if>
+        <if test="ioId != null amd ioId !=0">io_id=#{ioId},</if>
+        update_time=sysdate()
+        where card_id=#{cardId}
+        )
+    </update>
     <delete id="delCard" parameterType="int">
         delete from attendance_card where card_id in
         <foreach collection="array" item="cardId" open="(" separator="," close=")">

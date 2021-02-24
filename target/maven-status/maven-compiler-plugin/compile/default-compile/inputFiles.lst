@@ -10,7 +10,6 @@ D:\IdeaProject\psms\src\main\java\com\psms\framework\config\PsmsConfig.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\service\impl\SysDeptServiceImpl.java
 D:\IdeaProject\psms\src\main\java\com\psms\framework\security\handle\AuthenticationEntryPointImpl.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\service\ISysPostService.java
-D:\IdeaProject\psms\src\main\java\com\psms\project\attendance\util\MyFilter.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\monitor\controller\SysOperlogController.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\tool\gen\util\VelocityInitializer.java
 D:\IdeaProject\psms\src\main\java\com\psms\framework\web\exception\SysLockException.java
@@ -40,7 +39,6 @@ D:\IdeaProject\psms\src\main\java\com\psms\project\monitor\domain\SysLogininfor.
 D:\IdeaProject\psms\src\main\java\com\psms\project\attendance\service\IAttendanceSummaryService.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\attendance\service\IAttendanceScheduleOrderService.java
 D:\IdeaProject\psms\src\main\java\com\psms\common\utils\ServletUtils.java
-D:\IdeaProject\psms\src\main\java\com\psms\common\biometric\ZKFPDemo.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\tool\gen\util\GenUtils.java
 D:\IdeaProject\psms\src\main\java\com\psms\framework\aspectj\lang\annotation\Log.java
 D:\IdeaProject\psms\src\main\java\com\psms\PSMSServletInitializer.java
@@ -68,7 +66,6 @@ D:\IdeaProject\psms\src\main\java\com\psms\project\bussiness\service\IBussinessT
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\mapper\SysPostMapper.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\domain\SysUserPost.java
 D:\IdeaProject\psms\src\main\java\com\psms\common\exception\user\CaptchaException.java
-D:\IdeaProject\psms\src\main\java\com\psms\project\attendance\domain\FindRoleUtilPojo.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\domain\SysWorkNumHead.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\bussiness\domain\BussinessTrip.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\monitor\mapper\SysJobMapper.java
@@ -137,7 +134,6 @@ D:\IdeaProject\psms\src\main\java\com\psms\project\system\mapper\SysDictTypeMapp
 D:\IdeaProject\psms\src\main\java\com\psms\project\tool\gen\domain\GenTableColumn.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\attendance\mapper\AttendanceCardMapper.java
 D:\IdeaProject\psms\src\main\java\com\psms\common\constant\GenConstants.java
-D:\IdeaProject\psms\src\main\java\com\psms\project\attendance\mapper\FindRoleUtilMapper.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\service\impl\SysUserNumberServiceImpl.java
 D:\IdeaProject\psms\src\main\java\com\psms\common\utils\http\HttpUtils.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\domain\SysRoleDept.java
@@ -157,7 +153,6 @@ D:\IdeaProject\psms\src\main\java\com\psms\project\bussiness\controller\Bussines
 D:\IdeaProject\psms\src\main\java\com\psms\common\exception\CustomException.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\attendance\domain\AttendanceCard.java
 D:\IdeaProject\psms\src\main\java\com\psms\framework\security\LoginBody.java
-D:\IdeaProject\psms\src\main\java\com\psms\project\attendance\util\FindRoleUtil.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\service\impl\SysRoleSalaryImpl.java
 D:\IdeaProject\psms\src\main\java\com\psms\common\constant\UserConstants.java
 D:\IdeaProject\psms\src\main\java\com\psms\project\system\mapper\SysUserNumberMapper.java

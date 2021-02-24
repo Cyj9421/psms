@@ -253,7 +253,6 @@ com\psms\project\attendance\controller\AttendanceSummaryController.class
 com\psms\project\attendance\mapper\AttendanceSummaryMapper.class
 com\psms\common\utils\http\HttpUtils$TrustAnyTrustManager.class
 com\psms\project\attendance\service\impl\AttendanceInfoServiceImpl.class
-com\psms\project\attendance\mapper\FindRoleUtilMapper.class
 com\psms\common\utils\DateUtils.class
 com\psms\project\bussiness\service\impl\BussinessCompleteServiceImpl.class
 com\psms\framework\web\controller\BaseController.class
@@ -276,7 +275,6 @@ com\psms\common\core\lang\UUID$Holder.class
 com\psms\project\attendance\service\IAttendanceRpService.class
 com\psms\common\utils\Threads.class
 com\psms\common\utils\IdUtils.class
-com\psms\project\attendance\util\FindRoleUtil.class
 com\psms\framework\web\domain\server\Mem.class
 com\psms\project\attendance\service\IAttendanceAskOffService.class
 com\psms\project\system\domain\SysDictType.class
@@ -328,7 +326,6 @@ com\psms\framework\interceptor\RepeatSubmitInterceptor.class
 com\psms\project\attendance\domain\AttendanceSummary.class
 com\psms\framework\config\ThreadPoolConfig.class
 com\psms\framework\web\domain\server\Sys.class
-com\psms\project\attendance\domain\FindRoleUtilPojo.class
 com\psms\project\attendance\controller\AttendanceScheduleAndOrderController.class
 com\psms\project\monitor\domain\SysLogininfor.class
 com\psms\common\utils\http\HttpUtils$1.class
@@ -346,7 +343,6 @@ com\psms\project\attendance\controller\AttendanceAskOffController.class
 com\psms\project\bussiness\service\IBussinessTripService.class
 com\psms\project\attendance\domain\AttendanceFingerprint.class
 com\psms\project\attendance\mapper\AttendanceEarlyMapper.class
-com\psms\project\attendance\util\MyFilter.class
 com\psms\framework\aspectj\lang\annotation\Log.class
 com\psms\project\tool\gen\controller\GenController.class
 com\psms\project\system\mapper\SysDictTypeMapper.class
