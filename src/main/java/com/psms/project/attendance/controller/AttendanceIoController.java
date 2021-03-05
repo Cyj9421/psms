@@ -15,7 +15,7 @@ import java.util.List;
  * 控制层 出入口管理
  */
 @RestController
-@RequestMapping("/attendacne/io")
+@RequestMapping("/attendance/io")
 public class AttendanceIoController extends BaseController {
     @Autowired
     private IAttendanceIoService attendanceIoService;

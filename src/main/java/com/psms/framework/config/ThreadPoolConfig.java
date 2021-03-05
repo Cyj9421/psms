@@ -13,7 +13,6 @@ import com.psms.common.utils.Threads;
 /**
  * 线程池配置
  *
- * @author jeethink  官方网址：www.jeethink.vip
  **/
 @Configuration
 public class ThreadPoolConfig

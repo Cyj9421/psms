@@ -15,8 +15,7 @@ import com.psms.framework.web.domain.AjaxResult;
 
 /**
  * 认证失败处理类 返回未授权
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, Serializable

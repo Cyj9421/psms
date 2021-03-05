@@ -1,6 +1,8 @@
 package com.psms.project.attendance.service;
 
 import com.psms.project.attendance.domain.AttendanceInfo;
+import com.psms.project.attendance.domain.vo.AttendanceInfoVo;
+import com.psms.project.attendance.domain.vo.BrushCardInfoVo;
 
 import java.util.List;
 
@@ -56,4 +58,25 @@ public interface IAttendanceInfoService {
      * @return
      */
     public int delAttendance(int [] attendanceIds);
+
+    /**
+     * 刷卡信息
+     * @param workNum
+     * @return
+     */
+    public BrushCardInfoVo brushCardInfoByDoor(String workNum);
+
+    /**
+     * 刷卡考勤信息
+     * @param workNum
+     * @return
+     */
+    public BrushCardInfoVo brushCardInfoByAttendance(String workNum);
+
+    /**
+     * 指纹考勤信息
+     * @param workNum
+     * @return
+     */
+    public AttendanceInfoVo printFingerInfo(String workNum);
 }

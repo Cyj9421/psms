@@ -1,6 +1,5 @@
 package com.psms.project.induction.mapper;
 
-import com.psms.project.induction.domain.InductionStaff;
 import com.psms.project.induction.domain.vo.InductionVo;
 import com.psms.project.induction.domain.vo.InsertInductionVo;
 import com.psms.project.induction.domain.vo.SelectInductionVo;
@@ -22,11 +21,25 @@ public interface InductionStaffMapper {
     public List<InductionVo> inductionList(SelectInductionVo selectInductionVo);
 
     /**
+     * 根据工号查底薪
+     * @param workNum
+     * @return
+     */
+    public double selectBaseSalary(String workNum);
+
+    /**
      * 入职申请详情
      * @param inductionId
      * @return
      */
     public InductionVo inductionInfo(int inductionId);
+
+    /**
+     * 入职申请详情
+     * @param workNum
+     * @return
+     */
+    public InductionVo inductionInfoByWorkNum(String workNum);
 
     /**
      * 入职申请

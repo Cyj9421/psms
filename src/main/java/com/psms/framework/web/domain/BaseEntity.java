@@ -9,8 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Entity基类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class BaseEntity implements Serializable
 {

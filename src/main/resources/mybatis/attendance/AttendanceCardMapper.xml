@@ -7,11 +7,12 @@
         <id property="cardId" column="card_id"/>
         <result property="workNum" column="work_num"/>
         <result property="cardNum" column="card_num"/>
+        <result property="ioId" column="io_id"/>
+        <result property="cardType" column="card_type"/>
         <result property="carryNum" column="carry_num"/>
         <result property="brushNum" column="brush_num"/>
         <result property="totalNum" column="total_num"/>
         <result property="defaultNum" column="default_num"/>
-        <result property="ioId" column="io_id"/>
         <result property="deptName" column="dept_name"/>
         <result property="leader" column="leader"/>
         <result property="fullName" column="full_name"/>
@@ -22,7 +23,7 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
     <sql id="cardVo">
-        select c.card_id,c.work_num,c.card_num,carry_num,brush_num,io_id,c.create_time,c.update_time,
+        select c.card_id,c.work_num,c.card_num,c.io_id,c.card_type,c.carry_num,c.brush_num,c.total_num,c.default_num,c.create_time,c.update_time,
                n.full_name,
                d.dept_name,d.leader,
                p.post_name,p.post_code,
@@ -37,33 +38,36 @@
         insert into attendance_card(
         <if test="workNum != null and workNum != ''">work_num,</if>
         <if test="cardNum != null and cardNum != ''">card_num,</if>
+        <if test="cardType != null and cardType !=0">card_type,</if>
         <if test="carryNum != null and carryNum != 0">carry_num,</if>
         <if test="brushNum != null and brushNum != 0">brush_num,</if>
         <if test="defaultNum != null and defaultNum !=0">default_num,</if>
-        <if test="ioId != null amd ioId !=0">io_id,</if>
+        <if test="ioId != null and ioId !=0">io_id,</if>
         create_time
         )
         values (
         <if test="workNum != null and workNum != ''">#{workNum},</if>
         <if test="cardNum != null and cardNum != ''">#{cardNum},</if>
+        <if test="cardType != null and cardType != 0">#{cardType},</if>
         <if test="carryNum != null and carryNum != 0">#{carryNum},</if>
         <if test="brushNum != null and brushNum != 0">#{brushNum},</if>
-        <if test="defaultNum != null and defaultNum !=0">#{defaultNum},</if>
-        <if test="ioId != null amd ioId !=0">#{ioId},</if>
+        <if test="defaultNum != null and defaultNum != 0">#{defaultNum},</if>
+        <if test="ioId != null and ioId != 0">#{ioId},</if>
         sysdate()
       )
     </insert>
     <update id="updateCard" parameterType="com.psms.project.attendance.domain.AttendanceCard">
-        update attendance_card set (
+        update attendance_card set
         <if test="workNum != null and workNum != ''">work_num=#{workNum},</if>
         <if test="cardNum != null and cardNum != ''">card_num=#{cardNum},</if>
+        <if test="cardType != null and cardType != 0">card_type=#{cardType},</if>
         <if test="carryNum != null and carryNum != 0">carry_num=#{carryNum},</if>
         <if test="brushNum != null and brushNum != 0">brush_num=#{brushNum},</if>
+        <if test="totalNum !=null and totalNum !=0">total_num=#{totalNum},</if>
         <if test="defaultNum != null and defaultNum !=0">default_num=#{defaultNum},</if>
-        <if test="ioId != null amd ioId !=0">io_id=#{ioId},</if>
+        <if test="ioId != null and ioId !=0">io_id=#{ioId},</if>
         update_time=sysdate()
         where card_id=#{cardId}
-        )
     </update>
     <delete id="delCard" parameterType="int">
         delete from attendance_card where card_id in
@@ -74,14 +78,17 @@
     <select id="cardList" resultMap="cardResult" parameterType="com.psms.project.attendance.domain.AttendanceCard">
         <include refid="cardVo"/>
         <where>
-            <if test="workNum !=null and workNum!=''">
+            <if test="workNum !=null and workNum !=''">
                 AND c.work_num like concat('%',#{workNum},'%')
             </if>
-            <if test="cardNum !=null and cardNum!=''">
+            <if test="cardNum !=null and cardNum !=''">
                 AND c.card_num like concat('%',#{cardNum},'%')
             </if>
-            <if test="deptName !=null and deptName!=''">
+            <if test="deptName !=null and deptName !=''">
                 AND d.dept_name like concat('%',#{deptName},'%')
+            </if>
+            <if test="cardType !=null and cardType !=0">
+                AND c.card_type=#{cardType}
             </if>
         </where>
     </select>

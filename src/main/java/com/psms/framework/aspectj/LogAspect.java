@@ -32,8 +32,7 @@ import com.psms.project.monitor.domain.SysOperLog;
 
 /**
  * 操作日志记录处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Aspect
 @Component

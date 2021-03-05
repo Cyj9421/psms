@@ -6,8 +6,7 @@ import com.psms.project.system.domain.SysConfig;
 
 /**
  * 参数配置 服务层
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public interface ISysConfigService
 {

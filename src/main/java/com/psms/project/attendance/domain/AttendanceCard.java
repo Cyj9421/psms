@@ -20,6 +20,10 @@ public class AttendanceCard {
     private String workNum;
     /** 卡号 */
     private String cardNum;
+    /** 出入口id */
+    private int ioId;
+    /** ic卡类型(1考勤卡,2门禁卡) */
+    private int cardType;
     /** 携带人数 */
     private int carryNum;
     /** 剩余可刷次数 */
@@ -28,8 +32,6 @@ public class AttendanceCard {
     private int totalNum;
     /** 默认可刷次数 */
     private int defaultNum;
-    /** 出入口id */
-    private int ioId;
     /** 姓名 */
     private String fullName;
     /** 部门名称 */

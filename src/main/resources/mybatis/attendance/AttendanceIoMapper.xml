@@ -20,7 +20,7 @@
     <update id="updateIo" parameterType="com.psms.project.attendance.domain.AttendanceIo">
         update attendance_io set
         io_name=#{ioName},
-        update_time=#{updateTime}
+        update_time=sysdate()
         where io_id=#{ioId}
     </update>
     <delete id="delIos" parameterType="int">

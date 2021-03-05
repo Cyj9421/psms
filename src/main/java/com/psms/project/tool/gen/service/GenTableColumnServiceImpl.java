@@ -10,8 +10,7 @@ import com.psms.project.tool.gen.mapper.GenTableColumnMapper;
 
 /**
  * 业务字段 服务层实现
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Service
 public class GenTableColumnServiceImpl implements IGenTableColumnService 

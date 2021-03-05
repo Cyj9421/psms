@@ -1,6 +1,5 @@
 package com.psms.project.induction.service.impl;
 
-import com.psms.project.induction.domain.InductionStaff;
 import com.psms.project.induction.domain.vo.InductionVo;
 import com.psms.project.induction.domain.vo.InsertInductionVo;
 import com.psms.project.induction.domain.vo.SelectInductionVo;
@@ -31,6 +30,16 @@ public class InductionStaffServiceImpl implements IInductionStaffService {
     }
 
     /**
+     * 根据工号查找底薪
+     * @param workNum
+     * @return
+     */
+    @Override
+    public double selectBaseSalary(String workNum) {
+        return inductionStaffMapper.selectBaseSalary(workNum);
+    }
+
+    /**
      * 入职详情
      * @param inductionId
      * @return
@@ -38,6 +47,16 @@ public class InductionStaffServiceImpl implements IInductionStaffService {
     @Override
     public InductionVo inductionInfo(int inductionId) {
         return inductionStaffMapper.inductionInfo(inductionId);
+    }
+
+    /**
+     * 通过工号查找入职信息
+     * @param workNum
+     * @return
+     */
+    @Override
+    public InductionVo inductionInfoByWorkNum(String workNum) {
+        return inductionStaffMapper.inductionInfoByWorkNum(workNum);
     }
 
     /**

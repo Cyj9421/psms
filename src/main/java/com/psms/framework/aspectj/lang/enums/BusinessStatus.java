@@ -2,8 +2,7 @@ package com.psms.framework.aspectj.lang.enums;
 
 /**
  * 操作状态
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  *
  */
 public enum BusinessStatus

@@ -9,8 +9,7 @@ import com.psms.project.system.domain.SysUserRole;
 
 /**
  * 用户与角色关联表 数据层
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Mapper
 public interface SysUserRoleMapper

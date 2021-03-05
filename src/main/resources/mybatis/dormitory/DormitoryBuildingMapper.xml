@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.dormitory.mapper.DormitoryBuildingMapper">
+    <resultMap id="dormitoryResult" type="com.psms.project.dormitory.domain.DormitoryBuilding">
+        <id property="dormitoryId" column="dormitory_id"/>
+        <result property="dormitoryName" column="dormitory_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="dormitoryVo">
+        select dormitory_id,dormitory_name,create_time,update_time
+        from dormitory_building
+    </sql>
+    <insert id="addDormitory" parameterType="string">
+        insert into dormitory_building(
+        dormitory_name,create_time
+        )values (
+        #{dormitoryName},sysdate()
+        )
+    </insert>
+    <update id="updateDormitory" parameterType="com.psms.project.dormitory.domain.vo.UpdateDormitoryVo">
+        update dormitory_building set
+        dormitory_name=#{dormitoryName},
+        update_time=sysdate()
+        where dormitory_id=#{dormitoryId}
+    </update>
+    <delete id="delDormitory" parameterType="int">
+        delete from dormitory_building where dormitory_id in
+        <foreach collection="array" item="dormitoryId" open="(" separator="," close= ")">
+            #{dormitoryId}
+        </foreach>
+    </delete>
+    <select id="dormitoryList" resultMap="dormitoryResult">
+        <include refid="dormitoryVo"/>
+    </select>
+    <select id="dormitoryInfo" resultMap="dormitoryResult" parameterType="int">
+        <include refid="dormitoryVo"/>
+        where dormitory_id=#{dormitoryId}
+    </select>
+    <select id="dormitoryInfoBuDormitoryName" resultMap="dormitoryResult" parameterType="string">
+        <include refid="dormitoryVo"/>
+        where dormitory_name=#{dormitoryName}
+    </select>
+</mapper>

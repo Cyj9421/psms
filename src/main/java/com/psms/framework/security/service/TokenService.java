@@ -24,8 +24,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  * token验证处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Component
 public class TokenService

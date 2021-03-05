@@ -12,8 +12,7 @@ import com.psms.framework.web.domain.BaseEntity;
 
 /**
  * 字典数据表 sys_dict_data
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class SysDictData extends BaseEntity
 {

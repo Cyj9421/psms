@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.induction.mapper.InductionDepositMapper">
+    <resultMap id="depositVoResult" type="com.psms.project.induction.domain.vo.InductionDepositVo">
+        <id property="depositId" column="deposit_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="airTicket" column="air_ticket"/>
+        <result property="depositRemark" column="deposit_remark"/>
+        <result property="deposit" column="deposit"/>
+        <result property="operType" column="oper_type"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="fullName" column="full_name"/>
+        <result property="postName" column="post_name"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+    <resultMap id="depositResult" type="com.psms.project.induction.domain.InductionDeposit">
+        <id property="depositId" column="deposit_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="airTicket" column="air_ticket"/>
+        <result property="depositRemark" column="deposit_remark"/>
+        <result property="deposit" column="deposit"/>
+    </resultMap>
+    <sql id="depositVo">
+        select id.deposit_id,id.work_num,id.air_ticket,id.deposit_remark,id.deposit,id.oper_type,
+               d.dept_name,
+               n.full_name,
+               p.post_name,
+               s.create_time
+        from induction_deposit id
+        left join sys_user_number n on id.work_num=n.work_num
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join sys_post p on n.post_id=p.post_id
+        left join induction_staff s on id.work_num=s.work_num
+    </sql>
+    <insert id="addDeposit" parameterType="com.psms.project.induction.domain.InductionDeposit">
+        insert into induction_deposit(
+        <if test="workNum != null and workNum != ''">work_num,</if>
+        <if test="airTicket != null and airTicket != 0">air_ticket,</if>
+        <if test="depositRemark != null and depositRemark != ''">deposit_remark,</if>
+        <if test="deposit != null and deposit != 0">deposit</if>
+        )values (
+        <if test="workNum != null and workNum != ''">#{workNum},</if>
+        <if test="airTicket != null and airTicket != 0">#{airTicket},</if>
+        <if test="depositRemark != null and depositRemark != ''">#{depositRemark},</if>
+        <if test="deposit != null and deposit != 0">#{deposit}</if>
+        )
+    </insert>
+    <update id="updateDeposit" parameterType="com.psms.project.induction.domain.InductionDeposit">
+        update induction_deposit set
+        <if test="workNum != null and workNum != ''">work_num=#{workNum},</if>
+        <if test="airTicket != null and airTicket != 0">air_ticket=#{airTicket},</if>
+        <if test="depositRemark != null and depositRemark != ''">deposit_remark=#{depositRemark},</if>
+        <if test="deposit != null and deposit != 0">deposit=#{deposit}</if>
+        where deposit_id=#{depositId}
+    </update>
+    <update id="returnDeposit" parameterType="int">
+        update induction_deposit set
+        oper_type=#{param2}
+        where deposit_id=#{param1}
+    </update>
+    <select id="depositList" resultMap="depositVoResult" parameterType="com.psms.project.induction.domain.vo.SelectDepositVo">
+        <include refid="depositVo"/>
+        where id.oper_type=3
+        <if test="workNum !=null and workNum !=''">
+            AND id.work_num like concat ('%',#{workNum},'%')
+        </if>
+        <if test="operType != null and operType != 0">
+            AND id.oper_type=#{operType}
+        </if>
+        <if test="deptName !=null and deptName !=''">
+            AND d.dept_name like concat ('%',#{deptName},'%')
+        </if>
+        <if test="fullName !=null and fullName !=''">
+            AND n.full_name like concat ('%',#{fullName},'%')
+        </if>
+        <if test="beginTime != null"><!-- 开始时间检索 -->
+            AND date_format(s.create_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+        </if>
+        <if test="endTime != null"><!-- 结束时间检索 -->
+            AND date_format(s.create_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+        </if>
+        order by id.deposit_id desc
+    </select>
+    <select id="depositInfo" resultMap="depositVoResult" parameterType="int">
+        <include refid="depositVo"/>
+        where id.deposit_id=#{depositId}
+    </select>
+    <select id="depositInfoByworkNum" resultMap="depositVoResult" parameterType="string">
+        <include refid="depositVo"/>
+        where id.work_num=#{workNum}
+    </select>
+</mapper>

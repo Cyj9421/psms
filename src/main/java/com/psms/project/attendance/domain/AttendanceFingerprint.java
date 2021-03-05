@@ -21,6 +21,8 @@ public class AttendanceFingerprint {
     private String workNum;
     /** 指纹名 */
     private String fingerprintTemplate;
+    /** 出入口id */
+    private int ioId;
     /** 使用状态(0正常,1注销) */
     public int useStatus;
     /** 姓名 */

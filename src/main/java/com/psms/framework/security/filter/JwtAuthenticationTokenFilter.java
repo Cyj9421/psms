@@ -19,8 +19,7 @@ import com.psms.framework.security.service.TokenService;
 
 /**
  * token过滤器 验证token有效性
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter

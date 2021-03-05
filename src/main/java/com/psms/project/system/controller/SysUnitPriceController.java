@@ -38,7 +38,8 @@ public class SysUnitPriceController extends BaseController {
      * @return
      */
     @GetMapping("/list")
-    public AjaxResult priceList(SysUnitPrice sysUnitPrice,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+    public AjaxResult priceList(SysUnitPrice sysUnitPrice,
+                                @RequestParam(value="pageNum",defaultValue = "1")int pageNum,
                                 @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<SysUnitPrice> list = sysUnitPriceService.priceList(sysUnitPrice);

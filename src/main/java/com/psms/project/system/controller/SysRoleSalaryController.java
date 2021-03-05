@@ -74,6 +74,7 @@ public class SysRoleSalaryController extends BaseController {
         AttendanceSummary summary=new AttendanceSummary();
         for(int i=0;i<list.size();i++) {
             c.setTime(new Date());
+
             summary.setSummaryMonth(c.get(Calendar.MONTH)+1);
             summary.setSummaryQuarter(c.get(Calendar.MONTH)/3+1);
             summary.setSummaryYear(c.get(Calendar.YEAR));

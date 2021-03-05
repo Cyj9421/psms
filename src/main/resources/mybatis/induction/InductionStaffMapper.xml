@@ -5,65 +5,136 @@
         <id property="inductionId" column="induction_id"/>
         <result property="currencyId" column="currency_id"/>
         <result property="citizenshipId" column="citizenship_id"/>
+        <result property="deptId" column="dept_id"/>
         <result property="postId" column="post_id"/>
         <result property="probationId" column="probation_id"/>
+        <result property="dormitoryId" column="dormitory_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="roomId" column="room_id"/>
         <result property="workNum" column="work_num"/>
         <result property="salary" column="salary"/>
         <result property="fullName" column="full_name"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
         <result property="sex" column="sex"/>
         <result property="age" column="age"/>
         <result property="personalPhoto" column="personal_photo"/>
+        <result property="passport" column="passport"/>
+        <result property="national" column="national"/>
+        <result property="idCard" column="id_card"/>
+        <result property="contact" column="contact"/>
+        <result property="education" column="education"/>
+        <result property="isMarried" column="is_married"/>
+        <result property="bornDate" column="born_date"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="bornAddress" column="born_address"/>
+        <result property="bornProvince" column="born_province"/>
+        <result property="bornArea" column="born_area"/>
+        <result property="nowAddress" column="now_address"/>
+        <result property="nowProvince" column="now_province"/>
+        <result property="nowArea" column="now_area"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
+        <result property="payDay" column="payday"/>
         <result property="deposit" column="deposit"/>
         <result property="postName" column="post_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="scheduleName" column="schedule_name"/>
         <result property="probationDay" column="probation_day"/>
         <result property="probationMonth" column="probation_month"/>
         <result property="citizenshipName" column="citizenship_name"/>
         <result property="currencyName" column="currency_name"/>
     </resultMap>
     <sql id="inductionVo">
-        select a.induction_id,a.currency_id,a.citizenship_id,a.post_id,a.probation_id,a.work_num,
-               a.salary,a.full_name,a.sex,a.age,a.personal_photo,a.create_time,a.update_time,a.remark,
-               a.deposit,
+        select a.induction_id,a.currency_id,a.citizenship_id,a.dept_id,a.post_id,a.probation_id,
+               a.dormitory_id,a.order_id,a.room_id,a.work_num,a.salary,a.full_name,a.first_name,
+               a.last_name,a.sex,a.age,a.personal_photo,a.passport,a.national,a.id_card,a.contact,a.education,
+               a.is_married,a.born_date,a.phone_number,a.born_address,a.born_province,a.born_area,
+               a.now_address,a.now_province,a.now_area,a.create_time,a.update_time,a.remark,a.payday,a.deposit,
                b.post_name,
                c.probation_day,c.probation_month,
                d.citizenship_name,
-               e.currency_name
+               e.currency_name,
+               f.dept_name,
+               g.schedule_name
         from induction_staff a
         left join sys_post b on a.post_id=b.post_id
         left join induction_probation c on a.probation_id=c.probation_id
         left join induction_citizenship d on a.citizenship_id=d.citizenship_id
         left join induction_currency e on a.currency_id=e.currency_id
+        left join sys_dept f on a.dept_id=f.dept_id
+        left join attendance_schedule_order g on a.order_id=g.order_id
     </sql>
     <insert id="addInduction" parameterType="com.psms.project.induction.domain.vo.InsertInductionVo">
         insert into induction_staff(
         <if test="currencyId != null and currencyId !=0">currency_id,</if>
         <if test="citizenshipId != null and citizenshipId !=0">citizenship_id,</if>
+        <if test="deptId != null and deptId !=0">dept_id,</if>
         <if test="postId != null and postId !=0">post_id,</if>
         <if test="probationId != null and probationId !=0">probation_id,</if>
-        <if test="workNum != null and workNum != ''">work_num,</if>
+        <if test="dormitoryId != null and dormitoryId !=0">dormitory_id,</if>
+        <if test="roomId != null and roomId !=0">room_id,</if>
+        <if test="orderId != null and orderId !=0">order_id,</if>
         <if test="salary != null and salary !=0">salary,</if>
+        <if test="payDay != null and payDay != ''">payday,</if>
         <if test="deposit != null and deposit !=0">deposit,</if>
         <if test="fullName != null and fullName != ''">full_name,</if>
+        <if test="firstName != null and firstName != ''">first_name,</if>
+        <if test="lastName != null and lastName != ''">last_name,</if>
+        <if test="workNum != null and workNum != ''">work_num,</if>
         <if test="sex != null and sex !=0">sex,</if>
         <if test="age != null and age !=0">age,</if>
-        <if test="personalPhoto != null and personalPhoto != ''">persoal_photo,</if>
+        <if test="personalPhoto != null and personalPhoto != ''">personal_photo,</if>
+        <if test="passport != null and passport != ''">passport,</if>
+        <if test="national != null and national != ''">national,</if>
+        <if test="idCard != null and idCard != ''">id_card,</if>
+        <if test="contact != null and contact != ''">contact,</if>
+        <if test="education != null and education != ''">education,</if>
+        <if test="isMarried != null and isMarried != 0">is_married,</if>
+        <if test="bornDate != null and bornDate != ''">born_date,</if>
+        <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
+        <if test="bornAddress != null and bornAddress != ''">born_address,</if>
+        <if test="bornProvince != null and bornProvince != ''">born_province,</if>
+        <if test="bornArea != null and bornArea != ''">born_area,</if>
+        <if test="nowAddress != null and nowAddress != ''">now_address,</if>
+        <if test="nowProvince != null and nowProvince != ''">now_province,</if>
+        <if test="nowArea != null and nowArea != ''">now_area,</if>
         <if test="remark != null and remark != ''">remark,</if>
         create_time
         )values (
         <if test="currencyId != null and currencyId !=0">#{currencyId},</if>
         <if test="citizenshipId != null and citizenshipId !=0">#{citizenshipId},</if>
+        <if test="deptId != null and deptId !=0">#{deptId},</if>
         <if test="postId != null and postId !=0">#{postId},</if>
         <if test="probationId != null and probationId !=0">#{probationId},</if>
-        <if test="workNum != null and workNum != ''">#{workNum},</if>
-        <if test="salary != null and salary !=0 ">#{salary},</if>
+        <if test="dormitoryId != null and dormitoryId !=0">#{dormitoryId},</if>
+        <if test="roomId != null and roomId !=0">#{roomId},</if>
+        <if test="orderId != null and orderId !=0">#{orderId},</if>
+        <if test="salary != null and salary !=0">#{salary},</if>
+        <if test="payDay != null and payDay != ''">#{payDay},</if>
         <if test="deposit != null and deposit !=0">#{deposit},</if>
         <if test="fullName != null and fullName != ''">#{fullName},</if>
+        <if test="firstName != null and firstName != ''">#{firstName},</if>
+        <if test="lastName != null and lastName != ''">#{lastName},</if>
+        <if test="workNum != null and workNum != ''">#{workNum},</if>
         <if test="sex != null and sex !=0">#{sex},</if>
         <if test="age != null and age !=0">#{age},</if>
         <if test="personalPhoto != null and personalPhoto != ''">#{personalPhoto},</if>
+        <if test="passport != null and passport != ''">#{passport},</if>
+        <if test="national != null and national != ''">#{national},</if>
+        <if test="idCard != null and idCard != ''">#{idCard},</if>
+        <if test="contact != null and contact != ''">#{contact},</if>
+        <if test="education != null and education != ''">#{education},</if>
+        <if test="isMarried != null and isMarried != 0">#{isMarried},</if>
+        <if test="bornDate != null and bornDate != ''">#{bornDate},</if>
+        <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
+        <if test="bornAddress != null and bornAddress != ''">#{bornAddress},</if>
+        <if test="bornProvince != null and bornProvince != ''">#{bornProvince},</if>
+        <if test="bornArea != null and bornArea != ''">#{bornArea},</if>
+        <if test="nowAddress != null and nowAddress != ''">#{nowAddress},</if>
+        <if test="nowProvince != null and nowProvince != ''">#{nowProvince},</if>
+        <if test="nowArea != null and nowArea != ''">#{nowArea},</if>
         <if test="remark != null and remark != ''">#{remark},</if>
         sysdate()
         )
@@ -72,14 +143,36 @@
         update induction_staff set
         <if test="currencyId != null and currencyId !=0">currency_id=#{currencyId},</if>
         <if test="citizenshipId != null and citizenshipId !=0">citizenship_id=#{citizenshipId},</if>
+        <if test="deptId != null and deptId !=0">dept_id=#{deptId},</if>
         <if test="postId != null and postId !=0">post_id=#{postId},</if>
-        <if test="workNum != null and workNum != ''">work_num=#{workNum},</if>
+        <if test="probationId != null and probationId !=0">probation_id=#{probationId},</if>
+        <if test="dormitoryId != null and dormitoryId !=0">dormitory_id=#{dormitoryId},</if>
+        <if test="roomId != null and roomId=0">room_id=#{roomId},</if>
+        <if test="orderId != null and orderId !=0">order_id=#{orderId},</if>
         <if test="salary != null and salary !=0">salary=#{salary},</if>
+        <if test="payDay != null and payDay != ''">payday=#{payDay},</if>
         <if test="deposit != null and deposit !=0">deposit=#{deposit},</if>
         <if test="fullName != null and fullName != ''">full_name=#{fullName},</if>
+        <if test="firstName != null and firstName != ''">first_name=#{firstName},</if>
+        <if test="lastName != null and lastName != ''">last_name=#{lastName},</if>
+        <if test="workNum != null and workNum != ''">work_num=#{workNum},</if>
         <if test="sex != null and sex !=0">sex=#{sex},</if>
         <if test="age != null and age !=0">age=#{age},</if>
-        <if test="personalPhoto != null and personalPhoto != ''">persoal_photo=#{personalPhoto},</if>
+        <if test="personalPhoto != null and personalPhoto != ''">personal_photo=#{personalPhoto},</if>
+        <if test="passport != null and passport != ''">passport=#{passport},</if>
+        <if test="national != null and national != ''">national=#{national},</if>
+        <if test="idCard != null and idCard != ''">id_card=#{idCard},</if>
+        <if test="contact != null and contact != ''">contact=#{contact},</if>
+        <if test="education != null and education != ''">education=#{education},</if>
+        <if test="isMarried != null and isMarried != 0">is_married=#{isMarried},</if>
+        <if test="bornDate != null and bornDate != ''">born_date=#{bornDate},</if>
+        <if test="phoneNumber != null and phoneNumber != ''">phone_number=#{phoneNumber},</if>
+        <if test="bornAddress != null and bornAddress != ''">born_address=#{bornAddress},</if>
+        <if test="bornProvince != null and bornProvince != ''">born_province=#{bornProvince},</if>
+        <if test="bornArea != null and bornArea != ''">born_area=#{bornArea},</if>
+        <if test="nowAddress != null and nowAddress != ''">now_address=#{nowAddress},</if>
+        <if test="nowProvince != null and nowProvince != ''">now_province=#{nowProvince},</if>
+        <if test="nowArea != null and nowArea != ''">now_area=#{nowArea},</if>
         <if test="remark != null and remark != ''">remark=#{remark},</if>
         update_time=sysdate()
         where induction_id=#{inductionId}
@@ -110,5 +203,12 @@
     <select id="inductionInfo" resultMap="inductionStaffResult" parameterType="int">
         <include refid="inductionVo"/>
         where a.induction_id=#{inductionId}
+    </select>
+    <select id="inductionInfoByWorkNum" resultMap="inductionStaffResult" parameterType="string">
+        <include refid="inductionVo"/>
+        where a.work_num=#{workNum}
+    </select>
+    <select id="selectBaseSalary" resultType="java.lang.Double" parameterType="string">
+        select base_salary from sys_unit_price where work_num=#{workNum}
     </select>
 </mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.dormitory.mapper.DormitoryRoomTypeMapper">
+    <resultMap id="roomTypeResult" type="com.psms.project.dormitory.domain.DormitoryRoomType">
+        <id property="typeId" column="type_id"/>
+        <result property="typeName" column="type_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="roomTypeVo">
+        select type_id,type_name,create_time,update_time
+        from dormitory_room_type
+    </sql>
+    <insert id="addType" parameterType="string">
+        insert into dormitory_room_type(
+            type_name,create_time
+        )values (#{typeName},sysdate())
+    </insert>
+    <update id="updateType" parameterType="com.psms.project.dormitory.domain.vo.UpdateRoomTypeVo">
+        update dormitory_room_type set
+        type_name=#{typeName},update_time=sysdate()
+        where type_id=#{typeId}
+    </update>
+    <delete id="delTypes" parameterType="int">
+        delete from dormitory_room_type where type_id in
+        <foreach collection="array" item="typeId" open="(" separator="," close= ")">
+            #{typeId}
+        </foreach>
+    </delete>
+    <select id="typeList" resultMap="roomTypeResult">
+        <include refid="roomTypeVo"/>
+    </select>
+    <select id="typeInfo" resultMap="roomTypeResult">
+        <include refid="roomTypeVo"/>
+        where type_ie=#{typeId}
+    </select>
+    <select id="typeInfoByTypeName" resultMap="roomTypeResult" parameterType="string">
+        <include refid="roomTypeVo"/>
+        where type_name=#{typeName}
+    </select>
+</mapper>

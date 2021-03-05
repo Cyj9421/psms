@@ -6,8 +6,7 @@ import com.psms.project.system.domain.SysUser;
 
 /**
  * 用户 业务层
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public interface ISysUserService
 {

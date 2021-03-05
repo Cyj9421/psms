@@ -18,8 +18,7 @@ import com.psms.framework.datasource.DynamicDataSourceContextHolder;
 
 /**
  * 多数据源处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Aspect
 @Order(1)

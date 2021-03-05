@@ -9,8 +9,7 @@ import com.psms.project.system.domain.SysDictData;
 
 /**
  * 字典表 数据层
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Mapper
 public interface SysDictDataMapper

@@ -19,17 +19,39 @@
         <result property="postName" column="post_name"/>
         <result property="postCode" column="post_code"/>
         <result property="fullName" column="full_name"/>
+        <result property="personalPhoto" column="personal_photo"/>
+        <result property="brushNum" column="brush_num"/>
+        <result property="carryNum" column="carry_num"/>
+    </resultMap>
+    <resultMap id="brushCardInfoResult" type="com.psms.project.attendance.domain.vo.BrushCardInfoVo">
+        <result property="workNum" column="work_num"/>
+        <result property="fullName" column="full_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="carryNum" column="carry_num"/>
+        <result property="brushNum" column="brush_num"/>
+        <result property="personalPhoto" column="personal_photo"/>
+    </resultMap>
+    <resultMap id="infoVoResult" type="com.psms.project.attendance.domain.vo.AttendanceInfoVo">
+        <result property="workNum" column="work_num"/>
+        <result property="attendanceStatus" column="attendance_status"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="fullName" column="full_name"/>
+        <result property="personalPhoto" column="personal_photo"/>
     </resultMap>
     <sql id="attendanceVo">
         select i.attendance_id,i.work_num,i.is_overtime,i.is_late,i.is_early,i.is_absenteeism,i.start_time,
         i.end_time,i.attendance_date,i.attendance_status,
                d.dept_name,d.leader,
                p.post_name,p.post_code,
-               n.full_name
+               n.full_name,
+               s.personal_photo,
+               c.brush_num,c.carry_num
         from attendance_info i
         left join sys_user_number n on i.work_num=n.work_num
         left join sys_dept d on n.dept_id=d.dept_id
         left join sys_post p on n.post_id=p.post_id
+        left join induction_staff s on i.work_num=s.work_num
+        left join attendance_card c on i.work_num=c.work_num
     </sql>
     <insert id="startAttendance" parameterType="com.psms.project.attendance.domain.AttendanceInfo">
         insert into attendance_info (work_num,start_time,attendance_date)
@@ -78,5 +100,36 @@
     <select id="attendateInfo" resultMap="infoResult" parameterType="com.psms.project.attendance.domain.AttendanceInfo">
         <include refid="attendanceVo"/>
         where i.work_num=#{workNum} and i.attendance_date=#{attendanceDate}
+    </select>
+    <select id="brushCardInfoByDoor" resultMap="brushCardInfoResult" parameterType="string">
+        select n.work_num,n.full_name,
+               s.personal_photo,
+               d.dept_name,
+               c.brush_num,c.carry_num
+        from sys_user_number n
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join attendance_card c on n.work_num=c.work_num
+        left join induction_staff s on n.work_num=s.work_num
+        where n.work_num=#{workNum} and c.card_type=2
+    </select>
+    <select id="brushCardInfoByAttendance" resultMap="brushCardInfoResult" parameterType="string">
+        select n.work_num,n.full_name,
+               s.personal_photo,
+               d.dept_name,
+               c.brush_num,c.carry_num
+        from sys_user_number n
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join attendance_card c on n.work_num=c.work_num
+        left join induction_staff s on n.work_num=s.work_num
+        where n.work_num=#{workNum} and c.card_type=1
+    </select>
+    <select id="printFingerInfo" resultMap="infoVoResult" parameterType="string">
+        select n.work_num,n.full_name,
+               s.personal_photo,
+               d.dept_name
+        from sys_user_number n
+        left join sys_dept d on n.dept_id=d.dept_id
+        left join induction_staff s on n.work_num=s.work_num
+        where n.work_num=#{workNum}
     </select>
 </mapper>

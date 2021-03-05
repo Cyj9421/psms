@@ -11,9 +11,8 @@ import com.psms.framework.security.LoginUser;
 import com.psms.project.system.domain.SysRole;
 
 /**
- * JeeThink首创 自定义权限实现，ss取自SpringSecurity首字母
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ * 自定义权限实现，ss取自SpringSecurity首字母
+ *
  */
 @Service("ss")
 public class PermissionService

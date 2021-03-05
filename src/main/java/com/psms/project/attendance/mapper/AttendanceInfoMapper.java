@@ -1,6 +1,8 @@
 package com.psms.project.attendance.mapper;
 
 import com.psms.project.attendance.domain.AttendanceInfo;
+import com.psms.project.attendance.domain.vo.AttendanceInfoVo;
+import com.psms.project.attendance.domain.vo.BrushCardInfoVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -59,4 +61,25 @@ public interface AttendanceInfoMapper {
      * @return
      */
     public int delAttendance(int [] attendanceIds);
+
+    /**
+    * 门禁信息
+    * @param workNum
+    * @return
+    */
+    public BrushCardInfoVo brushCardInfoByDoor(String workNum);
+
+    /**
+    * 刷卡考勤信息
+    * @param workNum
+    * @return
+    */
+     public BrushCardInfoVo brushCardInfoByAttendance(String workNum);
+
+    /**
+    * 指纹考勤信息
+    * @param workNum
+    * @return
+    */
+    public AttendanceInfoVo printFingerInfo(String workNum);
 }

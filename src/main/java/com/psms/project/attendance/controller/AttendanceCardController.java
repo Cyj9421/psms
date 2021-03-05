@@ -2,10 +2,14 @@ package com.psms.project.attendance.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.psms.common.utils.StringUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.*;
+import com.psms.project.attendance.domain.vo.AttendanceCardVo;
+import com.psms.project.attendance.domain.vo.BrushCardInfoVo;
 import com.psms.project.attendance.service.*;
+import com.psms.project.system.service.ISysUserNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +38,8 @@ public class AttendanceCardController extends BaseController {
     private IAttendanceEarlyService attendanceEarlyService;
     @Autowired
     private IAttendanceOvertimeService attendanceOvertimeService;
+    @Autowired
+    private ISysUserNumberService userNumberService;
     private int i=0;
     /**
      * 卡号列表
@@ -62,14 +68,81 @@ public class AttendanceCardController extends BaseController {
     }
 
     /**
+     * 服务器绑定IC卡
+     * @param attendanceCardVo
+     * @return
+     */
+    @PostMapping("/client/add")
+    public AjaxResult clientAddCard(AttendanceCardVo attendanceCardVo){
+        if(StringUtils.isEmpty(attendanceCardVo.getWorkNum())){
+            return AjaxResult.error(400,"工号不能为空!");
+        }
+        if(StringUtils.isEmpty(attendanceCardVo.getCardNum())){
+            return AjaxResult.error(400,"卡号不能为空!");
+        }
+        if(userNumberService.numberByWorkNum(attendanceCardVo.getWorkNum())==null){
+            return AjaxResult.error(400,"没有该工号的信息!");
+        }
+        AttendanceCard cardInfo=attendanceCardService.attendanceCardInfo(attendanceCardVo.getCardNum());
+        if(cardInfo !=null){
+            return AjaxResult.error(400,"一张卡只能绑定一个人!");
+        }else {
+            if (attendanceCardVo.getCardType() == 0 || attendanceCardVo.getCardType()==1) {
+                return AjaxResult.error(400, "该工号已经绑定过考勤卡了!");
+            }
+        }
+        AttendanceCard attendanceCard=new AttendanceCard();
+        attendanceCard.setWorkNum(attendanceCardVo.getWorkNum());
+        attendanceCard.setCardNum(attendanceCardVo.getCardNum());
+        attendanceCard.setCardType(attendanceCardVo.getCardType());
+        attendanceCard.setBrushNum(attendanceCardVo.getBrushNum());
+        attendanceCard.setCarryNum(attendanceCardVo.getCarryNum());
+        attendanceCard.setIoId(attendanceCardVo.getIoId());
+        if(attendanceCardVo.getCardType()==2) {
+            if (attendanceCard.getBrushNum() != 0) {
+                attendanceCard.setDefaultNum(attendanceCard.getBrushNum());
+            }else {
+                attendanceCard.setBrushNum(10);
+                attendanceCard.setDefaultNum(10);
+            }
+        }
+        else {
+            attendanceCard.setBrushNum(2);
+            attendanceCard.setDefaultNum(2);
+        }
+        return toAjax(attendanceCardService.addCard(attendanceCard));
+    }
+    /**
      * 绑定卡号
      * @param attendanceCard
      * @return
      */
     @PostMapping("/add")
     public AjaxResult addCard(@RequestBody AttendanceCard attendanceCard){
-        if(attendanceCard.getBrushNum()!=0){
-            attendanceCard.setDefaultNum(attendanceCard.getBrushNum());
+        if(StringUtils.isEmpty(attendanceCard.getWorkNum())){
+            return AjaxResult.error(400,"工号不能为空!");
+        }
+        if(StringUtils.isEmpty(attendanceCard.getCardNum())){
+            return AjaxResult.error(400,"卡号不能为空!");
+        }
+        if(userNumberService.numberByWorkNum(attendanceCard.getWorkNum())==null){
+            return AjaxResult.error(400,"没有该工号的信息!");
+        }
+        AttendanceCard cardInfo=attendanceCardService.attendanceCardInfo(attendanceCard.getCardNum());
+        if(cardInfo !=null){
+            return AjaxResult.error(400,"一张卡只能绑定一个人!");
+        }else {
+            if (attendanceCard.getCardType() == 0 || attendanceCard.getCardType()==1) {
+                return AjaxResult.error(400, "该工号已经绑定过考勤卡了!");
+            }
+        }
+        if(attendanceCard.getCardType()==2) {
+            if (attendanceCard.getBrushNum() != 0) {
+                attendanceCard.setDefaultNum(attendanceCard.getBrushNum());
+            }else {
+                attendanceCard.setBrushNum(10);
+                attendanceCard.setDefaultNum(10);
+            }
         }
         return toAjax(attendanceCardService.addCard(attendanceCard));
     }
@@ -81,8 +154,13 @@ public class AttendanceCardController extends BaseController {
      */
     @PutMapping
     public AjaxResult updateCard(@RequestBody AttendanceCard attendanceCard){
-        if(attendanceCard.getBrushNum()!=0){
-            attendanceCard.setDefaultNum(attendanceCard.getBrushNum());
+        if(attendanceCard.getCardType()==2) {
+            if (attendanceCard.getBrushNum() != 0) {
+                attendanceCard.setDefaultNum(attendanceCard.getBrushNum());
+            }else {
+                attendanceCard.setBrushNum(10);
+                attendanceCard.setDefaultNum(10);
+            }
         }
         return toAjax(attendanceCardService.updateCard(attendanceCard));
     }
@@ -95,24 +173,49 @@ public class AttendanceCardController extends BaseController {
     public AjaxResult delCard(@PathVariable int [] cardIds){
         return toAjax(attendanceCardService.delCard(cardIds));
     }
-
     /**
      * 通过卡号
      * @param cardNum
      * @return
      * @throws ParseException
      */
-    @PostMapping("/{cardNum}")
-    public AjaxResult startAndEnd(@PathVariable String cardNum) throws ParseException {
+    @PostMapping("/through")
+    public AjaxResult startAndEnd(@RequestParam(value = "cardNum") String cardNum,
+                                  @RequestParam(value = "carryNum") int carryNum) throws ParseException {
         LocalTime localTime = LocalTime.now(); // gets the current time
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         AttendanceCard attendanceCard=attendanceCardService.attendanceCardInfo(cardNum);
         if(attendanceCard==null){
-            return AjaxResult.success("该卡未绑定员工");
+            return AjaxResult.error(400,"该卡未绑定员工");
+        }
+        if(attendanceCard.getCardType()==2){
+            BrushCardInfoVo brushCardDoorInfo=attendanceInfoService.brushCardInfoByDoor(attendanceCard.getWorkNum());
+            brushCardDoorInfo.setBrushCardTime(dateTime.format(new Date()));
+            if(carryNum>attendanceCard.getCarryNum()){
+                return AjaxResult.success("携带人数超出了!",brushCardDoorInfo);
+            }
+            if(attendanceCard.getBrushNum()<=0){
+                return AjaxResult.success("抱歉,今天的剩余次数已用完！",brushCardDoorInfo);
+            }
+            attendanceCard.setBrushNum(attendanceCard.getBrushNum()-1);
+            attendanceCard.setTotalNum(attendanceCard.getTotalNum()+1);
+            attendanceCardService.updateCard(attendanceCard);
+            BrushCardInfoVo brushCardDoorFor=attendanceInfoService.brushCardInfoByDoor(attendanceCard.getWorkNum());
+            brushCardDoorFor.setBrushCardTime(dateTime.format(new Date()));
+            return AjaxResult.success(brushCardDoorFor);
+        }
+        BrushCardInfoVo brushCardAttendanceInfo=attendanceInfoService.brushCardInfoByAttendance(attendanceCard.getWorkNum());
+        brushCardAttendanceInfo.setBrushCardTime(dateTime.format(new Date()));
+        if(attendanceCard.getBrushNum()<=0){
+            return AjaxResult.success("抱歉,今天的剩余次数已用完！",brushCardAttendanceInfo);
         }
         AttendanceInfo attendanceInfo=new AttendanceInfo();
-        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         attendanceCard.setBrushNum(attendanceCard.getBrushNum()-1);
         attendanceCard.setTotalNum(attendanceCard.getBrushNum()+1);
+        attendanceCardService.updateCard(attendanceCard);
+        BrushCardInfoVo brushCardAttendanceFor=attendanceInfoService.brushCardInfoByAttendance(attendanceCard.getWorkNum());
+        brushCardAttendanceFor.setBrushCardTime(dateTime.format(new Date()));
         attendanceInfo.setWorkNum(attendanceCard.getWorkNum());
         attendanceInfo.setAttendanceDate(date.parse(date.format(new Date())));
         if(i==0){
@@ -128,13 +231,13 @@ public class AttendanceCardController extends BaseController {
                     return AjaxResult.success(attendanceInfo);
                 }else{
                     i=0;
-                    return AjaxResult.success("你今天已经打过卡了");
+                    return AjaxResult.success("你今天已经打过卡了",brushCardAttendanceInfo);
                 }
             }
             catch (Exception e){
                 i=0;
                 e.printStackTrace();
-                return AjaxResult.success("你今天已经打过卡了");
+                return AjaxResult.success("你今天已经打过卡了",brushCardAttendanceInfo);
             }
         }
         attendanceInfo=attendanceInfoService.attendateInfo(attendanceInfo);
@@ -191,6 +294,6 @@ public class AttendanceCardController extends BaseController {
             }
         }
         attendanceInfoService.updateAttendance(attendanceInfo);
-        return AjaxResult.success(attendanceInfoService.attendateInfo(attendanceInfo));
+        return AjaxResult.success(brushCardAttendanceFor);
     }
 }

@@ -41,6 +41,10 @@ public class AttendanceInfo implements Serializable {
     private String postName;
     /** 岗位编码 */
     private String postCode;
+    /** 个人照片 */
     private String personalPhoto;
-
+    /** 剩余可刷次数 */
+    private int brushNum;
+     /** 携带人数 */
+    private int carryNum;
 }

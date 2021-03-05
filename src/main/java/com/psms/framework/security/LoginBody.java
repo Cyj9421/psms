@@ -2,8 +2,7 @@ package com.psms.framework.security;
 
 /**
  * 用户登录对象
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class LoginBody
 {

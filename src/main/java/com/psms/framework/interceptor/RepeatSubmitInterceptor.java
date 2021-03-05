@@ -13,8 +13,7 @@ import com.psms.framework.web.domain.AjaxResult;
 
 /**
  * 防止重复提交拦截器
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Component
 public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter

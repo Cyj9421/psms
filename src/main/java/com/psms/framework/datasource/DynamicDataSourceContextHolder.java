@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 数据源切换处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class DynamicDataSourceContextHolder
 {

@@ -15,8 +15,7 @@ import com.psms.common.utils.html.EscapeUtil;
 
 /**
  * XSS过滤处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper
 {

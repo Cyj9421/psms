@@ -8,7 +8,6 @@ import javax.annotation.PreDestroy;
 /**
  * 确保应用退出时能关闭后台线程
  *
- * @author jeethink  官方网址：www.jeethink.vip
  */
 @Component
 public class ShutdownManager

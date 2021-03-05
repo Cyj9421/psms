@@ -9,8 +9,7 @@ import com.psms.common.utils.spring.SpringUtils;
 
 /**
  * 异步任务管理器
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class AsyncManager
 {

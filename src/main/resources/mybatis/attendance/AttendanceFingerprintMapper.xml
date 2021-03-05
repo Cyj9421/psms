@@ -6,6 +6,7 @@
     <resultMap id="fingerprintResult" type="com.psms.project.attendance.domain.AttendanceFingerprint">
         <id property="fingerprintId" column="fingerprint_id"/>
         <result property="workNum" column="work_num"/>
+        <result property="ioId" column="io_id"/>
         <result property="fingerprintTemplate" column="fingerprint_template"/>
         <result property="useStatus" column="use_status"/>
         <result property="fullName" column="full_name"/>
@@ -17,8 +18,8 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
     <insert id="addFingerprint" parameterType="com.psms.project.attendance.domain.AttendanceFingerprint">
-        insert into attendance_fingerprint(work_num,fingerprint_template,create_time)
-        values(#{workNum},#{fingerprintTemplate},sysdate())
+        insert into attendance_fingerprint(work_num,fingerprint_template,io_id,create_time)
+        values(#{workNum},#{fingerprintTemplate},#{ioId},sysdate())
     </insert>
     <update id="delFingerprint" parameterType="string">
         update attendance_fingerprint set
@@ -34,7 +35,7 @@
         <if test="fingerprintTemplate != null and fingerprintTemplate != ''">
             fingerprint_template=#{fingerprintTemplate},
         </if>
-        update_by=#{updateBy},
+        <if test="ioId != null and ioId !=0">io_id=#{ioId},</if>
         update_time=sysdate()
         where fingerprint_id=#{fingerprintId}
     </update>
@@ -45,25 +46,29 @@
         </foreach>
     </delete>
     <select id="fingerprintInfo" parameterType="int" resultMap="fingerprintResult">
-        select f.fingerprint_id,f.work_num,f.fingerprint_template,f.use_status,f.create_time,f.update_time,
+        select f.fingerprint_id,f.io_id,f.work_num,f.fingerprint_template,f.use_status,f.create_time,f.update_time,
                n.full_name,
                d.dept_name,d.leader,
-               p.post_name,p.post_code
+               p.post_name,p.post_code,
+               i.io_id
         from attendance_fingerprint f
         left join sys_user_number n on f.work_num=n.work_num
         left join sys_dept d on n.dept_id=d.dept_id
         left join sys_post p on n.post_id=p.post_id
+        left join attendance_io i on f.io_id=i.io_id
         where fingerprint_id=#{fingerprintId} and f.use_status=1
     </select>
     <select id="fingerprintList" resultMap="fingerprintResult" parameterType="com.psms.project.attendance.domain.AttendanceFingerprint">
-        select f.fingerprint_id,f.work_num,f.fingerprint_template,f.use_status,f.create_time,f.update_time,
-               n.full_name,
-               d.dept_name,d.leader,
-               p.post_name,p.post_code
+        select f.fingerprint_id,f.io_id,f.work_num,f.fingerprint_template,f.use_status,f.create_time,f.update_time,
+        n.full_name,
+        d.dept_name,d.leader,
+        p.post_name,p.post_code,
+        i.io_id
         from attendance_fingerprint f
         left join sys_user_number n on f.work_num=n.work_num
         left join sys_dept d on n.dept_id=d.dept_id
         left join sys_post p on n.post_id=p.post_id
+        left join attendance_io i on f.io_id=i.io_id
         <where>
         <if test="deptName !=null and deptName!=''">
             AND d.dept_name like concat('%',#{deptName},'%')

@@ -6,7 +6,9 @@ import com.psms.common.utils.SecurityUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.*;
+import com.psms.project.attendance.domain.vo.AttendanceInfoVo;
 import com.psms.project.attendance.service.*;
+import com.psms.project.system.service.ISysUserNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +39,8 @@ public class AttendancePrintController extends BaseController {
     private IAttendanceEarlyService attendanceEarlyService;
     @Autowired
     private IAttendanceOvertimeService attendanceOvertimeService;
+    @Autowired
+    private ISysUserNumberService userNumberService;
     /** 用来判断是上班打卡还是下班打卡 */
     private int i=0;
     /**
@@ -54,6 +58,16 @@ public class AttendancePrintController extends BaseController {
     }
 
     /**
+     * 可用指纹列表
+     * @return
+     */
+    @GetMapping("/available/list")
+    public AjaxResult templateListIsAvailable() {
+        AttendanceFingerprint attendanceFingerprint=new AttendanceFingerprint();
+        attendanceFingerprint.setUseStatus(1);
+        return AjaxResult.success(attendanceFingerprintService.fingerprintList(attendanceFingerprint));
+    }
+    /**
      * 指纹详情
      * @param fingerprintId
      * @return
@@ -65,15 +79,19 @@ public class AttendancePrintController extends BaseController {
 
     /**
      * 录入指纹
-     * @param workNum
-     * @param fingerprintTemplate
+     * @param workNum 工号
+     * @param fingerprintTemplate 指纹模板
      * @return
      */
     @PostMapping("/enroll")
-    public AjaxResult addTemplate(String workNum,String fingerprintTemplate){
+    public AjaxResult addTemplate(String workNum,String fingerprintTemplate,int ioId){
+        if(userNumberService.numberByWorkNum(workNum)==null){
+            return AjaxResult.success("没有该工号的信息!",false);
+        }
         AttendanceFingerprint attendanceFingerprint=new AttendanceFingerprint();
         attendanceFingerprint.setWorkNum(workNum);
         attendanceFingerprint.setFingerprintTemplate(fingerprintTemplate);
+        attendanceFingerprint.setIoId(ioId);
         return toAjax(attendanceFingerprintService.addFingerprint(attendanceFingerprint));
     }
 
@@ -87,6 +105,12 @@ public class AttendancePrintController extends BaseController {
     public AjaxResult startAndEnd(@PathVariable int fingerprintId) throws ParseException {
         LocalTime localTime = LocalTime.now(); // gets the current time
         AttendanceFingerprint attendanceFingerprint=attendanceFingerprintService.fingerprintInfo(fingerprintId);
+        SimpleDateFormat datetime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if(attendanceFingerprint==null){
+            return AjaxResult.error(400,"该指纹已注销!");
+        }
+        AttendanceInfoVo attendanceInfoVo=attendanceInfoService.printFingerInfo(attendanceFingerprint.getWorkNum());
+        attendanceInfoVo.setAttendanceTime(datetime.format(new Date()));
         AttendanceInfo attendanceInfo=new AttendanceInfo();
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         attendanceInfo.setWorkNum(attendanceFingerprint.getWorkNum());
@@ -104,16 +128,16 @@ public class AttendancePrintController extends BaseController {
                     return AjaxResult.success(attendanceInfo);
                 }else{
                     i=0;
-                    return AjaxResult.success("你今天已经打过卡了");
+                    return AjaxResult.success("你今天已经打过卡了",attendanceInfoVo);
                 }
             }
             catch (Exception e){
                 i=0;
                 e.printStackTrace();
-                return AjaxResult.success("你今天已经打过卡了");
+                return AjaxResult.success("你今天已经打过卡了",attendanceInfoVo);
             }
         }
-            attendanceInfo=attendanceInfoService.attendateInfo(attendanceInfo);
+        attendanceInfo=attendanceInfoService.attendateInfo(attendanceInfo);
         if(attendanceInfo.getEndTime()==null && i==1){
             //下班打卡
             Time time=Time.valueOf(localTime);
@@ -167,7 +191,7 @@ public class AttendancePrintController extends BaseController {
             }
         }
         attendanceInfoService.updateAttendance(attendanceInfo);
-        return AjaxResult.success(attendanceInfoService.attendateInfo(attendanceInfo));
+        return AjaxResult.success(attendanceInfoVo);
     }
     /**
      * 指纹更新

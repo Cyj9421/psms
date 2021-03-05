@@ -16,6 +16,8 @@ public class InductionProbation {
     private int probationMonth;
     @ApiModelProperty("试用期-日")
     private int probationDay;
+    @ApiModelProperty("工号")
+    private String workNum;
     @ApiModelProperty("创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;

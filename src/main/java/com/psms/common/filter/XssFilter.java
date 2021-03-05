@@ -18,8 +18,7 @@ import com.psms.common.utils.StringUtils;
 
 /**
  * 防止XSS攻击的过滤器
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class XssFilter implements Filter
 {

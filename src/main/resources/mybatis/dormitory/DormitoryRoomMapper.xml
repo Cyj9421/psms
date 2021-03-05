@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.dormitory.mapper.DormitoryRoomMapper">
+    <resultMap id="roomResult" type="com.psms.project.dormitory.domain.DormitoryRoom">
+        <id property="roomId" column="room_id"/>
+        <result property="dormitoryId" column="dormitory_id"/>
+        <result property="typeId" column="type_id"/>
+        <result property="roomName" column="room_name"/>
+        <result property="roomCapacity" column="room_capacity"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="typeName" column="type_name"/>
+        <result property="dormitoryName" column="dormitory_name"/>
+    </resultMap>
+    <resultMap id="roomInfoResult" type="com.psms.project.dormitory.domain.vo.DormitoryRoomInfoVo">
+        <result property="workNum" column="work_num"/>
+        <result property="fullName" column="full_name"/>
+        <result property="sex" column="sex"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="scheduleName" column="schedule_name"/>
+        <result property="remark" column="remark"/>
+        <result property="roomName" column="room_name"/>
+        <result property="dormitoryName" column="dormitory_name"/>
+        <result property="typeName" column="type_name"/>
+    </resultMap>
+    <sql id="roomVo">
+        select a.room_id,a.dormitory_id,a.type_id,a.room_name,a.room_capacity,a.remark,a.create_time,a.update_time,
+               b.type_name,
+               c.dormitory_name
+        from dormitory_room a
+        left join dormitory_room_type b on a.type_id=b.type_id
+        left join dormitory_building c on a.dormitory_id=c.dormitory_id
+    </sql>
+    <insert id="addRoom" parameterType="com.psms.project.dormitory.domain.vo.InsertRoomVo">
+        insert into dormitory_room(
+        <if test="dormitoryId != null and dormitoryId != 0">dormitory_id,</if>
+        <if test="typeId != null and typeId != 0">type_id,</if>
+        <if test="roomName != null and roomName != ''">room_name,</if>
+        <if test="roomCapacity != null and roomCapacity != 0">room_capacity,</if>
+        <if test="remark != null and remark != ''">remark,</if>
+        create_time
+        )values (
+        <if test="dormitoryId != null and dormitoryId != 0">#{dormitoryId},</if>
+        <if test="typeId != null and typeId != 0">#{typeId},</if>
+        <if test="roomName != null and roomName != ''">#{roomName},</if>
+        <if test="roomCapacity != null and roomCapacity != 0">#{roomCapacity},</if>
+        <if test="remark != null and remark != ''">#{remark},</if>
+        sysdate()
+        )
+    </insert>
+    <update id="updateRoom" parameterType="com.psms.project.dormitory.domain.vo.UpdateRoomVo">
+        update dormitory_room set
+        <if test="dormitoryId != null and dormitoryId != 0">dormitory_id=#{dormitoryId},</if>
+        <if test="typeId != null and typeId != 0">type_id=#{typeId},</if>
+        <if test="roomName != null and roomName != ''">room_name=#{roomName},</if>
+        <if test="roomCapacity != null">room_capacity=#{roomCapacity},</if>
+        <if test="remark != null and remark != ''">remark=#{remark},</if>
+        update_time=sysdate()
+        where room_id=#{roomId}
+    </update>
+    <delete id="delRooms" parameterType="int">
+        delete from dormitory_room where room_id in
+        <foreach collection="array" item="roomId" open="(" separator="," close= ")">
+            #{roomId}
+        </foreach>
+    </delete>
+    <select id="roomList" resultMap="roomResult">
+        <include refid="roomVo"/>
+        <where>
+            <if test="dormitoryName != null and dormitoryName != ''">
+                AND c.dormitory_name like concat ('%',#{dormitoryName},'%')
+            </if>
+            <if test="typeName != null and typeName != ''">
+                AND b.type_name like concat ('%',#{typeName},'%')
+            </if>
+        </where>
+        group by a.dormitory_id
+        order by a.room_id desc
+    </select>
+    <select id="roomInfo" resultMap="roomResult" parameterType="int">
+        <include refid="roomVo"/>
+        where a.room_id=#{roomId}
+    </select>
+    <select id="roomInfoByRoomName" resultMap="roomResult" parameterType="com.psms.project.dormitory.domain.vo.InsertRoomVo">
+        <include refid="roomVo"/>
+        where a.room_name=#{roomName} and a.dormitory_id=#{dormitoryId}
+    </select>
+    <select id="roomInfoList" resultMap="roomInfoResult">
+        select a.work_num,a.full_name,a.sex,a.remark,
+               b.dept_name,
+               c.schedule_name,
+               d.dormitory_name,
+               e.room_name,
+               f.type_name
+        from induction_staff a
+        left join sys_dept b on a.dept_id=b.dept_id
+        left join attendance_schedule_order c on a.order_id=c.order_id
+        left join dormitory_building d on a.dormitory_id=d.dormitory_id
+        left join dormitory_room e on a.room_id=e.room_id
+        left join dormitory_room_type f on e.type_id=f.type_id
+    </select>
+</mapper>

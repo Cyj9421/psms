@@ -21,8 +21,7 @@ import com.psms.framework.security.LoginUser;
 
 /**
  * 登录校验方法
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @Component
 public class SysLoginService
