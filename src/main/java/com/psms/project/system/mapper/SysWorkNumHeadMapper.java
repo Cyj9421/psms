@@ -13,12 +13,13 @@ public interface SysWorkNumHeadMapper {
      * @return
      */
     public List<SysWorkNumHead> headList(SysWorkNumHead sysWorkNumHead);
+
     /**
      * 通过部门id查找工号开头
      * @param deptId
      * @return
      */
-    public SysWorkNumHead selectHeadByDeptId(long deptId);
+    public SysWorkNumHead selectHeadByDeptId(long deptId,long postId);
 
     /**
      * 新增工号开头

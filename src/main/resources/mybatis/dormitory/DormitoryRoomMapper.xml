@@ -75,7 +75,6 @@
                 AND b.type_name like concat ('%',#{typeName},'%')
             </if>
         </where>
-        group by a.dormitory_id
         order by a.room_id desc
     </select>
     <select id="roomInfo" resultMap="roomResult" parameterType="int">

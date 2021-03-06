@@ -69,6 +69,11 @@ public class InductionStaffServiceImpl implements IInductionStaffService {
         return inductionStaffMapper.addInduction(insertInductionVo);
     }
 
+    @Override
+    public int updateInductionStatus(int inductionId, int inductionStatus) {
+        return inductionStaffMapper.updateInductionStatus(inductionId,inductionStatus);
+    }
+
     /**
      * 修改入职申请
      * @param updateInductionVo

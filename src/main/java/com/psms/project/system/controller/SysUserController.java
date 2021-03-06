@@ -145,7 +145,7 @@ public class SysUserController extends BaseController
         {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
-        SysWorkNumHead sysWorkNumHead=sysWorkNumHeadService.selectHeadByDeptId(user.getDeptId());
+        SysWorkNumHead sysWorkNumHead=sysWorkNumHeadService.selectHeadByDeptId(user.getDeptId(),user.getPostId());
         String head=sysWorkNumHead.getWorkNumHead();
         //根据部门id查找工号开头
         if(workHead!=null && !workHead.equals(head)) {

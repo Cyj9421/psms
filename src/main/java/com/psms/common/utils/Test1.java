@@ -17,12 +17,9 @@ import static io.netty.handler.codec.DateFormatter.format;
 
 @Slf4j
 public class Test1 {
-    public static void main(String[] args) throws ParseException, IOException {
-        Map<String,Object> map=new HashMap<>();
-         map.put("1","map1");
-         System.out.println(map.get("1"));
+    public static void main(String[] args) {
 
-
+        String body=String.format("%06d",1000);
+        System.out.println(body);
     }
-
 }

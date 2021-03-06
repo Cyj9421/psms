@@ -6,15 +6,18 @@
     <resultMap id="headResult" type="com.psms.project.system.domain.SysWorkNumHead">
         <id property="headId" column="head_id"/>
         <result property="workNumHead" column="work_num_head"/>
+        <result property="numTotal" column="num_total"/>
         <result property="deptId" column="dept_id"/>
+        <result property="postId" column="post_id"/>
+
     </resultMap>
     <sql id="headVo">
-        select head_id,work_num_head,dept_id from sys_work_num_head
+        select head_id,work_num_head,num_total,dept_id,post_id from sys_work_num_head
     </sql>
     <insert id="addHead" parameterType="com.psms.project.system.domain.SysWorkNumHead">
         insert into sys_work_num_head(
-        work_num_head,dept_id
-        )values (#{workNumHead},#{deptId})
+        work_num_head,dept_id,post_id
+        )values (#{workNumHead},#{deptId},#{postId})
     </insert>
     <update id="updateHead" parameterType="com.psms.project.system.domain.SysWorkNumHead">
         update sys_work_num_head set
@@ -23,6 +26,12 @@
         </if>
         <if test="deptId !=null and deptId!=0">
             dept_id=#{deptId}
+        </if>
+        <if test="postId !=null and postId!=0">
+            post_id=#{postId}
+        </if>
+        <if test="numTotal !=null and numTotal!=0">
+            num_total=#{numTotal}
         </if>
         where head_id=#{headId}
     </update>
@@ -34,7 +43,7 @@
     </delete>
     <select id="selectHeadByDeptId" parameterType="long" resultMap="headResult" >
         <include refid="headVo"/>
-        where dept_id=#{deptId}
+        where dept_id=#{param1} and post_id=#{param2}
     </select>
     <select id="headList" parameterType="com.psms.project.system.domain.SysWorkNumHead" resultMap="headResult">
         <include refid="headVo"/>

@@ -177,6 +177,10 @@
         update_time=sysdate()
         where induction_id=#{inductionId}
     </update>
+    <update id="updateInductionStatus" parameterType="int">
+        update induction_staff set induction_status=#{param2}
+        where induction_status=2 and induction_id=#{param1}
+    </update>
     <delete id="delInductions" parameterType="int">
         delete from induction_staff where induction_id in
         <foreach collection="array" item="inductionId" open="(" separator="," close= ")">

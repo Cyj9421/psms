@@ -47,6 +47,14 @@ public interface IInductionStaffService {
     public int addInduction(InsertInductionVo insertInductionVo);
 
     /**
+     * 入职审核
+     * @param inductionId
+     * @param inductionStatus
+     * @return
+     */
+    public int updateInductionStatus(int inductionId,int inductionStatus);
+
+    /**
      * 修改入职申请
      * @param updateInductionVo
      * @return

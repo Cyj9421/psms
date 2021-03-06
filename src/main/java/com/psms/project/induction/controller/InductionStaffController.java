@@ -117,6 +117,16 @@ public class InductionStaffController extends BaseController {
     public AjaxResult updateInduction(@ApiParam("入职申请表") @RequestBody UpdateInductionVo updateInductionVo){
         return toAjax(inductionStaffService.updateInduction(updateInductionVo));
     }
+    @PutMapping("/update/status")
+    @ApiOperation(value = "入职审核",notes = "入职审核")
+    public AjaxResult updateStatus(@ApiParam("入职id") @RequestParam(value = "inductionId") int inductionId,
+                                   @ApiParam("入职状态(1审核通过,2审核中,3未通过)") @RequestParam(value = "inductionStatus") int inductionStatus){
+        int row=inductionStaffService.updateInductionStatus(inductionId,inductionStatus);
+        if(row >=0){
+            return AjaxResult.error(400,"不能二次审核!");
+        }
+        return AjaxResult.success();
+    }
     @DeleteMapping
     @ApiOperation(value = "批量删除入职记录",notes = "批量删除入职记录")
     public AjaxResult delInduction(@ApiParam("入职id数组") @RequestParam(value = "inductionIds") int [] inductionIds){

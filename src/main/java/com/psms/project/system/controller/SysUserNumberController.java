@@ -7,7 +7,9 @@ import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.system.domain.SysRoleSalary;
 import com.psms.project.system.domain.SysUserNumber;
+import com.psms.project.system.domain.SysWorkNumHead;
 import com.psms.project.system.service.ISysUserNumberService;
+import com.psms.project.system.service.ISysWorkNumHeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +27,8 @@ import java.util.List;
 public class SysUserNumberController extends BaseController {
     @Autowired
     private ISysUserNumberService sysUserNumberService;
-
+    @Autowired
+    private ISysWorkNumHeadService workNumHeadService;
     /**
      * 工号列表
      * @param sysUserNumber
@@ -39,7 +42,19 @@ public class SysUserNumberController extends BaseController {
         PageInfo pageInfo = new PageInfo(list);
         return AjaxResult.success(pageInfo);
     }
-
+    @GetMapping("/generate")
+    public AjaxResult generateWorkNum(@RequestParam(value = "deptId") long deptId,
+                                      @RequestParam(value = "postId") long postId){
+        SysWorkNumHead workNumHead=workNumHeadService.selectHeadByDeptId(deptId,postId);
+        if(workNumHead ==null){
+            return AjaxResult.error(400,"没有该工号开头，请设置!");
+        }
+        String body=String.format("%06d",workNumHead.getNumTotal()+1);
+        String workNum=workNumHead.getWorkNumHead()+body;
+        AjaxResult ajax=AjaxResult.success();
+        ajax.put("workNum",workNum);
+        return ajax;
+    }
     /**
      * 工号详情
      * @param sysUserNumber

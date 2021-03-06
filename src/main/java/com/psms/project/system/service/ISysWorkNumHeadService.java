@@ -19,7 +19,7 @@ public interface ISysWorkNumHeadService {
      * @param deptId
      * @return
      */
-    public SysWorkNumHead selectHeadByDeptId(long deptId);
+    public SysWorkNumHead selectHeadByDeptId(long deptId,long postId);
 
     /**
      * 新增工号开头

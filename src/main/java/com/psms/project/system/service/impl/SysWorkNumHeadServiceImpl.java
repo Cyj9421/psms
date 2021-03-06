@@ -24,13 +24,14 @@ public class SysWorkNumHeadServiceImpl implements ISysWorkNumHeadService {
     }
 
     /**
-     * 通过部门id查找工号开头
+     * 查找工号开头
      * @param deptId
+     * @param postId
      * @return
      */
     @Override
-    public SysWorkNumHead selectHeadByDeptId(long deptId) {
-        return sysWorkNumHeadMapper.selectHeadByDeptId(deptId);
+    public SysWorkNumHead selectHeadByDeptId(long deptId,long postId) {
+        return sysWorkNumHeadMapper.selectHeadByDeptId(deptId,postId);
     }
 
     /**

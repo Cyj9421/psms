@@ -1,5 +1,7 @@
 package com.psms.project.system.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,14 +9,17 @@ import lombok.NoArgsConstructor;
 /**
  * 工号开头表
  */
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
+@ApiModel("工号开头")
 public class SysWorkNumHead {
-    /** 工号开头id */
+    @ApiModelProperty("工号开头id")
     private int headId;
-    /** 工号开头 */
+    @ApiModelProperty("工号开头")
     private String workNumHead;
-    /** 部门id */
+    @ApiModelProperty("工号编码计数")
+    private int numTotal;
+    @ApiModelProperty("部门id")
     private long deptId;
+    @ApiModelProperty("岗位id")
+    private long postId;
 }
