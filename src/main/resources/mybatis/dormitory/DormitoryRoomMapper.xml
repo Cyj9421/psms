@@ -15,7 +15,8 @@
     </resultMap>
     <resultMap id="roomInfoResult" type="com.psms.project.dormitory.domain.vo.DormitoryRoomInfoVo">
         <result property="workNum" column="work_num"/>
-        <result property="fullName" column="full_name"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
         <result property="sex" column="sex"/>
         <result property="deptName" column="dept_name"/>
         <result property="scheduleName" column="schedule_name"/>
@@ -65,14 +66,11 @@
             #{roomId}
         </foreach>
     </delete>
-    <select id="roomList" resultMap="roomResult">
+    <select id="roomList" resultMap="roomResult" parameterType="com.psms.project.dormitory.domain.vo.SelectRoomVo">
         <include refid="roomVo"/>
         <where>
-            <if test="dormitoryName != null and dormitoryName != ''">
-                AND c.dormitory_name like concat ('%',#{dormitoryName},'%')
-            </if>
-            <if test="typeName != null and typeName != ''">
-                AND b.type_name like concat ('%',#{typeName},'%')
+            <if test="dormitoryId != null and dormitoryId !=0">
+                AND a.dormitory_id=#{dormitoryId}
             </if>
         </where>
         order by a.room_id desc
@@ -85,8 +83,8 @@
         <include refid="roomVo"/>
         where a.room_name=#{roomName} and a.dormitory_id=#{dormitoryId}
     </select>
-    <select id="roomInfoList" resultMap="roomInfoResult">
-        select a.work_num,a.full_name,a.sex,a.remark,
+    <select id="roomInfoList" resultMap="roomInfoResult" parameterType="int">
+        select a.work_num,a.first_name,a.last_name,a.sex,a.remark,
                b.dept_name,
                c.schedule_name,
                d.dormitory_name,
@@ -98,5 +96,6 @@
         left join dormitory_building d on a.dormitory_id=d.dormitory_id
         left join dormitory_room e on a.room_id=e.room_id
         left join dormitory_room_type f on e.type_id=f.type_id
+        where a.dormitory_id=#{param1} and a.room_id=#{param2}
     </select>
 </mapper>

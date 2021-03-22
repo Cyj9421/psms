@@ -35,6 +35,11 @@ public class SysUser extends BaseEntity
     @Excel(name="岗位编号")
     private Long postId;
 
+
+    /** 岗位ID */
+    @Excel(name="角色编号")
+    private Long roleId;
+
     /** 员工工号 */
     @Excel(name="员工工号")
     private String workNum;
@@ -119,6 +124,13 @@ public class SysUser extends BaseEntity
         this.userId = userId;
     }
 
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
     public void setPostId(Long postId)
     {

@@ -46,7 +46,16 @@ public class SysPostController extends BaseController
         List<SysPost> list = postService.selectPostList(post);
         return getDataTable(list);
     }
-    
+
+    /**
+     * 查询部门下的所有岗位
+     * @param deptId
+     * @return
+     */
+    @GetMapping("/by/dept")
+    public AjaxResult selectPostByDeptId(long deptId){
+        return AjaxResult.success(postService.selectPostVoList(deptId));
+    }
     @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:post:export')")
     @GetMapping("/export")

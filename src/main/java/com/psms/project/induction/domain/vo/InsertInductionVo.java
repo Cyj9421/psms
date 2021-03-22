@@ -27,8 +27,14 @@ public class InsertInductionVo {
     private int roomId;
     @ApiModelProperty("班别id")
     private int orderId;
+    @ApiModelProperty("学历id")
+    private int educationId;
     @ApiModelProperty("姓名")
     private String fullName;
+    @ApiModelProperty("姓（民族）")
+    private String firstNameNational;
+    @ApiModelProperty("名（民族）")
+    private String lastNameNational;
     @ApiModelProperty("姓")
     private String firstName;
     @ApiModelProperty("名")
@@ -53,8 +59,6 @@ public class InsertInductionVo {
     private String contact;
     @ApiModelProperty("电话号码")
     private String phoneNumber;
-    @ApiModelProperty("学历")
-    private String education;
     @ApiModelProperty("是否结婚(1结婚,2未婚(默认))")
     private int isMarried;
     @ApiModelProperty("出生日期")

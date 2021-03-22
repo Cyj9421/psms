@@ -2,6 +2,7 @@ package com.psms.project.system.mapper;
 
 import java.util.List;
 
+import com.psms.project.system.domain.SysUser;
 import com.psms.project.system.domain.SysUserPost;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -36,6 +37,13 @@ public interface SysUserPostMapper
      * @return 结果
      */
     public int deleteUserPost(Long[] ids);
+
+    /**
+     * 新增用户岗位信息
+     * @param user
+     * @return
+     */
+    public int insertUserPost(SysUser user);
 
     /**
      * 批量新增用户岗位信息

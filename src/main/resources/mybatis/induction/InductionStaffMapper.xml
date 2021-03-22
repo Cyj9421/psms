@@ -10,10 +10,13 @@
         <result property="probationId" column="probation_id"/>
         <result property="dormitoryId" column="dormitory_id"/>
         <result property="orderId" column="order_id"/>
+        <result property="educationId" column="education_id"/>
         <result property="roomId" column="room_id"/>
         <result property="workNum" column="work_num"/>
         <result property="salary" column="salary"/>
         <result property="fullName" column="full_name"/>
+        <result property="firstNameNational" column="first_name_national"/>
+        <result property="lastNameNational" column="last_name_national"/>
         <result property="firstName" column="first_name"/>
         <result property="lastName" column="last_name"/>
         <result property="sex" column="sex"/>
@@ -23,7 +26,7 @@
         <result property="national" column="national"/>
         <result property="idCard" column="id_card"/>
         <result property="contact" column="contact"/>
-        <result property="education" column="education"/>
+        <result property="educationBackground" column="education_background"/>
         <result property="isMarried" column="is_married"/>
         <result property="bornDate" column="born_date"/>
         <result property="phoneNumber" column="phone_number"/>
@@ -45,19 +48,33 @@
         <result property="probationMonth" column="probation_month"/>
         <result property="citizenshipName" column="citizenship_name"/>
         <result property="currencyName" column="currency_name"/>
+        <result property="probationStatus" column="probation_status"/>
+    </resultMap>
+    <resultMap id="InductionWorkCardResult" type="com.psms.project.induction.domain.InductionWorkCard">
+        <result property="workNum" column="work_num"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="sex" column="sex"/>
+        <result property="passport" column="passport"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="scheduleName" column="schedule_name"/>
+        <result property="dormitoryName" column="dormitory_name"/>
+        <result property="roomName" column="room_name"/>
+        <result property="phoneNumber" column="phone_number"/>
     </resultMap>
     <sql id="inductionVo">
         select a.induction_id,a.currency_id,a.citizenship_id,a.dept_id,a.post_id,a.probation_id,
-               a.dormitory_id,a.order_id,a.room_id,a.work_num,a.salary,a.full_name,a.first_name,
-               a.last_name,a.sex,a.age,a.personal_photo,a.passport,a.national,a.id_card,a.contact,a.education,
+               a.dormitory_id,a.order_id,a.room_id,a.work_num,a.salary,a.full_name,a.first_name_national,a.last_name_national,a.first_name,
+               a.last_name,a.sex,a.age,a.personal_photo,a.passport,a.national,a.id_card,a.contact,a.education_id,
                a.is_married,a.born_date,a.phone_number,a.born_address,a.born_province,a.born_area,
                a.now_address,a.now_province,a.now_area,a.create_time,a.update_time,a.remark,a.payday,a.deposit,
                b.post_name,
-               c.probation_day,c.probation_month,
+               c.probation_day,c.probation_month,c.probation_status,
                d.citizenship_name,
                e.currency_name,
                f.dept_name,
-               g.schedule_name
+               g.schedule_name,
+               h.education_background
         from induction_staff a
         left join sys_post b on a.post_id=b.post_id
         left join induction_probation c on a.probation_id=c.probation_id
@@ -65,6 +82,7 @@
         left join induction_currency e on a.currency_id=e.currency_id
         left join sys_dept f on a.dept_id=f.dept_id
         left join attendance_schedule_order g on a.order_id=g.order_id
+        left join induction_education_background h on a.education_id=h.education_id
     </sql>
     <insert id="addInduction" parameterType="com.psms.project.induction.domain.vo.InsertInductionVo">
         insert into induction_staff(
@@ -80,6 +98,8 @@
         <if test="payDay != null and payDay != ''">payday,</if>
         <if test="deposit != null and deposit !=0">deposit,</if>
         <if test="fullName != null and fullName != ''">full_name,</if>
+        <if test="firstNameNational != null and firstNameNational != ''">first_name_national,</if>
+        <if test="lastNameNational != null and lastNameNational != ''">last_name_national,</if>
         <if test="firstName != null and firstName != ''">first_name,</if>
         <if test="lastName != null and lastName != ''">last_name,</if>
         <if test="workNum != null and workNum != ''">work_num,</if>
@@ -90,7 +110,7 @@
         <if test="national != null and national != ''">national,</if>
         <if test="idCard != null and idCard != ''">id_card,</if>
         <if test="contact != null and contact != ''">contact,</if>
-        <if test="education != null and education != ''">education,</if>
+        <if test="educationId != null and educationId !=0 ">education_id,</if>
         <if test="isMarried != null and isMarried != 0">is_married,</if>
         <if test="bornDate != null and bornDate != ''">born_date,</if>
         <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
@@ -115,6 +135,8 @@
         <if test="payDay != null and payDay != ''">#{payDay},</if>
         <if test="deposit != null and deposit !=0">#{deposit},</if>
         <if test="fullName != null and fullName != ''">#{fullName},</if>
+        <if test="firstNameNational != null and firstNameNational != ''">#{firstNameNational},</if>
+        <if test="lastNameNational != null and lastNameNational != ''">#{lastNameNational},</if>
         <if test="firstName != null and firstName != ''">#{firstName},</if>
         <if test="lastName != null and lastName != ''">#{lastName},</if>
         <if test="workNum != null and workNum != ''">#{workNum},</if>
@@ -125,7 +147,7 @@
         <if test="national != null and national != ''">#{national},</if>
         <if test="idCard != null and idCard != ''">#{idCard},</if>
         <if test="contact != null and contact != ''">#{contact},</if>
-        <if test="education != null and education != ''">#{education},</if>
+        <if test="educationId != null and educationId !=0">#{educationId},</if>
         <if test="isMarried != null and isMarried != 0">#{isMarried},</if>
         <if test="bornDate != null and bornDate != ''">#{bornDate},</if>
         <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
@@ -153,6 +175,8 @@
         <if test="payDay != null and payDay != ''">payday=#{payDay},</if>
         <if test="deposit != null and deposit !=0">deposit=#{deposit},</if>
         <if test="fullName != null and fullName != ''">full_name=#{fullName},</if>
+        <if test="firstNameNational != null and firstNameNational !=''">first_name_national=#{firstNameNational},</if>
+        <if test="lastNameNational != null and lastNameNational !=''">last_name_national=#{lastNameNational},</if>
         <if test="firstName != null and firstName != ''">first_name=#{firstName},</if>
         <if test="lastName != null and lastName != ''">last_name=#{lastName},</if>
         <if test="workNum != null and workNum != ''">work_num=#{workNum},</if>
@@ -163,7 +187,7 @@
         <if test="national != null and national != ''">national=#{national},</if>
         <if test="idCard != null and idCard != ''">id_card=#{idCard},</if>
         <if test="contact != null and contact != ''">contact=#{contact},</if>
-        <if test="education != null and education != ''">education=#{education},</if>
+        <if test="educationId != null and educationId !=0">education_id=#{educationId},</if>
         <if test="isMarried != null and isMarried != 0">is_married=#{isMarried},</if>
         <if test="bornDate != null and bornDate != ''">born_date=#{bornDate},</if>
         <if test="phoneNumber != null and phoneNumber != ''">phone_number=#{phoneNumber},</if>
@@ -202,6 +226,9 @@
             <if test="citizenshipName != null and citizenshipName != ''">
                 AND d.citizenship_name like concat('%',#{citizenshipName},'%')
             </if>
+            <if test="probationStatus != null and probationStatus != 0">
+                AND c.probation_status=#{probationStatus}
+            </if>
         </where>
     </select>
     <select id="inductionInfo" resultMap="inductionStaffResult" parameterType="int">
@@ -214,5 +241,25 @@
     </select>
     <select id="selectBaseSalary" resultType="java.lang.Double" parameterType="string">
         select base_salary from sys_unit_price where work_num=#{workNum}
+    </select>
+    <select id="inductionInfoByIdCard" resultMap="inductionStaffResult" parameterType="string">
+        <include refid="inductionVo"/>
+        where a.id_card=#{idCard}
+    </select>
+    <select id="cardList" resultMap="InductionWorkCardResult" parameterType="string">
+        select  i.work_num,i.first_name,i.last_name,i.sex,i.phone_number,i.passport,
+                d.dept_name,
+                g.schedule_name,
+                b.dormitory_name,
+                r.room_name
+        from induction_staff i
+        left join sys_dept d on i.dept_id=d.dept_id
+        left join attendance_schedule_order g on i.order_id=g.order_id
+        left join dormitory_building b on i.dormitory_id=b.dormitory_id
+        left join dormitory_room r on i.room_id=r.room_id
+        where i.work_num in
+        <foreach collection="array" item="workNum" open="(" separator="," close= ")">
+            #{workNum}
+        </foreach>
     </select>
 </mapper>

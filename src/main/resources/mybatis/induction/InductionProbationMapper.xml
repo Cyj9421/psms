@@ -6,11 +6,12 @@
         <result property="workNum" column="work_num"/>
         <result property="probationMonth" column="probation_month"/>
         <result property="probationDay" column="probation_day"/>
+        <result property="probationStatus" column="probation_status"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
     <sql id="probationVo">
-        select probation_id,work_num,probation_month,probation_day,create_time,update_time
+        select probation_id,work_num,probation_month,probation_day,probation_status,create_time,update_time
         from induction_probation
     </sql>
     <insert id="addProbation" parameterType="com.psms.project.induction.domain.InductionProbation">
@@ -19,12 +20,14 @@
         <if test="workNum != null and workNum != ''">work_num,</if>
         <if test="probationMonth != null and probationMonth != 0">probation_month,</if>
         <if test="probationDay != null and probationDay != 0">probation_day,</if>
+        <if test="probationStatus != null and probationStatus != 0">probation_status,</if>
         create_time
         )values (
         <if test="probationId != null and probationId != 0">#{probationId},</if>
         <if test="workNum != null and workNum != ''">#{workNum},</if>
         <if test="probationMonth != null and probationMonth != 0">#{probationMonth},</if>
         <if test="probationDay != null and probationDay != 0">#{probationDay},</if>
+        <if test="probationStatus != null and probationStatus != 0">#{probationStatus},</if>
         sysdate()
         )
     </insert>
@@ -33,6 +36,7 @@
         <if test="workNum != null and workNum != ''">work_num=#{workNum},</if>
         <if test="probationMonth != null and probationMonth != 0">probation_month=#{probationMonth},</if>
         <if test="probationDay != null and probationDay != 0">probation_day=#{probationDay},</if>
+        <if test="probationStatus != null and probationStatus != 0">probation_status=#{probationStatus},</if>
         update_time=sysdate()
         where probation_id=#{probationId}
     </update>

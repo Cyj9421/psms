@@ -25,6 +25,8 @@ public class AttendanceCardRep  {
     private String reason;//补卡原因
     private int repType;//补卡类型(0,迟到,1,缺勤)
     private int cardStatus;//补卡状态（0：批准；1：审核中；2:补卡失败）
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date attendanceDate;//考勤日期
     private String nickName;//办理者姓名
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date nickTime;//办理时间

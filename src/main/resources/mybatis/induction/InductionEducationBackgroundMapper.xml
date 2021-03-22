@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.induction.mapper.InductionEducationBackgroundMapper">
+    <resultMap id="educationBackgroundResult" type="com.psms.project.induction.domain.InductionEducationBackground">
+        <id property="educationId" column="education_id"/>
+        <result property="educationBackground" column="education_background"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <sql id="educationVo">
+        select education_id,education_background,create_time,update_time from induction_education_background
+    </sql>
+    <insert id="addEducationBackground" parameterType="string">
+        insert into induction_education_background(
+        education_background,create_time
+        )values (
+        #{educationBackground},sysdate()
+        )
+    </insert>
+    <update id="updateEducationBackground" parameterType="com.psms.project.induction.domain.vo.UpdateEducationBackgroundVo">
+        update induction_education_background set
+        education_background=#{educationBackground},
+        update_time=sysdate()
+        where education_id=#{educationId}
+    </update>
+    <delete id="delEducationBackgrounds" parameterType="int">
+        delete from induction_education_background where education_id in
+        <foreach collection="array" item="educationId" open="(" separator="," close= ")">
+            #{educationId}
+        </foreach>
+    </delete>
+    <select id="educationBackgroundList" resultMap="educationBackgroundResult">
+        <include refid="educationVo"/>
+    </select>
+    <select id="educationBackgroundInfo" resultMap="educationBackgroundResult" parameterType="int">
+        <include refid="educationVo"/>
+        where education_id=#{educationId}
+    </select>
+    <select id="educationBackground" resultMap="educationBackgroundResult" parameterType="string">
+        <include refid="educationVo"/>
+        where education_background=#{educationBackground}
+    </select>
+
+</mapper>

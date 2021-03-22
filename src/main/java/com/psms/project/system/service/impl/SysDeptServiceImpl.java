@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.psms.project.system.domain.vo.SysDeptPostVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -188,6 +190,27 @@ public class SysDeptServiceImpl implements ISysDeptService
         }
         dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
         return deptMapper.insertDept(dept);
+    }
+
+    /**
+     * 向部门添加岗位
+     * @param deptPostVo
+     * @return
+     */
+    @Override
+    public int addPostByDept(SysDeptPostVo deptPostVo) {
+        return deptMapper.addPostByDept(deptPostVo);
+    }
+
+    /**
+     * 删除部门下的岗位
+     * @param deptId,postId
+     * @param postId
+     * @return
+     */
+    @Override
+    public int delPostByDept(long deptId, long postId) {
+        return deptMapper.delPostByDept(deptId,postId);
     }
 
     /**

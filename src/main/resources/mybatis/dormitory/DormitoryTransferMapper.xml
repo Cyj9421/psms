@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.dormitory.mapper.DormitoryTransferMapper">
+    <resultMap id="transferResult" type="com.psms.project.dormitory.domain.DormitoryTransfer">
+        <id property="transferId" column="transfer_id"/>
+        <result property="dormitoryId" column="dormitory_id"/>
+        <result property="roomId" column="room_id"/>
+        <result property="workNum" column="work_num"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="transferStatus" column="transfer_status"/>
+        <result property="dormitoryName" column="dormitory_name"/>
+        <result property="roomName" column="room_name"/>
+        <result property="totalNum" column="total_num"/>
+        <result property="scheduleName" column="schedule_name"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+    <sql id="selectTransferVo">
+        select t.transfer_id,t.dormitory_id,t.room_id,t.work_num,t.transfer_status,t.create_date,t.update_date,t.remark,
+               i.first_name,i.last_name,
+               d.dept_name,
+               b.dormitory_name,
+               r.room_name,
+               s.schedule_name
+        from dormitory_transfer t
+        left join induction_staff i on t.work_num=i.work_num
+        left join sys_dept d on i.dept_id=d.dept_id
+        left join dormitory_building b on i.dormitory_id=b.dormitory_id
+        left join dormitory_room r on i.room_id=r.room_id
+        left join attendance_schedule_order s on i.order_id=s.order_id
+    </sql>
+    <insert id="addTransfer" parameterType="com.psms.project.dormitory.domain.vo.InsertTransferVo">
+        insert into dormitory_transfer(
+        <if test="workNum != null and workNum != ''">work_num,</if>
+        <if test="dormitoryId != null and dormitoryId !=0">dormitory_id,</if>
+        <if test="roomId != null and roomId !=0">room_id,</if>
+        <if test="remark != null and remark != ''">remark,</if>
+        <if test="createDate != null">create_date</if>
+        )values (
+        <if test="workNum != null and workNum != ''">#{workNum},</if>
+        <if test="dormitoryId != null and dormitoryId !=0">#{dormitoryId},</if>
+        <if test="roomId != null and roomId !=0">#{roomId},</if>
+        <if test="remark != null and remark != ''">#{remark},</if>
+        <if test="createDate != null">#{createDate}</if>
+        )
+    </insert>
+    <update id="updateTransfer" parameterType="com.psms.project.dormitory.domain.vo.UpdateTransferVo">
+        update dormitory_transfer set
+        transfer_status=#{transferStatus},
+        update_date=sysdate()
+        where transfer_id=#{transferId}  and transfer_status=2
+    </update>
+    <delete id="delTransfers" parameterType="int">
+        delete from dormitory_transfer where transfer_id in
+        <foreach collection="array" item="transferId" open="(" separator="," close=")">
+            #{transferId}
+        </foreach>
+    </delete>
+    <select id="transferList" resultMap="transferResult">
+        <include refid="selectTransferVo"/>
+    </select>
+    <select id="transferInfo" resultMap="transferResult" parameterType="int">
+        <include refid="selectTransferVo"/>
+        where t.transfer_id=#{transferId}
+    </select>
+    <select id="totalNum" resultType="java.lang.Integer" parameterType="string">
+        select count(*) from dormitory_transfer where
+        work_num=#{workNum} and transfer_status=1
+    </select>
+</mapper>

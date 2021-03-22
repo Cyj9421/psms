@@ -3,6 +3,7 @@ package com.psms.project.system.service;
 import java.util.List;
 
 import com.psms.project.system.domain.SysPost;
+import com.psms.project.system.domain.vo.SysPostVo;
 
 /**
  * 岗位信息 服务层
@@ -25,6 +26,13 @@ public interface ISysPostService
      * @return 岗位列表
      */
     public List<SysPost> selectPostAll();
+
+    /**
+     * 查找部门下的岗位
+     * @param deptId
+     * @return
+     */
+    public List<SysPostVo> selectPostVoList(long deptId);
 
     /**
      * 通过岗位ID查询岗位信息

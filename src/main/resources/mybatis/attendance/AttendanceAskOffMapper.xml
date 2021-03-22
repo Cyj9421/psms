@@ -72,4 +72,9 @@
         <include refid="askOffVo"/>
         where a.ask_id=#{askId}
     </select>
+    <select id="askOffByWorkNum" resultMap="askOffResult" parameterType="com.psms.project.attendance.domain.vo.AskVo">
+        <include refid="askOffVo"/>
+        where a.work_num=#{workNum}
+        and #{nowDateTime} between a.ask_from and a.ask_to
+    </select>
 </mapper>

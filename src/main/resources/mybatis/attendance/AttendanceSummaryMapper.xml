@@ -8,9 +8,10 @@
             <result property="workNum" column="work_num"/>
             <result property="fullName" column="full_name"/>
             <result property="deptName" column="dept_name"/>
-            <result property="leader" column="leader"/>
             <result property="postName" column="post_name"/>
-            <result property="postCode" column="post_code"/>
+            <result property="attendanceNum" column="attendance_num"/>
+            <result property="askNum" column="ask_num"/>
+            <result property="vacateNum" column="vacate_num"/>
             <result property="lateNum" column="late_num"/>
             <result property="earlyNum" column="early_num"/>
             <result property="afdNum" column="afd_num"/>
@@ -20,49 +21,93 @@
             <result property="punishments" column="punishments"/>
             <result property="punishmentNum" column="punishment_num"/>
             <result property="btNum" column="bt_num"/>
+            <result property="isFullTime" column="is_full_time"/>
             <result property="reportType" column="report_type"/>
             <result property="summaryMonth" column="summary_month"/>
             <result property="summaryQuarter" column="summary_quarter"/>
             <result property="summaryYear" column="summary_year"/>
+            <result property="salary" column="salary"/>
+    </resultMap>
+    <resultMap id="summaryVoResult" type="com.psms.project.attendance.domain.vo.AttendanceSummaryVo">
+        <result property="deptName" column="dept_name"/>
+        <result property="attendanceNum" column="attendance_num"/>
+        <result property="askNum" column="ask_num"/>
+        <result property="vacateNum" column="vacate_num"/>
+        <result property="lateNum" column="late_num"/>
+        <result property="earlyNum" column="early_num"/>
+        <result property="afdNum" column="afd_num"/>
+        <result property="rewardsNum" column="rewards_num"/>
+        <result property="punishmentNum" column="punishment_num"/>
+        <result property="isFullTime" column="is_full_time"/>
+    </resultMap>
+    <resultMap id="attendanceRpVoResult" type="com.psms.project.attendance.domain.vo.AttendanceRpVo">
+        <result property="rewardsNum" column="rewards_num"/>
+        <result property="punishmentNum" column="punishment_num"/>
+        <result property="deptName" column="dept_name"/>
+    </resultMap>
+    <resultMap id="toDayResult" type="com.psms.project.attendance.domain.vo.AttendanceVo">
+        <id property="attendanceId" column="attendance_id"/>
+        <result property="fullName" column="full_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="postName" column="post_name"/>
+        <result property="workNum" column="work_num"/>
+        <result property="isOvertime" column="is_overtime"/>
+        <result property="isAsk" column="is_ask"/>
+        <result property="isVacate" column="is_vacate"/>
+        <result property="isEarly" column="is_early"/>
+        <result property="isLate" column="is_late"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="attendanceStatus" column="attendance_status"/>
+        <result property="attendanceDate" column="attendance_date"/>
+        <result property="isAbsenteeism" column="is_absenteeism"/>
     </resultMap>
     <sql id="summaryVo">
-        select s.summary_id,s.work_num,s.late_num,s.early_num,s.afd_num,s.overtime,s.rewards_num,s.rewards,s.punishment_num,s.punishments,s.bt_num,s.report_type,s.summary_month,s.summary_quarter,s.summary_year,
-               d.dept_name,d.leader,
-               p.post_name,p.post_code,
-               n.full_name
+        select s.summary_id,s.work_num,s.attendance_num,s.ask_num,s.vacate_num,s.late_num,s.early_num,s.afd_num,s.overtime,s.rewards_num,s.rewards,s.punishment_num,s.punishments,s.bt_num,s.is_full_time,s.report_type,s.summary_month,s.summary_quarter,s.summary_year,
+               d.dept_name,
+               p.post_name,
+               n.full_name,
+               rs.salary
         from attendance_summary s
         left join sys_user_number n on s.work_num=n.work_num
         left join sys_dept d on n.dept_id=d.dept_id
         left join sys_post p on n.post_id=p.post_id
+        left join sys_role_salary rs on s.work_num=rs.work_num and rs.salary_month=s.summary_month and rs.salary_year=s.summary_year
     </sql>
     <sql id="summary">
         SELECT count(*) AS late_num,
 	    ( SELECT count(*) FROM attendance_early
-	    WHERE early_date between #{startDate} and #{endDate} and work_num=#{workNum}) AS early_num,
+	    WHERE early_date between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) AS early_num,
 	    ( SELECT count(*) FROM attendance_info
-	    WHERE is_absenteeism=0 and attendance_date between #{startDate} and #{endDate} and work_num=#{workNum}) AS afd_num,
+	    WHERE is_absenteeism=2 and attendance_date between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) AS afd_num,
+	    ( SELECT count(*) FROM attendance_info
+	    WHERE is_absenteeism=1 and is_ask=1 and is_vacate=1 and attendance_status=1 and attendance_date between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) as attendance_num,
+	    ( SELECT count(*) FROM attendance_info
+	    WHERE is_ask=2 and attendance_date between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) as ask_num,
+	    ( SELECT count(*) FROM attendance_info
+	    WHERE is_vacate=2 and attendance_date between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) as vacate_num,
 	    ( SELECT count(*) FROM attendance_rp
-	    WHERE operation = 0 and rp_status=1 and update_time between #{startDate} and #{endDate} and work_num=#{workNum}) AS rewards_num,
+	    WHERE operation = 2 and rp_status=2 and update_time between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) AS rewards_num,
 	    ( select sum(cash_amount) from attendance_rp
-        where work_num=#{workNum} and operation=1 and rp_way=1 and rp_status=2 and update_time between #{startDate} and #{endDate}) as rewards,
+        where work_num=#{workNum} and operation=1 and rp_way=1 and rp_status=2 and update_time between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d')) as rewards,
 	    ( SELECT count(*) FROM attendance_rp
-	    WHERE operation = 1 and rp_status=1 and update_time between #{startDate} and #{endDate} and work_num=#{workNum}) AS punishment_num,
+	    WHERE operation = 1 and rp_status=2 and update_time between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) AS punishment_num,
 	    ( select sum(cash_amount) from attendance_rp
-        where work_num=#{workNum} and operation=2 and rp_way=1 and rp_status=2 and update_time between #{startDate} and #{endDate}) as punishments,
+        where work_num=#{workNum} and operation=2 and rp_way=1 and rp_status=2 and update_time between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d')) as punishments,
 	    ( SELECT count(*) FROM bussiness_trip
-	    WHERE trip_status = 3 and update_trip_time between #{startDate} and #{endDate} and work_num=#{workNum}) AS bt_num,
+	    WHERE trip_status = 3 and update_trip_time between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) AS bt_num,
 	    ( SELECT sum(over_time) FROM attendance_overtime
-	    WHERE clock_date between #{startDate} and #{endDate} and work_num=#{workNum}) AS overtime
+	    WHERE clock_date between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}) AS overtime
     FROM
 	    attendance_late
     WHERE
-	    late_date between #{startDate} and #{endDate} and work_num=#{workNum}
+	    late_date between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d') and work_num=#{workNum}
     </sql>
     <sql id="summaryToDayVo">
-        select i.attendance_id,i.work_num,i.is_overtime,i.is_late,i.is_early,i.is_absenteeism,i.start_time,
+        select i.attendance_id,i.work_num,i.is_ask,i.is_vacate,i.is_overtime,i.is_late,i.is_early,i.is_absenteeism,i.start_time,
         i.end_time,i.attendance_date,i.attendance_status,
-               d.dept_name,d.leader,
-               p.post_name,p.post_code,
+               d.dept_name,
+               p.post_name,
                n.full_name
         from attendance_info i
         left join sys_user_number n on i.work_num=n.work_num
@@ -74,6 +119,9 @@
         insert into attendance_summary
         (
         <if test="workNum != null and workNum != ''">work_num,</if>
+        <if test="attendanceNum != null and attendanceNum !=0">attendance_num,</if>
+        <if test="askNum != null and askNum !=0">ask_num,</if>
+        <if test="vacateNum != null and vacateNum !=0">vacate_num,</if>
         <if test="lateNum != null and lateNum !=0">late_num,</if>
         <if test="earlyNum != null and earlyNum !=0">early_num,</if>
         <if test="afdNum != null and afdNum !=0">afd_num,</if>
@@ -83,6 +131,7 @@
         <if test="punishmentNum != null and punishmentNum !=0">punishment_num,</if>
         <if test="punishments != null and punishments !=0">punishments,</if>
         <if test="btNum != null and btNum !=0">bt_num,</if>
+        <if test="isFullTime != null and isFullTime !=0">is_full_time,</if>
         <if test="reportType != null and reportType !=0">report_type,</if>
         <if test="summaryMonth != null and summaryMonth !=0">summary_month,</if>
         <if test="summaryQuarter != null and summaryQuarter != 0 ">summary_quarter,</if>
@@ -90,6 +139,9 @@
         )
         values (
         <if test="workNum != null and workNum != ''">#{workNum},</if>
+        <if test="attendanceNum != null and attendanceNum !=0">#{attendanceNum},</if>
+        <if test="askNum != null and askNum !=0">#{askNum},</if>
+        <if test="vacateNum != null and vacateNum !=0">#{vacateNum},</if>
         <if test="lateNum != null and lateNum != 0 ">#{lateNum},</if>
         <if test="earlyNum != null and earlyNum != 0 ">#{earlyNum},</if>
         <if test="afdNum != null and afdNum != 0 ">#{afdNum},</if>
@@ -99,11 +151,11 @@
         <if test="punishmentNum != null and punishmentNum != 0 ">#{punishmentNum},</if>
         <if test="punishments != null and punishments != 0 "> #{punishments},</if>
         <if test="btNum != null and btNum != 0 ">#{btNum},</if>
+        <if test="isFullTime != null and isFullTime !=0">#{isFullTime},</if>
         <if test="reportType != null and reportType != 0 ">#{reportType},</if>
         <if test="summaryMonth != null and summaryMonth != 0 ">#{summaryMonth},</if>
         <if test="summaryQuarter != null and summaryQuarter != 0 ">#{summaryQuarter},</if>
         <if test="summaryYear != null and summaryYear != 0 ">#{summaryYear}</if>
-
         )
     </insert>
     <delete id="delSummary" parameterType="int">
@@ -112,37 +164,116 @@
             #{summaryId}
         </foreach>
     </delete>
+    <delete id="delSummaryByDate" parameterType="int">
+        delete from attendance_summary
+        where report_type=#{reportType}
+            <if test="workNum != null and workNum!=''">
+            AND work_num=#{workNum}
+            </if>
+            <if test="summaryMonth != null and summaryMonth != 0 ">
+            AND summary_month=#{summaryMonth}
+            </if>
+            <if test="summaryQuarter != null and summaryQuarter != 0 ">
+            AND summary_quarter=#{summaryQuarter}
+            </if>
+            <if test="summaryYear != null and summaryYear != 0 ">
+            AND summary_year=#{summaryYear}
+            </if>
+    </delete>
     <select id="summaryList" resultMap="summaryResult" parameterType="com.psms.project.attendance.domain.AttendanceSummary">
         <include refid="summaryVo"/>
         <where>
-        <if test="fullName != null and fullName != ''">
-            AND n.full_name like concat('%', #{fullName}, '%')
-        </if>
         <if test="deptName != null and deptName != ''">
             AND d.dept_name like concat('%', #{deptName}, '%')
         </if>
         <if test="workNum != null and workNum != ''">
             AND s.work_num like concat('%', #{workNum}, '%')
         </if>
-        <if test="reportType != null and reportType != ''">
-            AND s.report_type = #{reportType}
+        <if test="selectType != null and selectType ==1">
+            AND s.afd_num >0
         </if>
-        <if test="summaryMonth != null and summaryMonth !=0 ">
-            AND s.summary_month = #{summaryMonth}
+        <if test="selectType != null and selectType ==2">
+            AND s.vacate_num >0
         </if>
-        <if test="summaryQuarter != null and summaryQuarter !=0 ">
-            AND s.summary_quarter = #{summaryQuarter}
+        <if test="selectType != null and selectType ==3">
+            AND s.late_num>0
         </if>
-        <if test="summaryYear != null and summaryYear !=0 ">
-            AND s.summary_year = #{summaryYear}
+        <if test="selectType != null and selectType ==4">
+            AND s.early_num>0
+        </if>
+        <if test="selectType != null and selectType ==5">
+            AND s.punishment_num>0
         </if>
         </where>
+        order by s.summary_month,s.summary_year desc
     </select>
     <select id="summaryInfo" resultMap="summaryResult">
         <include refid="summaryVo"/>
         where s.summary_id=#{summaryId}
     </select>
+
     <select id="summaryToType" resultMap="summaryResult" parameterType="com.psms.project.attendance.domain.vo.AttendanceReportDateVo">
     <include refid="summary"/>
+    </select>
+    <select id="attendanceToDayList" resultMap="toDayResult" parameterType="com.psms.project.attendance.domain.vo.AttendanceVo">
+    <include refid="summaryToDayVo"/>
+    <where>
+        <if test="deptName != null and deptName != ''">
+            AND d.dept_name like concat('%', #{deptName}, '%')
+        </if>
+        <if test="workNum != null and workNum != ''">
+            AND i.work_num like concat('%', #{workNum}, '%')
+        </if>
+        <if test="selectType != null and selectType ==1">
+            AND i.is_absenteeism=2
+        </if>
+        <if test="selectType != null and selectType ==2">
+            AND i.is_vacate=2
+        </if>
+        <if test="selectType != null and selectType ==3">
+            AND i.is_late=2
+        </if>
+        <if test="selectType != null and selectType ==4">
+            AND i.is_early=2
+        </if>
+        <if test="selectType != null and selectType ==5">
+            AND i.is_ask=1 and i.is_vacate=1 and i.is_absenteeism=1
+        </if>
+    </where>
+    order by i.attendance_date desc
+    </select>
+    <select id="summaryVoList" resultMap="summaryVoResult" parameterType="com.psms.project.attendance.domain.vo.AttendanceReportDateVo">
+	SELECT count(if(is_late=2,true,null)) AS late_num,
+				 count(if(is_early=2,true,null)) AS early_num,
+				 count(if(is_vacate=2,true,null)) AS vacate_num,
+				 count(if(is_absenteeism=1 and is_ask=1 and is_vacate=1,true,null)) AS attendance_num,
+				 count(if(is_ask=2,true,null)) AS ask_num,
+				 count(if(is_absenteeism=2,true,null)) AS afd_num,
+				 d.dept_name
+	FROM attendance_info i
+	LEFT JOIN sys_user_number n on i.work_num=n.work_num
+	LEFT JOIN sys_dept d on n.dept_id=d.dept_id
+	WHERE attendance_date between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d')
+        <if test="deptName !=null and deptName != ''">
+            AND d.dept_name like concat('%',#{deptName},'%')
+        </if>
+<!--        <if test="selectType != null and selectType ==1">-->
+<!--            AND -->
+<!--        </if>-->
+	group by d.dept_name
+    </select>
+    <select id="attendanceRpVoList" resultMap="attendanceRpVoResult" parameterType="com.psms.project.attendance.domain.vo.AttendanceReportDateVo">
+        	SELECT
+				 count(if(rp.operation = 1 and rp.rp_status=2,true,null))AS rewards_num,
+				 count(if(rp.operation = 2 and rp.rp_status=2,true,null))AS punishment_num,
+				 d.dept_name
+			FROM attendance_rp rp
+			LEFT JOIN sys_user_number n on rp.work_num=n.work_num
+		    LEFT JOIN sys_dept d on n.dept_id=d.dept_id
+	        WHERE rp.update_time between date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d')
+	        <if test="deptName !=null and deptName != ''">
+                AND d.dept_name like concat('%',#{deptName},'%')
+            </if>
+	        group by d.dept_name
     </select>
 </mapper>

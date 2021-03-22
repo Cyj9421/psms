@@ -2,6 +2,8 @@ package com.psms.project.system.mapper;
 
 import java.util.List;
 
+import com.psms.project.system.domain.SysDeptPost;
+import com.psms.project.system.domain.vo.SysDeptPostVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -96,6 +98,20 @@ public interface SysDeptMapper
      * @return 结果
      */
     public int updateDept(SysDept dept);
+
+    /**
+     * 向部门添加岗位
+     * @param deptPostVo
+     * @return
+     */
+    public int addPostByDept(SysDeptPostVo deptPostVo);
+
+    /**
+     * 删除部门下的岗位
+     * @param deptId,postId
+     * @return
+     */
+    public int delPostByDept(long deptId,long postId);
 
     /**
      * 修改所在部门的父级部门状态

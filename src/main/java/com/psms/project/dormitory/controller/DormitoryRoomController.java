@@ -8,6 +8,7 @@ import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.dormitory.domain.DormitoryBuilding;
 import com.psms.project.dormitory.domain.DormitoryRoom;
 import com.psms.project.dormitory.domain.vo.InsertRoomVo;
+import com.psms.project.dormitory.domain.vo.SelectRoomVo;
 import com.psms.project.dormitory.domain.vo.UpdateRoomVo;
 import com.psms.project.dormitory.service.IDormitoryRoomService;
 import io.swagger.annotations.Api;
@@ -27,17 +28,18 @@ public class DormitoryRoomController extends BaseController {
     private IDormitoryRoomService roomService;
     @GetMapping("/list")
     @ApiOperation(value = "房间列表",notes = "房间列表")
-    public AjaxResult roomList(@ApiParam("页码") @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+    public AjaxResult roomList(SelectRoomVo selectRoomVo,@ApiParam("页码")@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @ApiParam("页显示条数") @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<DormitoryRoom> list = roomService.roomList();
+        List<DormitoryRoom> list = roomService.roomList(selectRoomVo);
         PageInfo pageInfo = new PageInfo(list);
         return AjaxResult.success(pageInfo);
     }
     @GetMapping("/info/list")
     @ApiOperation(value = "房间入住人员列表",notes = "房间入住人员列表")
-    public AjaxResult roomInfoList(){
-        return AjaxResult.success(roomService.roomInfoList());
+    public AjaxResult roomInfoList(@ApiParam(value = "宿舍id") @RequestParam(value = "dormitoryId") int dormitoryId,
+                                   @ApiParam(value = "房间id") @RequestParam(value = "roomId") int roomId){
+        return AjaxResult.success(roomService.roomInfoList(dormitoryId,roomId));
     }
     @PostMapping("/add")
     @ApiOperation(value = "添加房间",notes = "添加房间")

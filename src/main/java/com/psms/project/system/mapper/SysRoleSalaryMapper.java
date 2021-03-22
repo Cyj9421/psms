@@ -3,6 +3,7 @@ package com.psms.project.system.mapper;
 import com.psms.project.attendance.domain.AttendanceSummary;
 import com.psms.project.system.domain.SysRoleSalary;
 import com.psms.project.system.domain.SysUnitPrice;
+import com.psms.project.system.domain.vo.SysGetSalaryVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -25,6 +26,12 @@ public interface SysRoleSalaryMapper {
      * @return
      */
     public SysRoleSalary salaryInfo(int salaryId);
+
+    /**
+     * 领取参数详情
+     * @return
+     */
+    public List<SysGetSalaryVo> getSalaryList(int salaryYear,int salaryMonth);
 
     /**
      * 新增工资数据

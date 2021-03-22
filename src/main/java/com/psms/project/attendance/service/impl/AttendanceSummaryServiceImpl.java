@@ -2,6 +2,9 @@ package com.psms.project.attendance.service.impl;
 
 import com.psms.project.attendance.domain.AttendanceSummary;
 import com.psms.project.attendance.domain.vo.AttendanceReportDateVo;
+import com.psms.project.attendance.domain.vo.AttendanceRpVo;
+import com.psms.project.attendance.domain.vo.AttendanceSummaryVo;
+import com.psms.project.attendance.domain.vo.AttendanceVo;
 import com.psms.project.attendance.mapper.AttendanceSummaryMapper;
 import com.psms.project.attendance.service.IAttendanceSummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,35 @@ public class AttendanceSummaryServiceImpl implements IAttendanceSummaryService {
     }
 
     /**
+     * 部门奖惩次数
+     * @param attendanceReportDateVo
+     * @return
+     */
+    @Override
+    public List<AttendanceRpVo> attendanceRpVoList(AttendanceReportDateVo attendanceReportDateVo) {
+        return attendanceSummaryMapper.attendanceRpVoList(attendanceReportDateVo);
+    }
+
+    /**
+     * 部门考勤列表
+     * @param attendanceReportDateVo
+     * @return
+     */
+    @Override
+    public List<AttendanceSummaryVo> summaryVoList(AttendanceReportDateVo attendanceReportDateVo) {
+        return attendanceSummaryMapper.summaryVoList(attendanceReportDateVo);
+    }
+
+    /**
+     * 考勤日汇总
+     * @return
+     */
+    @Override
+    public List<AttendanceVo> attendanceToDayList(AttendanceVo attendanceVo) {
+        return attendanceSummaryMapper.attendanceToDayList(attendanceVo);
+    }
+
+    /**
      * 月/季/年 汇总报表
      * @param attendanceReportDateVo
      * @return
@@ -55,6 +87,19 @@ public class AttendanceSummaryServiceImpl implements IAttendanceSummaryService {
     @Override
     public AttendanceSummary summaryToType(AttendanceReportDateVo attendanceReportDateVo) {
         return attendanceSummaryMapper.summaryToType(attendanceReportDateVo);
+    }
+
+    /**
+     * 删除汇总
+     * @param reportType
+     * @param summaryMonth
+     * @param summaryQuarter
+     * @param summaryYear
+     * @return
+     */
+    @Override
+    public int delSummaryByDate(int reportType, int summaryMonth, int summaryQuarter, int summaryYear,String workNum) {
+        return attendanceSummaryMapper.delSummaryByDate(reportType,summaryMonth,summaryQuarter,summaryYear,workNum);
     }
 
     /**

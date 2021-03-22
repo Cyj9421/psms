@@ -35,6 +35,9 @@
             <if test="deviceStatus !=null and deviceStatus !=0">
                 AND device_status=#{deviceStatus}
             </if>
+            <if test="deviceStatus ==0">
+                AND device_status !=3
+            </if>
         </where>
     </select>
 </mapper>

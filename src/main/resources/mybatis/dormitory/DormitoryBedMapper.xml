@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.psms.project.dormitory.mapper.DormitoryBedMapper">
+    <resultMap id="bedResult" type="com.psms.project.dormitory.domain.DormitoryBed">
+        <id property="bedId" column="bed_id"/>
+        <result property="roomId" column="room_id"/>
+        <result property="bedNo" column="bed_no"/>
+        <result property="useStatus" column="use_status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="roomName" column="room_name"/>
+    </resultMap>
+    <sql id="selectBedVo">
+        select b.bed_id,b.room_id,b.bed_no,b.use_status,b.create_time,b.update_time,
+               r.room_name
+        from dormitory_bed b
+        left join dormitory_room r on b.room_id=r.room_id
+    </sql>
+    <insert id="addBed" parameterType="com.psms.project.dormitory.domain.vo.InsertBedVo">
+        insert into dormitory_bed (
+        <if test="bedNo != null and bedNo != ''">bed_no,</if>
+        <if test="roomId != null and roomId != 0">room_id,</if>
+        create_time
+        )values (
+        <if test="bedNo != null and bedNo != ''">#{bedNo},</if>
+        <if test="roomId != null and roomId != 0">#{roomId},</if>
+        sysdate()
+        )
+    </insert>
+    <update id="updateBed" parameterType="com.psms.project.dormitory.domain.vo.UpdateBedVo">
+        update dormitory_bed set
+        <if test="bedNo != null and bedNo != ''">bed_no=#{bedNo},</if>
+        <if test="roomId != null and roomId != 0">room_id=#{roomId},</if>
+        update_time=sysdate()
+        where bed_id=#{bedId}
+    </update>
+    <delete id="delBeds" parameterType="int">
+        delete from dormitory_bed where bed_id in
+        <foreach collection="array" item="bedId" open="(" separator="," close= ")">
+            #{bedId}
+        </foreach>
+    </delete>
+    <select id="bedList" resultMap="bedResult" parameterType="com.psms.project.dormitory.domain.vo.SelectBedVo">
+        <include refid="selectBedVo"/>
+        where b.use_status=1
+            <if test="roomId != null and roomId !=0">
+                AND r.room_id=#{roomId}
+            </if>
+    </select>
+    <select id="bedInfo" resultMap="bedResult" parameterType="int">
+        <include refid="selectBedVo"/>
+        where b.bed_id=#{bedId}
+    </select>
+    <select id="totalBed" resultType="java.lang.Integer" parameterType="int">
+        select count(*) from dormitory_bed where room_id=#{roomId}
+    </select>
+    <select id="selectBed" resultMap="bedResult" parameterType="com.psms.project.dormitory.domain.vo.InsertBedVo">
+        <include refid="selectBedVo"/>
+        where b.room_id=#{roomId} and b.bed_no=#{bedNo}
+    </select>
+</mapper>

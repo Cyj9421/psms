@@ -43,7 +43,7 @@
     </delete>
     <select id="selectHeadByDeptId" parameterType="long" resultMap="headResult" >
         <include refid="headVo"/>
-        where dept_id=#{param1} and post_id=#{param2}
+        where dept_id=#{param1}
     </select>
     <select id="headList" parameterType="com.psms.project.system.domain.SysWorkNumHead" resultMap="headResult">
         <include refid="headVo"/>

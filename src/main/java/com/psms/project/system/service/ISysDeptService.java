@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.psms.framework.web.domain.TreeSelect;
 import com.psms.project.system.domain.SysDept;
+import com.psms.project.system.domain.vo.SysDeptPostVo;
 
 /**
  * 部门管理 服务层
@@ -91,6 +92,21 @@ public interface ISysDeptService
      * @return 结果
      */
     public int insertDept(SysDept dept);
+
+
+    /**
+     * 向部门添加岗位
+     * @param deptPostVo
+     * @return
+     */
+    public int addPostByDept(SysDeptPostVo deptPostVo);
+
+    /**
+     * 删除部门下的岗位
+     * @param deptId,postId
+     * @return
+     */
+    public int delPostByDept(long deptId,long postId);
 
     /**
      * 修改保存部门信息

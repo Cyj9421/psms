@@ -8,6 +8,8 @@ import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.AttendanceAskOff;
 import com.psms.project.attendance.domain.AttendanceCardRep;
 import com.psms.project.attendance.service.IAttendanceCardRepService;
+import com.psms.project.attendance.service.IAttendanceLateService;
+import com.psms.project.attendance.service.IAttendanceSummaryService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,10 @@ import java.util.List;
 public class AttendanceCardRepController extends BaseController {
     @Autowired
     private IAttendanceCardRepService attendanceCardRepService;
-
+    @Autowired
+    private IAttendanceSummaryService summaryService;
+    @Autowired
+    private IAttendanceLateService lateService;
     /**
      * 补卡列表
      * @param attendanceCardRep
@@ -67,7 +72,11 @@ public class AttendanceCardRepController extends BaseController {
     @PutMapping
     public AjaxResult updateCard(@RequestBody AttendanceCardRep attendanceCardRep){
         attendanceCardRep.setUpdateBy(SecurityUtils.getUsername());
-        return toAjax(attendanceCardRepService.updateCard(attendanceCardRep));
+        attendanceCardRepService.updateCard(attendanceCardRep);
+//        if(attendanceCardRep.getCardStatus()==1){
+//            lateService.delLate();
+//        }
+        return AjaxResult.success();
     }
     @DeleteMapping("/{replacementIds}")
     public AjaxResult delCards(@PathVariable int [] replacementIds){

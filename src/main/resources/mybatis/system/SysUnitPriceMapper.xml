@@ -59,12 +59,12 @@
     </insert>
     <update id="updatePrice" parameterType="com.psms.project.system.domain.SysUnitPrice">
         update sys_unit_price set
-        <if test="baseSalary !=null and baseSalary !=0">base_salary=#{baseSalary},</if>
         <if test="overtimePrice !=null and overtimePrice !=0">overtime_price=#{overtimePrice},</if>
         <if test="afdPrice !=null and afdPrice !=0">afd_price=#{afdPrice},</if>
         <if test="latePrice !=null and latePrice !=0">late_price=#{latePrice},</if>
         <if test="earlyPrice !=null and earlyPrice !=0">early_price=#{earlyPrice},</if>
-        <if test="remark !=null and remark !=0">remark=#{remark}</if>
+        <if test="remark !=null and remark !=0">remark=#{remark},</if>
+        base_salary=#{baseSalary}
         where work_num=#{workNum}
     </update>
 </mapper>

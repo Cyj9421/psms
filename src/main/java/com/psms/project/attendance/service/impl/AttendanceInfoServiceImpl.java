@@ -1,6 +1,7 @@
 package com.psms.project.attendance.service.impl;
 
 import com.psms.project.attendance.domain.vo.AttendanceInfoVo;
+import com.psms.project.attendance.domain.vo.AttendanceVo;
 import com.psms.project.attendance.domain.vo.BrushCardInfoVo;
 import com.psms.project.attendance.mapper.AttendanceInfoMapper;
 import com.psms.project.attendance.domain.AttendanceInfo;
@@ -116,6 +117,16 @@ public class AttendanceInfoServiceImpl implements IAttendanceInfoService {
     @Override
     public AttendanceInfoVo printFingerInfo(String workNum) {
         return attendanceInfoMapper.printFingerInfo(workNum);
+    }
+
+    /**
+     * 添加考勤信息
+     * @param attendanceVo
+     * @return
+     */
+    @Override
+    public int addAttendance(AttendanceVo attendanceVo) {
+        return attendanceInfoMapper.addAttendance(attendanceVo);
     }
 
 }

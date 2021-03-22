@@ -16,7 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateTime"    column="update_time"   />
 		<result property="remark"        column="remark"        />
 	</resultMap>
-	
+	<resultMap id="selectPostByDept" type="com.psms.project.system.domain.vo.SysPostVo">
+		<result property="deptId" column="dept_id"/>
+		<result property="postId" column="post_id"/>
+		<result property="deptName" column="dept_name"/>
+		<result property="postName" column="post_name"/>
+	</resultMap>
 	<sql id="selectPostVo">
         select post_id, post_code, post_name, post_sort, status, create_by, create_time, remark 
 		from sys_post
@@ -71,8 +76,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectPostVo"/>
 		 where post_code=#{postCode} limit 1
 	</select>
-	
-	<update id="updatePost" parameterType="SysPost">
+    <select id="selectPostVoList" resultMap="selectPostByDept" parameterType="long">
+		select dp.dept_id,dp.post_id,
+			   d.dept_name,
+			   p.post_name
+		from sys_dept_post  dp
+		left join sys_dept d on dp.dept_id=d.dept_id
+		left join sys_post p on dp.post_id=p.post_id
+		where dp.dept_id=#{deptId}
+	</select>
+
+    <update id="updatePost" parameterType="SysPost">
  		update sys_post
  		<set>
  			<if test="postCode != null and postCode != ''">post_code = #{postCode},</if>

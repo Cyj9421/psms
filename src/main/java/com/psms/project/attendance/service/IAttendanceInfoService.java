@@ -2,6 +2,7 @@ package com.psms.project.attendance.service;
 
 import com.psms.project.attendance.domain.AttendanceInfo;
 import com.psms.project.attendance.domain.vo.AttendanceInfoVo;
+import com.psms.project.attendance.domain.vo.AttendanceVo;
 import com.psms.project.attendance.domain.vo.BrushCardInfoVo;
 
 import java.util.List;
@@ -79,4 +80,11 @@ public interface IAttendanceInfoService {
      * @return
      */
     public AttendanceInfoVo printFingerInfo(String workNum);
+
+    /**
+     * 新增记录
+     * @param attendanceVo
+     * @return
+     */
+    public int addAttendance(AttendanceVo attendanceVo);
 }

@@ -53,6 +53,18 @@ public class SysRoleSalaryController extends BaseController {
     public AjaxResult salaryInfo(@PathVariable("salaryId") int salaryId){
         return AjaxResult.success(sysRoleSalaryService.salaryInfo(salaryId));
     }
+
+    /**
+     * 领取工资详情
+     * @return
+     */
+    @GetMapping("/get/list")
+    public AjaxResult getSalaryList(){
+        Calendar calendar = Calendar.getInstance();
+        int year=calendar.get(Calendar.YEAR);
+        int month=calendar.get(Calendar.MONTH)+1;
+        return AjaxResult.success(sysRoleSalaryService.getSalaryList(year,month));
+    }
     /**
      * 领取工资
      * @param sysRoleSalary
@@ -69,12 +81,11 @@ public class SysRoleSalaryController extends BaseController {
      */
     @PostMapping("/calc")
     public AjaxResult calcSalary(){
-        List<String> list=sysUserNumberService.numList();
+        List<String> list=sysUserNumberService.numList(null);
         Calendar c = Calendar.getInstance();
         AttendanceSummary summary=new AttendanceSummary();
         for(int i=0;i<list.size();i++) {
             c.setTime(new Date());
-
             summary.setSummaryMonth(c.get(Calendar.MONTH)+1);
             summary.setSummaryQuarter(c.get(Calendar.MONTH)/3+1);
             summary.setSummaryYear(c.get(Calendar.YEAR));
@@ -95,6 +106,8 @@ public class SysRoleSalaryController extends BaseController {
                     sysRoleSalary.getRemark() - sysRoleSalary.getPenalty() - sysRoleSalary.getLateSalary() -
                     sysRoleSalary.getEarlySalary() - sysRoleSalary.getAfdSalary();
             sysRoleSalary.setSalary(salary);
+            sysRoleSalary.setSalaryMonth(c.get(Calendar.MONTH)+1);
+            sysRoleSalary.setSalaryYear(c.get(Calendar.YEAR));
             sysRoleSalaryService.addSalary(sysRoleSalary);
         }
         return AjaxResult.success();

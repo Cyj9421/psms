@@ -2,6 +2,9 @@ package com.psms.project.attendance.service;
 
 import com.psms.project.attendance.domain.AttendanceSummary;
 import com.psms.project.attendance.domain.vo.AttendanceReportDateVo;
+import com.psms.project.attendance.domain.vo.AttendanceRpVo;
+import com.psms.project.attendance.domain.vo.AttendanceSummaryVo;
+import com.psms.project.attendance.domain.vo.AttendanceVo;
 
 import java.util.List;
 
@@ -29,11 +32,40 @@ public interface IAttendanceSummaryService {
     public int addSummary(AttendanceSummary attendanceSummary);
 
     /**
+     * 部门奖惩次数
+     * @param attendanceReportDateVo
+     * @return
+     */
+    public List<AttendanceRpVo> attendanceRpVoList(AttendanceReportDateVo attendanceReportDateVo);
+
+    /**
+     * 部门考勤汇总列表
+     * @param attendanceReportDateVo
+     * @return
+     */
+    public List<AttendanceSummaryVo> summaryVoList(AttendanceReportDateVo attendanceReportDateVo);
+
+    /**
+     * 考勤日汇总
+     * @return
+     */
+    public List<AttendanceVo> attendanceToDayList(AttendanceVo attendanceVo);
+
+    /**
      * 月/季/年汇总
      * @param attendanceReportDateVo
      * @return
      */
     public AttendanceSummary summaryToType(AttendanceReportDateVo attendanceReportDateVo);
+
+    /**
+     * 删除汇总
+     * @param summaryMonth
+     * @param summaryQuarter
+     * @param summaryYear
+     * @return
+     */
+    public int delSummaryByDate(int reportType,int summaryMonth,int summaryQuarter,int summaryYear,String workNum);
 
     /**
      * 批量删除汇总

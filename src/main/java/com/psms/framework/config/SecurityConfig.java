@@ -104,7 +104,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.bmp",
-                        "/**/*.js"
+                        "/**/*.js",
+                        "/*.pdf",
+                        "/*.docx",
+                        "/*.zip"
                 ).permitAll()
                 .antMatchers("/profile/**").anonymous()
                 .antMatchers("/common/download**").anonymous()
@@ -121,6 +124,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/induction/**/**").permitAll()
                 .antMatchers("/dormitory/**").permitAll()
                 .antMatchers("/common/upload").permitAll()
+                .antMatchers("/work/card/**").permitAll()
                 .antMatchers("/upload").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()

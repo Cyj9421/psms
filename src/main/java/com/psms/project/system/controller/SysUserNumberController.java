@@ -42,6 +42,22 @@ public class SysUserNumberController extends BaseController {
         PageInfo pageInfo = new PageInfo(list);
         return AjaxResult.success(pageInfo);
     }
+
+    /**
+     * 工号列表
+     * @param workNum
+     * @return
+     */
+    @GetMapping("/num/list")
+    public AjaxResult workNumList(String workNum){
+        return AjaxResult.success(sysUserNumberService.numList(workNum));
+    }
+    /**
+     * 根据部门和岗位生成工号
+     * @param deptId
+     * @param postId
+     * @return
+     */
     @GetMapping("/generate")
     public AjaxResult generateWorkNum(@RequestParam(value = "deptId") long deptId,
                                       @RequestParam(value = "postId") long postId){
@@ -50,7 +66,7 @@ public class SysUserNumberController extends BaseController {
             return AjaxResult.error(400,"没有该工号开头，请设置!");
         }
         String body=String.format("%06d",workNumHead.getNumTotal()+1);
-        String workNum=workNumHead.getWorkNumHead()+body;
+        String workNum=workNumHead.getWorkNumHead()+"-"+body;
         AjaxResult ajax=AjaxResult.success();
         ajax.put("workNum",workNum);
         return ajax;

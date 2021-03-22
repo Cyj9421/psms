@@ -9,9 +9,11 @@ import lombok.Data;
 public class DormitoryRoomInfoVo {
     @ApiModelProperty("工号")
     private String workNum;
-    @ApiModelProperty("姓名")
-    private String fullName;
-    @ApiModelProperty("性别")
+    @ApiModelProperty("姓")
+    private String firstName;
+    @ApiModelProperty("名")
+    private String lastName;
+    @ApiModelProperty("性别(1男,2女)")
     private int sex;
     @ApiModelProperty("部门名称")
     private String deptName;

@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 /**
  * 考勤汇总
  */
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class AttendanceSummary {
     /** 考勤汇总id */
@@ -20,12 +18,14 @@ public class AttendanceSummary {
     private String workNum;
     /** 部门名称 */
     private String deptName;
-    /** 部门领导 */
-    private String leader;
     /** 职位名称 */
     private String postName;
-    /** 岗位编码 */
-    private String postCode;
+    /** 出勤次数 */
+    private int attendanceNum;
+    /** 请假次数 */
+    private int askNum;
+    /** 休假次数 */
+    private int vacateNum;
     /** 迟到次数 */
     private int lateNum;
     /** 早退次数 */
@@ -44,7 +44,9 @@ public class AttendanceSummary {
     private double punishments;
     /** 出差次数 */
     private int btNum;
-    /** 报表类型(1日,2月(默认),3季,4年) */
+    /** 是否全勤(1是,2否) */
+    private int isFullTime;
+    /** 报表类型(1月,2季,3年) */
     private int reportType;
     /** 月份 */
     private int summaryMonth;
@@ -52,4 +54,8 @@ public class AttendanceSummary {
     private int summaryQuarter;
     /** 年份 */
     private int summaryYear;
+    /** 薪资 */
+    private double salary;
+    /** 查询类型(1未出勤,2休假中,3迟到,4早退,5旷工,6犯错,7已出勤) */
+    private int selectType;
 }

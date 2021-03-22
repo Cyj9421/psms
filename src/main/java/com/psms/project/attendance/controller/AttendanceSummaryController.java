@@ -7,11 +7,15 @@ import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.AttendanceInfo;
 import com.psms.project.attendance.domain.AttendanceSummary;
 import com.psms.project.attendance.domain.vo.AttendanceReportDateVo;
+import com.psms.project.attendance.domain.vo.AttendanceRpVo;
+import com.psms.project.attendance.domain.vo.AttendanceSummaryVo;
+import com.psms.project.attendance.domain.vo.AttendanceVo;
 import com.psms.project.attendance.service.IAttendanceInfoService;
 import com.psms.project.attendance.service.IAttendanceOvertimeService;
 import com.psms.project.attendance.service.IAttendanceScheduleService;
 import com.psms.project.attendance.service.IAttendanceSummaryService;
 import com.psms.project.system.service.ISysUserNumberService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +48,7 @@ public class AttendanceSummaryController extends BaseController {
      * @return
      */
     @GetMapping("/list")
+    @ApiOperation(value = "考勤列表",notes ="考勤列表")
     public AjaxResult summaryList(AttendanceSummary attendanceSummary, @RequestParam(value="pageNum",defaultValue = "1")int pageNum,
                                   @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -68,13 +73,61 @@ public class AttendanceSummaryController extends BaseController {
      * @return
      */
     @GetMapping("/day")
-    public AjaxResult reportToDay(AttendanceInfo attendanceInfo,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+    public AjaxResult reportToDay(AttendanceVo attendanceVo,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
                                   @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
             PageHelper.startPage(pageNum,pageSize);
-            List<AttendanceInfo> list = attendanceInfoService.attendanceList(attendanceInfo);
+            List<AttendanceVo> list = attendanceSummaryService.attendanceToDayList(attendanceVo);
             PageInfo pageInfo = new PageInfo(list);
             return AjaxResult.success(pageInfo);
     }
+
+    /**
+     * 部门考勤汇总
+     * @param
+     * @return
+     */
+    @GetMapping("/dept/list")
+    public AjaxResult sumReportByDept(AttendanceReportDateVo attendanceReportDateVo,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+                                      @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c=Calendar.getInstance();
+        if(attendanceReportDateVo.getStartDate()==null || attendanceReportDateVo.getEndDate()==null){
+            c.add(Calendar.MONTH, 0);
+            c.set(GregorianCalendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
+            attendanceReportDateVo.setStartDate(c.getTime());
+            c.set(Calendar.DATE, 1);
+            c.roll(Calendar.DATE, -1);
+            attendanceReportDateVo.setEndDate(c.getTime());
+        }
+        int days=(int)(new Date().getTime()-(sdf.parse(sdf.format(attendanceReportDateVo.getStartDate()))).getTime())/(60*60*24*1000);
+        List<AttendanceSummaryVo> attendanceSummaryVoList = attendanceSummaryService.summaryVoList(attendanceReportDateVo);
+        List<AttendanceRpVo> attendanceRpVoList = attendanceSummaryService.attendanceRpVoList(attendanceReportDateVo);
+        for(int i=0;i<attendanceSummaryVoList.size();i++){
+            AttendanceSummaryVo attendanceSummaryVo = attendanceSummaryVoList.get(i);
+            for(int j=0;j<attendanceRpVoList.size();j++){
+                AttendanceRpVo attendanceRpVo=attendanceRpVoList.get(j);
+                if(attendanceSummaryVo.getDeptName().equals(attendanceRpVo.getDeptName())){
+                    attendanceSummaryVo.setRewardsNum(attendanceRpVo.getRewardsNum());
+                    attendanceSummaryVo.setPunishmentNum(attendanceRpVo.getPunishmentNum());
+                }else{
+                    attendanceSummaryVo.setRewardsNum(0);
+                    attendanceSummaryVo.setPunishmentNum(0);
+                }
+            }
+            if(attendanceSummaryVo.getAfdNum()!=0){
+                attendanceSummaryVo.setIsFullTime(2);
+            }
+            if(attendanceSummaryVo.getAttendanceNum()+attendanceSummaryVo.getAskNum()+attendanceSummaryVo.getVacateNum()==days){
+                attendanceSummaryVo.setIsFullTime(1);
+            }else {
+                attendanceSummaryVo.setIsFullTime(2);
+            }
+        }
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo pageInfo = new PageInfo(attendanceSummaryVoList);
+        return AjaxResult.success(pageInfo);
+    }
+
     /**
      * 统计报表 月/季/年
      *
@@ -84,7 +137,8 @@ public class AttendanceSummaryController extends BaseController {
     @PostMapping("/{type}")
     public AjaxResult sumReport(@PathVariable int type){
         AttendanceReportDateVo attendanceReportDateVo=new AttendanceReportDateVo();
-        List<String> list=sysUserNumberService.numList();
+        List<String> list=sysUserNumberService.numList(null);
+        int days=0;
         for(int i=0;i<list.size();i++) {
             attendanceReportDateVo.setWorkNum(list.get(i));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -92,6 +146,7 @@ public class AttendanceSummaryController extends BaseController {
             if (type == 1) {
                 c.add(Calendar.MONTH, 0);
                 c.set(GregorianCalendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
+                days=(int)(new Date().getTime()-c.getTime().getTime())/(60*60*24*1000);
                 attendanceReportDateVo.setStartDate(c.getTime());
                 c.set(Calendar.DATE, 1);
                 c.roll(Calendar.DATE, -1);
@@ -106,6 +161,7 @@ public class AttendanceSummaryController extends BaseController {
                         c.set(Calendar.MONTH, 3);
                         c.set(Calendar.DATE, 1);
                         c.add(Calendar.DATE, -1);
+                        days=(int)(new Date().getTime()-c.getTime().getTime())/(60*60*24*1000);
                         attendanceReportDateVo.setEndDate(c.getTime());
                         String str1 = sdf.format(c.getTime());
                         try {
@@ -118,6 +174,7 @@ public class AttendanceSummaryController extends BaseController {
                         c.set(Calendar.MONTH, 6);
                         c.set(Calendar.DATE, 1);
                         c.add(Calendar.DATE, -1);
+                        days=(int)(new Date().getTime()-c.getTime().getTime())/(60*60*24*1000);
                         attendanceReportDateVo.setEndDate(c.getTime());
                         String str2 = sdf.format(c.getTime());
                         try {
@@ -130,6 +187,7 @@ public class AttendanceSummaryController extends BaseController {
                         c.set(Calendar.MONTH, 9);
                         c.set(Calendar.DATE, 1);
                         c.add(Calendar.DATE, -1);
+                        days=(int)(new Date().getTime()-c.getTime().getTime())/(60*60*24*1000);
                         attendanceReportDateVo.setEndDate(c.getTime());
                         String str3 = sdf.format(c.getTime());
                         try {
@@ -143,6 +201,7 @@ public class AttendanceSummaryController extends BaseController {
                         c.set(Calendar.MONTH, 12);
                         c.set(Calendar.DATE, 1);
                         c.add(Calendar.DATE, -1);
+                        days=(int)(new Date().getTime()-c.getTime().getTime())/(60*60*24*1000);
                         attendanceReportDateVo.setEndDate(c.getTime());
                         String str4 = sdf.format(c.getTime());
                         try {
@@ -158,12 +217,24 @@ public class AttendanceSummaryController extends BaseController {
                 String str = sdf.format(new Date());
                 int year = Integer.parseInt(str.substring(0, 4));
                 c.set(Calendar.YEAR, year);
+                days=(int)(new Date().getTime()-c.getTime().getTime())/(60*60*24*1000);
                 attendanceReportDateVo.setStartDate(c.getTime());
                 c.roll(Calendar.DAY_OF_YEAR, -1);
                 attendanceReportDateVo.setEndDate(c.getTime());
             }
+            c.clear();
             c.setTime(new Date());
             AttendanceSummary attendanceSummary = attendanceSummaryService.summaryToType(attendanceReportDateVo);
+            if(attendanceSummary.getAfdNum()!=0){
+                attendanceSummary.setIsFullTime(2);
+            }
+            if(attendanceSummary.getAttendanceNum()+attendanceSummary.getAskNum()+attendanceSummary.getVacateNum()==days){
+                attendanceSummary.setIsFullTime(1);
+            }else {
+                attendanceSummary.setIsFullTime(2);
+            }
+            attendanceSummaryService.delSummaryByDate
+                    (type,c.get(Calendar.MONTH)+1,c.get(Calendar.MONTH) / 3 + 1,c.get(Calendar.YEAR),attendanceReportDateVo.getWorkNum());
             attendanceSummary.setWorkNum(attendanceReportDateVo.getWorkNum());
             attendanceSummary.setReportType(type);
             attendanceSummary.setSummaryMonth(c.get(Calendar.MONTH)+1);

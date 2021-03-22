@@ -61,7 +61,7 @@ public interface ISysUserNumberService {
      * 查询所有的工号
      * @return
      */
-    public List<String> numList();
+    public List<String> numList(String workNum);
 
 }
 

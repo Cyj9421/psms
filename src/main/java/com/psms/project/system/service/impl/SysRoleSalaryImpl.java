@@ -3,6 +3,7 @@ package com.psms.project.system.service.impl;
 import com.psms.project.attendance.domain.AttendanceSummary;
 import com.psms.project.system.domain.SysRoleSalary;
 import com.psms.project.system.domain.SysUnitPrice;
+import com.psms.project.system.domain.vo.SysGetSalaryVo;
 import com.psms.project.system.mapper.SysRoleSalaryMapper;
 import com.psms.project.system.service.ISysRoleSalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,17 @@ public class SysRoleSalaryImpl implements ISysRoleSalaryService {
     @Override
     public SysRoleSalary salaryInfo(int salaryId) {
         return sysRoleSalaryMapper.salaryInfo(salaryId);
+    }
+
+    /**
+     * 领取工资详情
+     * @param salaryYear
+     * @param salaryMonth
+     * @return
+     */
+    @Override
+    public List<SysGetSalaryVo> getSalaryList(int salaryYear, int salaryMonth) {
+        return sysRoleSalaryMapper.getSalaryList(salaryYear,salaryMonth);
     }
 
     /**

@@ -55,14 +55,14 @@ public class SysUserController extends BaseController
     @Autowired
     private TokenService tokenService;
 
-    @Autowired
-    private ISysUserNumberService sysUserNumberService;
-
-    @Autowired
-    private ISysWorkNumHeadService sysWorkNumHeadService;
-    //设置编号开头从1开始
-    private int i=1;
-    private String workHead;
+//    @Autowired
+//    private ISysUserNumberService sysUserNumberService;
+//
+//    @Autowired
+//    private ISysWorkNumHeadService sysWorkNumHeadService;
+//    //设置编号开头从1开始
+//    private int i=1;
+//    private String workHead;
     /**
      * 获取用户列表
      */
@@ -145,36 +145,37 @@ public class SysUserController extends BaseController
         {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
-        SysWorkNumHead sysWorkNumHead=sysWorkNumHeadService.selectHeadByDeptId(user.getDeptId(),user.getPostId());
-        String head=sysWorkNumHead.getWorkNumHead();
-        //根据部门id查找工号开头
-        if(workHead!=null && !workHead.equals(head)) {
-            i=1;
+        if(StringUtils.isEmpty(user.getWorkNum())){
+            return AjaxResult.error(400,"工号不能为空");
         }
-        String body=String.format("%06d",i);
-        String workNum=head+body;
-        //生成工号
-        SysUserNumber sysUserNumber=new SysUserNumber();
-        sysUserNumber.setWorkNum(workNum);
-        sysUserNumber.setHeadId(sysWorkNumHead.getHeadId());
-        sysUserNumber.setPostId(user.getPostId());
-        sysUserNumber.setDeptId(user.getDeptId());
-        sysUserNumber.setFullName(user.getNickName());
-        sysUserNumber.setCreateBy(SecurityUtils.getUsername());
-        sysUserNumber.setCreateTime(new Date());
-        SysUserNumber numberinfo=sysUserNumberService.checkNum(sysUserNumber.getFullName());
-        if(numberinfo != null){
-            numberinfo.setUpdateBy(SecurityUtils.getUsername());
-            numberinfo.setUpdateTime(new Date());
-            sysUserNumberService.saveNewNum(numberinfo);
-            return AjaxResult.error("老员工,已生成新的工号");
-        }
-        sysUserNumberService.addNumber(sysUserNumber);
-        i++;
-        workHead=head;
+//        SysWorkNumHead sysWorkNumHead=sysWorkNumHeadService.selectHeadByDeptId(user.getDeptId(),user.getPostId());
+//        String head=sysWorkNumHead.getWorkNumHead();
+//        //根据部门id查找工号开头
+//        if(workHead!=null && !workHead.equals(head)) {
+//            i=1;
+//        }
+//        String body=String.format("%06d",i);
+//        String workNum=head+body;
+//        //生成工号
+//        SysUserNumber sysUserNumber=new SysUserNumber();
+//        sysUserNumber.setWorkNum(workNum);
+//        sysUserNumber.setHeadId(sysWorkNumHead.getHeadId());
+//        sysUserNumber.setPostId(user.getPostId());
+//        sysUserNumber.setDeptId(user.getDeptId());
+//        sysUserNumber.setFullName(user.getNickName());
+//        sysUserNumber.setCreateBy(SecurityUtils.getUsername());
+//        sysUserNumber.setCreateTime(new Date());
+//        SysUserNumber numberinfo=sysUserNumberService.checkNum(sysUserNumber.getFullName());
+//        if(numberinfo != null){
+//            numberinfo.setUpdateBy(SecurityUtils.getUsername());
+//            numberinfo.setUpdateTime(new Date());
+//            sysUserNumberService.saveNewNum(numberinfo);
+//            return AjaxResult.error("老员工,已生成新的工号");
+//        }
+//        sysUserNumberService.addNumber(sysUserNumber);
+//        i++;
         user.setCreateBy(SecurityUtils.getUsername());
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
-        user.setWorkNum(workNum);
         int res=userService.insertUser(user);
         return toAjax(res);
     }

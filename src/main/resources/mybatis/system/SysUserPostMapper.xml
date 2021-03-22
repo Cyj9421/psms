@@ -30,5 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(#{item.userId},#{item.postId})
 		</foreach>
 	</insert>
-	
+    <insert id="insertUserPost" parameterType="com.psms.project.system.domain.SysUser">
+		insert into sys_user_post(user_id, post_id) values(
+		#{userId},#{postId}
+		)
+	</insert>
+
 </mapper> 

@@ -312,23 +312,24 @@ public class SysUserServiceImpl implements ISysUserService
      */
     public void insertUserRole(SysUser user)
     {
-        Long[] roles = user.getRoleIds();
-        if (StringUtils.isNotNull(roles))
-        {
-            // 新增用户与角色管理
-            List<SysUserRole> list = new ArrayList<SysUserRole>();
-            for (Long roleId : roles)
-            {
-                SysUserRole ur = new SysUserRole();
-                ur.setUserId(user.getUserId());
-                ur.setRoleId(roleId);
-                list.add(ur);
-            }
-            if (list.size() > 0)
-            {
-                userRoleMapper.batchUserRole(list);
-            }
-        }
+//        Long[] roles = user.getRoleIds();
+//        if (StringUtils.isNotNull(user.getRoleId()))
+//        {
+            userRoleMapper.insertUserRole(user);
+//            // 新增用户与角色管理
+//            List<SysUserRole> list = new ArrayList<SysUserRole>();
+//            for (Long roleId : roles)
+//            {
+//                SysUserRole ur = new SysUserRole();
+//                ur.setUserId(user.getUserId());
+//                ur.setRoleId(roleId);
+//                list.add(ur);
+//            }
+//            if (list.size() > 0)
+//            {
+//                userRoleMapper.batchUserRole(list);
+//            }
+//        }
     }
 
     /**
@@ -338,23 +339,25 @@ public class SysUserServiceImpl implements ISysUserService
      */
     public void insertUserPost(SysUser user)
     {
-        Long[] posts = user.getPostIds();
-        if (StringUtils.isNotNull(posts))
-        {
-            // 新增用户与岗位管理
-            List<SysUserPost> list = new ArrayList<SysUserPost>();
-            for (Long postId : posts)
-            {
-                SysUserPost up = new SysUserPost();
-                up.setUserId(user.getUserId());
-                up.setPostId(postId);
-                list.add(up);
-            }
-            if (list.size() > 0)
-            {
-                userPostMapper.batchUserPost(list);
-            }
-        }
+        userPostMapper.insertUserPost(user);
+//        Long[] posts = user.getPostIds();
+//        if (StringUtils.isNotNull(posts))
+//        {
+
+//            // 新增用户与岗位管理
+//            List<SysUserPost> list = new ArrayList<SysUserPost>();
+//            for (Long postId : posts)
+//            {
+//                SysUserPost up = new SysUserPost();
+//                up.setUserId(user.getUserId());
+//                up.setPostId(postId);
+//                list.add(up);
+//            }
+//            if (list.size() > 0)
+//            {
+//                userPostMapper.batchUserPost(list);
+//            }
+//        }
     }
 
     /**

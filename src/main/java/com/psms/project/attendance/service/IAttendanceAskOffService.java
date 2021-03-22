@@ -1,6 +1,7 @@
 package com.psms.project.attendance.service;
 
 import com.psms.project.attendance.domain.AttendanceAskOff;
+import com.psms.project.attendance.domain.vo.AskVo;
 
 import java.util.List;
 
@@ -21,6 +22,13 @@ public interface IAttendanceAskOffService {
      * @return
      */
     AttendanceAskOff askOffInfo(Integer askId);
+
+    /**
+     * 请休假详情
+     * @param askVo
+     * @return
+     */
+    AttendanceAskOff askOffByWorkNum(AskVo askVo);
 
     /**
      * 请假列表

@@ -14,10 +14,10 @@ public class DormitoryBuilding {
     private int dormitoryId;
     @ApiModelProperty("宿舍名称")
     private String dormitoryName;
-    @JsonFormat(pattern = "yyyy-MM-dd Hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty("创建时间")
     private Date createTime;
-    @JsonFormat(pattern = "yyyy-MM-dd Hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty("更新时间")
     private Date updateTime;
 }

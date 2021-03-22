@@ -21,7 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateBy"   column="update_by"   />
 		<result property="updateTime" column="update_time" />
 	</resultMap>
-	
+	<resultMap id="deptPostResult" type="com.psms.project.system.domain.SysDeptPost">
+		<id property="id" column="id"/>
+		<result property="deptId" column="dept_id"/>
+		<result property="postId" column="post_id"/>
+	</resultMap>
 	<sql id="selectDeptVo">
         select d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.phone, d.email, d.status, d.del_flag, d.create_by, d.create_time 
         from sys_dept d
@@ -109,8 +113,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			sysdate()
  		)
 	</insert>
-	
-	<update id="updateDept" parameterType="com.psms.project.system.domain.SysDept">
+    <insert id="addPostByDept" parameterType="com.psms.project.system.domain.SysDeptPost">
+			insert into sys_dept_post(
+			dept_id,post_id
+			)values (
+			#{deptId},#{postId}
+			)
+	</insert>
+
+    <update id="updateDept" parameterType="com.psms.project.system.domain.SysDept">
  		update sys_dept
  		<set>
  			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
@@ -152,6 +163,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<delete id="deleteDeptById" parameterType="Long">
 		update sys_dept set del_flag = '2' where dept_id = #{deptId}
+	</delete>
+	<delete id="delPostByDept" parameterType="long">
+		delete from sys_dept_post where
+		dept_id=#{param1} and post_id=#{param2}
 	</delete>
 
 </mapper> 

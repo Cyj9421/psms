@@ -48,7 +48,6 @@
             update_by=#{updateBy},
             update_time=sysdate()
         where work_id=#{workId}
-
     </update>
     <select id="numberList" parameterType="com.psms.project.system.domain.SysUserNumber" resultMap="numberResult">
         <include refid="numberVo"/>
@@ -75,7 +74,10 @@
         <include refid="numberVo"/>
         where n.work_num=#{workNum}
     </select>
-    <select id="numList" resultType="java.lang.String">
+    <select id="numList" resultType="java.lang.String" parameterType="String">
         select work_num from sys_user_number where use_status=1
+            <if test="_parameter !=null and _parameter != ''">
+                AND work_num like concat('%',#{workNum},'%')
+            </if>
     </select>
 </mapper>

@@ -15,4 +15,6 @@ public class SelectInductionVo {
     private String workNum;
     @ApiModelProperty("性别(1男,2女)")
     private int sex;
+    @ApiModelProperty("试用期状态(1已转正,2试用中(默认))")
+    private int probationStatus;
 }

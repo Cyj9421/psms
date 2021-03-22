@@ -91,7 +91,7 @@ public class SysUserNumberServiceImpl implements ISysUserNumberService {
      * @return
      */
     @Override
-    public List<String> numList() {
-        return sysUserNumberMapper.numList();
+    public List<String> numList(String workNum) {
+        return sysUserNumberMapper.numList(workNum);
     }
 }

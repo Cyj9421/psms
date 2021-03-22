@@ -32,5 +32,6 @@ public class AttendanceAskOff implements Serializable {
     private String updateBy;//审核人
     @JsonFormat(pattern = "yy-MM-dd hh:mm:ss")
     private Date updateTime;//审核时间
+
 }
 

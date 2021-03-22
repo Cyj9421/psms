@@ -3,6 +3,7 @@ package com.psms.project.dormitory.service.impl;
 import com.psms.project.dormitory.domain.DormitoryRoom;
 import com.psms.project.dormitory.domain.vo.DormitoryRoomInfoVo;
 import com.psms.project.dormitory.domain.vo.InsertRoomVo;
+import com.psms.project.dormitory.domain.vo.SelectRoomVo;
 import com.psms.project.dormitory.domain.vo.UpdateRoomVo;
 import com.psms.project.dormitory.mapper.DormitoryRoomMapper;
 import com.psms.project.dormitory.service.IDormitoryRoomService;
@@ -24,8 +25,8 @@ public class DormitoryRoomServiceImpl implements IDormitoryRoomService {
      * @return
      */
     @Override
-    public List<DormitoryRoom> roomList() {
-        return roomMapper.roomList();
+    public List<DormitoryRoom> roomList(SelectRoomVo selectRoomVo) {
+        return roomMapper.roomList(selectRoomVo);
     }
 
     /**
@@ -33,8 +34,8 @@ public class DormitoryRoomServiceImpl implements IDormitoryRoomService {
      * @return
      */
     @Override
-    public List<DormitoryRoomInfoVo> roomInfoList() {
-        return roomMapper.roomInfoList();
+    public List<DormitoryRoomInfoVo> roomInfoList(int dormitoryId,int roomId) {
+        return roomMapper.roomInfoList(dormitoryId,roomId);
     }
 
     /**

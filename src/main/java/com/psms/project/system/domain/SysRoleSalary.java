@@ -2,6 +2,7 @@ package com.psms.project.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.psms.project.attendance.domain.AttendanceSummary;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,9 +13,8 @@ import java.util.List;
 /**
  * 工资汇总表
  */
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
+@ApiModel("工资参数")
 public class SysRoleSalary {
     /** 工资id */
     private int salaryId;
@@ -36,7 +36,11 @@ public class SysRoleSalary {
     private double remark;
     /** 工资总额 */
     private double salary;
-    /** 领取状态(1领取,2未发放,3未领取）(默认2) */
+    /** 工资-月份 */
+    private int salaryMonth;
+    /** 工资-年份 */
+    private int salaryYear;
+    /** 领取状态(1领取,2未领取）(默认2) */
     private int getStatus;
     /** 领取时间 */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
@@ -49,14 +53,12 @@ public class SysRoleSalary {
     private String fullName;
     /** 部门名称 */
     private String deptName;
-    /** 部门负责人 */
-    private String leader;
-    /** 岗位名称 */
-    private String postName;
-    /** 岗位编码 */
-    private String postCode;
-    /** 薪资单价列表 */
-    private List<SysUnitPrice> sysUnitPrices;
-    /** 考勤列表 */
-    private List<AttendanceSummary> attendanceSummaries;
+    /** 个人照片 */
+    private String personalPhoto;
+    /** 性别 */
+    private int sex;
+//    /** 薪资单价列表 */
+//    private List<SysUnitPrice> sysUnitPrices;
+//    /** 考勤列表 */
+//    private List<AttendanceSummary> attendanceSummaries;
 }

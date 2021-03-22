@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.psms.project.system.domain.SysDeptPost;
+import com.psms.project.system.domain.vo.SysDeptPostVo;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -113,6 +115,16 @@ public class SysDeptController extends BaseController
     }
 
     /**
+     * 向部门添加岗位
+     * @param deptPostVo
+     * @return
+     */
+    @PostMapping("/add/post")
+    public AjaxResult addDeptPost(@RequestBody SysDeptPostVo deptPostVo){
+        return toAjax(deptService.addPostByDept(deptPostVo));
+    }
+
+    /**
      * 修改部门
      */
     @PreAuthorize("@ss.hasPermi('system:dept:edit')")
@@ -154,5 +166,17 @@ public class SysDeptController extends BaseController
             return AjaxResult.error("部门存在用户,不允许删除");
         }
         return toAjax(deptService.deleteDeptById(deptId));
+    }
+
+    /**
+     * 删除部门下的岗位
+     * @param deptId
+     * @param postId
+     * @return
+     */
+    @DeleteMapping("/del/post")
+    public AjaxResult delPostByDept(@RequestParam(value = "deptId") long deptId,
+                                    @RequestParam(value = "postId") long postId){
+        return toAjax(deptService.delPostByDept(deptId,postId));
     }
 }

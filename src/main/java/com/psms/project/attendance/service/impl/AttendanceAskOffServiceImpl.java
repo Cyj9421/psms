@@ -1,5 +1,6 @@
 package com.psms.project.attendance.service.impl;
 
+import com.psms.project.attendance.domain.vo.AskVo;
 import com.psms.project.attendance.mapper.AttendanceAskOffMapper;
 import com.psms.project.attendance.domain.AttendanceAskOff;
 import com.psms.project.attendance.service.IAttendanceAskOffService;
@@ -34,6 +35,16 @@ public class AttendanceAskOffServiceImpl implements IAttendanceAskOffService {
     @Override
     public AttendanceAskOff askOffInfo(Integer askId) {
         return attendanceAskOffMapper.askOffInfo(askId);
+    }
+
+    /**
+     *
+     * @param askVo
+     * @return
+     */
+    @Override
+    public AttendanceAskOff askOffByWorkNum(AskVo askVo) {
+        return attendanceAskOffMapper.askOffByWorkNum(askVo);
     }
 
     /**

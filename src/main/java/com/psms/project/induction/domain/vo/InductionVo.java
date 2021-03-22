@@ -30,6 +30,10 @@ public class InductionVo {
     private int orderId;
     @ApiModelProperty("姓名")
     private String fullName;
+    @ApiModelProperty("姓（民族）")
+    private String firstNameNational;
+    @ApiModelProperty("名（民族）")
+    private String lastNameNational;
     @ApiModelProperty("姓")
     private String firstName;
     @ApiModelProperty("名")
@@ -52,8 +56,8 @@ public class InductionVo {
     private String idCard;
     @ApiModelProperty("联系方式")
     private String contact;
-    @ApiModelProperty("学历")
-    private String education;
+    @ApiModelProperty("学历id")
+    private int educationId;
     @ApiModelProperty("是否结婚(1结婚,2未婚(默认))")
     private int isMarried;
     @ApiModelProperty("出生日期")
@@ -94,8 +98,12 @@ public class InductionVo {
     private String deptName;
     @ApiModelProperty("班别名称")
     private String scheduleName;
+    @ApiModelProperty("学历")
+    private String educationBackground;
     @ApiModelProperty("试用期-月")
     private int probationMonth;
     @ApiModelProperty("试用期-日")
     private int probationDay;
+    @ApiModelProperty("试用期状态(1已转正,2试用中(默认))")
+    private int probationStatus;
 }

@@ -1,10 +1,12 @@
 package com.psms.project.induction.service;
 
+import com.psms.project.induction.domain.InductionWorkCard;
 import com.psms.project.induction.domain.vo.InductionVo;
 import com.psms.project.induction.domain.vo.InsertInductionVo;
 import com.psms.project.induction.domain.vo.SelectInductionVo;
 import com.psms.project.induction.domain.vo.UpdateInductionVo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +42,13 @@ public interface IInductionStaffService {
     public InductionVo inductionInfoByWorkNum(String workNum);
 
     /**
+     * 验证身份证号
+     * @param idCard
+     * @return
+     */
+    public InductionVo inductionInfoByIdCard(String idCard);
+
+    /**
      * 入职申请
      * @param insertInductionVo
      * @return
@@ -67,4 +76,18 @@ public interface IInductionStaffService {
      * @return
      */
     public int delInductions(int [] inductionIds);
+
+    /**
+     * 根据出生日期计算年龄
+     * @param bornDate
+     * @return
+     */
+    public int calculateAge(Date bornDate);
+
+    /**
+     * 工牌信息
+     * @param workNums
+     * @return
+     */
+    public List<InductionWorkCard> cardList(String [] workNums);
 }

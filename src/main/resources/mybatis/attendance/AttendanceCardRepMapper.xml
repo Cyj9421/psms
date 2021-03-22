@@ -13,7 +13,7 @@
         <result property="fullName" column="full_name"/>
         <result property="reason" column="reason"/>
         <result property="repType" column="rep_type"/>
-        <result property="cardStatus" column="care_status"/>
+        <result property="cardStatus" column="card_status"/>
         <result property="nickName" column="nick_name"/>
         <result property="nickTime" column="nick_time"/>
         <result property="updateBy" column="update_by"/>
@@ -33,12 +33,12 @@
         insert into attendance_card_rep(work_num,reason,rep_type,nick_name,nick_time)
         values (#{workNum},#{reason},#{repType},#{nickName},sysdate())
     </insert>
-    <update id="updateCard">
+    <update id="updateCard" parameterType="com.psms.project.attendance.domain.AttendanceCardRep">
         update attendance_card_rep set
         card_status=#{cardStatus},
-        update_by=#{updateBy},
+        <if test="updateBy != null and updateBy != ''">update_by=#{updateBy},</if>
         update_time=sysdate()
-        where replacement_id=#{replacementId} and card_status=1
+        where replacement_id=#{replacementId} and card_status=2
     </update>
     <delete id="delCard" parameterType="int">
         delete from attendance_card_rep where replacement_id in

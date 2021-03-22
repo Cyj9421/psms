@@ -3,6 +3,7 @@ package com.psms.project.system.mapper;
 import java.util.List;
 
 import com.psms.project.system.domain.SysPost;
+import com.psms.project.system.domain.vo.SysPostVo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -27,6 +28,13 @@ public interface SysPostMapper
      * @return 岗位列表
      */
     public List<SysPost> selectPostAll();
+
+    /**
+     * 查找部门下的岗位
+     * @param deptId
+     * @return
+     */
+    public List<SysPostVo> selectPostVoList(long deptId);
 
     /**
      * 通过岗位ID查询岗位信息

@@ -3,6 +3,7 @@ package com.psms.project.dormitory.service;
 import com.psms.project.dormitory.domain.DormitoryRoom;
 import com.psms.project.dormitory.domain.vo.DormitoryRoomInfoVo;
 import com.psms.project.dormitory.domain.vo.InsertRoomVo;
+import com.psms.project.dormitory.domain.vo.SelectRoomVo;
 import com.psms.project.dormitory.domain.vo.UpdateRoomVo;
 
 import java.util.List;
@@ -15,13 +16,13 @@ public interface IDormitoryRoomService {
      * 房间列表
      * @return
      */
-    public List<DormitoryRoom> roomList();
+    public List<DormitoryRoom> roomList(SelectRoomVo selectRoomVo);
 
     /**
      * 房间入住人员列表
      * @return
      */
-    public List<DormitoryRoomInfoVo> roomInfoList();
+    public List<DormitoryRoomInfoVo> roomInfoList(int dormitoryId,int roomId);
 
     /**
      * 房间信息

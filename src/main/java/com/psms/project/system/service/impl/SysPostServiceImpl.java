@@ -1,6 +1,8 @@
 package com.psms.project.system.service.impl;
 
 import java.util.List;
+
+import com.psms.project.system.domain.vo.SysPostVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,16 @@ public class SysPostServiceImpl implements ISysPostService
     public List<SysPost> selectPostAll()
     {
         return postMapper.selectPostAll();
+    }
+
+    /**
+     * 查找部门下的所有岗位
+     * @param deptId
+     * @return
+     */
+    @Override
+    public List<SysPostVo> selectPostVoList(long deptId) {
+        return postMapper.selectPostVoList(deptId);
     }
 
     /**

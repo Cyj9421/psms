@@ -2,6 +2,7 @@ package com.psms.project.system.mapper;
 
 import java.util.List;
 
+import com.psms.project.system.domain.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -37,6 +38,13 @@ public interface SysUserRoleMapper
      * @return 结果
      */
     public int countUserRoleByRoleId(Long roleId);
+
+    /**
+     * 新增用户角色信息
+     * @param user
+     * @return
+     */
+    public int insertUserRole(SysUser user);
 
     /**
      * 批量新增用户角色信息

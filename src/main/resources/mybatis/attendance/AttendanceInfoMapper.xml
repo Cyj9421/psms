@@ -33,7 +33,7 @@
     </resultMap>
     <resultMap id="infoVoResult" type="com.psms.project.attendance.domain.vo.AttendanceInfoVo">
         <result property="workNum" column="work_num"/>
-        <result property="attendanceStatus" column="attendance_status"/>
+<!--        <result property="attendanceStatus" column="attendance_status"/>-->
         <result property="deptName" column="dept_name"/>
         <result property="fullName" column="full_name"/>
         <result property="personalPhoto" column="personal_photo"/>
@@ -56,6 +56,23 @@
     <insert id="startAttendance" parameterType="com.psms.project.attendance.domain.AttendanceInfo">
         insert into attendance_info (work_num,start_time,attendance_date)
         values (#{workNum},#{startTime},#{attendanceDate})
+    </insert>
+    <insert id="addAttendance" parameterType="com.psms.project.attendance.domain.vo.AttendanceVo">
+        insert into attendance_info(
+        <if test="workNum != null and workNum != ''">work_num,</if>
+        <if test="isAsk != null and isAsk !=0 ">is_ask,</if>
+        <if test="isVacate != null and isVacate !=0 ">is_vacate,</if>
+        <if test="isAbsenteeism != null and isAbsenteeism !=0 ">is_absenteeism,</if>
+        <if test="attendanceDate != null">attendance_date,</if>
+        attendance_status
+        )values (
+        <if test="workNum != null and workNum != ''">#{workNum},</if>
+        <if test="isAsk != null and isAsk !=0 ">#{isAsk},</if>
+        <if test="isVacate != null and isVacate !=0 ">#{isVacate},</if>
+        <if test="isAbsenteeism != null and isAbsenteeism !=0 ">#{isAbsenteeism},</if>
+        <if test="attendanceDate != null">#{attendanceDate},</if>
+        #{attendanceStatus}
+        )
     </insert>
     <update id="endAttendance" parameterType="com.psms.project.attendance.domain.AttendanceInfo">
         update attendance_info set end_time=#{endTime}

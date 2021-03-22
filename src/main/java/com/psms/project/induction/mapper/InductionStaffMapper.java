@@ -1,5 +1,6 @@
 package com.psms.project.induction.mapper;
 
+import com.psms.project.induction.domain.InductionWorkCard;
 import com.psms.project.induction.domain.vo.InductionVo;
 import com.psms.project.induction.domain.vo.InsertInductionVo;
 import com.psms.project.induction.domain.vo.SelectInductionVo;
@@ -42,6 +43,13 @@ public interface InductionStaffMapper {
     public InductionVo inductionInfoByWorkNum(String workNum);
 
     /**
+     * 验证身份证号
+     * @param idCard
+     * @return
+     */
+    public InductionVo inductionInfoByIdCard(String idCard);
+
+    /**
      * 入职申请
      * @param insertInductionVo
      * @return
@@ -69,4 +77,11 @@ public interface InductionStaffMapper {
      * @return
      */
     public int delInductions(int [] inductionIds);
+
+    /**
+     * 工牌信息
+     * @param workNums
+     * @return
+     */
+    public List<InductionWorkCard> cardList(String [] workNums);
 }

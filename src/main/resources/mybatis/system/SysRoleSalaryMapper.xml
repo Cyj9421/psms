@@ -14,17 +14,27 @@
         <result property="afdSalary" column="afd_salary"/>
         <result property="remark" column="remark"/>
         <result property="salary" column="salary"/>
+        <result property="salaryMonth" column="salary_month"/>
+        <result property="salaryYear" column="salary_year"/>
         <result property="getStatus" column="get_status"/>
         <result property="getTime" column="get_time"/>
         <result property="workNum" column="work_num"/>
         <result property="fullName" column="full_name"/>
         <result property="deptName" column="dept_name"/>
-        <result property="leader" column="leader"/>
-        <result property="postName" column="post_name"/>
-        <result property="postCode" column="post_code"/>
-        <collection property="sysUnitPrices" resultMap="priceResult"/>
-        <collection property="attendanceSummaries" resultMap="summaryResult"/>
+        <result property="personalPhoto" column="personal_photo"/>
+        <result property="sex" column="sex"/>
     </resultMap>
+    <resultMap id="getSalaryResult" type="com.psms.project.system.domain.vo.SysGetSalaryVo">
+        <result property="headcount" column="headcount"/>
+        <result property="receiveCount" column="receive_count"/>
+        <result property="notReceiveCount" column="not_receive_count"/>
+        <result property="receiveSalaryCount" column="receive_salary_count"/>
+        <result property="notReceiveSalaryCount" column="not_receive_salary_count"/>
+        <result property="currencyName" column="currency_name"/>
+    </resultMap>
+<!--        <collection property="sysUnitPrices" resultMap="priceResult"/>-->
+<!--        <collection property="attendanceSummaries" resultMap="summaryResult"/>-->
+<!--    </resultMap>-->
     <resultMap id="summaryResult" type="com.psms.project.attendance.domain.AttendanceSummary">
         <id property="summaryId" column="summary_id"/>
         <result property="workNum" column="workNum"/>
@@ -40,33 +50,33 @@
         <result property="summaryQuarter" column="summary_quarter"/>
         <result property="summaryYear" column="summary_year"/>
      </resultMap>
-    <resultMap id="priceResult" type="com.psms.project.system.domain.SysUnitPrice">
-        <id property="priceId" column="price_id"/>
-        <result property="workNum" column="work_num"/>
-        <result property="baseSalary" column="base_salary"/>
-        <result property="afdPrice" column="afd_price"/>
-        <result property="earlyPrice" column="early_price"/>
-        <result property="latePrice" column="late_price"/>
-        <result property="overtimePrice" column="overtime_price"/>
-        <result property="remark" column="remark"/>
-    </resultMap>
+<!--    <resultMap id="priceResult" type="com.psms.project.system.domain.SysUnitPrice">-->
+<!--        <id property="priceId" column="price_id"/>-->
+<!--        <result property="workNum" column="work_num"/>-->
+<!--        <result property="baseSalary" column="base_salary"/>-->
+<!--        <result property="afdPrice" column="afd_price"/>-->
+<!--        <result property="earlyPrice" column="early_price"/>-->
+<!--        <result property="latePrice" column="late_price"/>-->
+<!--        <result property="overtimePrice" column="overtime_price"/>-->
+<!--        <result property="remark" column="remark"/>-->
+<!--    </resultMap>-->
     <sql id="selectSalaryVo">
-        select s.salary_id,s.work_num,s.base_salary,s.overtime_salary,s.bonus,s.penalty,s.late_salary,s.early_salary,s.afd_salary,s.remark,s.salary,s.get_status,s.get_time,
+        select s.salary_id,s.work_num,s.base_salary,s.overtime_salary,s.bonus,s.penalty,s.late_salary,s.early_salary,s.afd_salary,s.remark,s.salary,s.salary_month,s.salary_year,s.get_status,s.get_time,
                sm.summary_id,sm.work_num,sm.late_num,sm.early_num,sm.afd_num,sm.overtime,sm.rewards_num,sm.punishment_num,sm.bt_num,sm.report_type,
                up.price_id,up.work_num,up.base_salary,up.overtime_price,up.afd_price,up.late_price,up.early_price,up.remark,
                n.full_name,
-               d.dept_name,d.leader,
-               p.post_code,p.post_name
+               d.dept_name,
+               i.personal_photo,i.sex
         from sys_role_salary s
             left join sys_unit_price up on s.work_num=up.work_num
             left join attendance_summary sm on s.work_num=sm.work_num
             left join sys_user_number n on s.work_num=n.work_num
             left join sys_dept d on n.dept_id=d.dept_id
-            left join sys_post p on n.post_id=p.post_id
+            left join induction_staff i on s.work_num=i.work_num
     </sql>
     <insert id="addSalary" parameterType="com.psms.project.system.domain.SysRoleSalary">
-        insert into sys_role_salary(work_num,base_salary,overtime_salary,bonus,penalty,late_salary,early_salary,afd_salary,remark,salary)
-        values (#{workNum},#{baseSalary},#{overtimeSalary},#{bonus},#{penalty},#{lateSalary},#{earlySalary},#{afdSalary},#{remark},#{salary})
+        insert into sys_role_salary(work_num,base_salary,overtime_salary,bonus,penalty,late_salary,early_salary,afd_salary,remark,salary,salary_month,salary_year)
+        values (#{workNum},#{baseSalary},#{overtimeSalary},#{bonus},#{penalty},#{lateSalary},#{earlySalary},#{afdSalary},#{remark},#{salary},#{salaryMonth},#{salaryYear})
     </insert>
 
     <update id="getSalary" parameterType="com.psms.project.system.domain.SysRoleSalary">
@@ -89,7 +99,7 @@
         where work_num=#{workNum}
     </update>
 
-    <select id="salaryList" resultMap="salaryResult">
+    <select id="salaryList" resultMap="salaryResult" parameterType="com.psms.project.system.domain.SysRoleSalary">
         <include refid="selectSalaryVo"/>
         where sm.report_type=1
             <if test="workNum != null and workNum!=''">
@@ -117,5 +127,23 @@
          and  a.summary_month=#{summaryMonth}
          and  a.summary_quarter=#{summaryQuarter}
          and  a.summary_year=#{summaryYear}
+    </select>
+    <select id="getSalaryList" resultMap="getSalaryResult" parameterType="int">
+        SELECT
+	    count(*) AS headcount,
+	    count(if(get_status = 1,TRUE,null))  AS receive_count,
+	    count(if(get_status = 2,TRUE,null)) AS not_receive_count,
+	    COALESCE(sum(if(get_status = 1,s.salary,0)),0)AS receive_salary_count,
+	    COALESCE(sum(if(get_status = 2,s.salary,0)),0)AS not_receive_salary_count,
+	    i.currency_name
+        FROM
+	    sys_role_salary s
+	    LEFT JOIN induction_staff ids ON s.work_num = ids.work_num
+	    LEFT JOIN induction_currency i ON ids.currency_id = i.currency_id
+        WHERE
+	    s.salary_year = #{param1}
+	    AND s.salary_month = #{param2}
+        GROUP BY
+	    i.currency_name
     </select>
 </mapper>

@@ -37,6 +37,9 @@ public class BussinessCompleteController extends BaseController {
     public AjaxResult destroyList(BussinessComplete bussinessComplete, @RequestParam(value="pageNum",defaultValue = "1")int pageNum,
                                   @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
+        if(bussinessComplete.getDestroyStatus()==0){
+            bussinessComplete.setDestroyStatus(2);
+        }
         List<BussinessComplete> list = bussinessCompleteService.destroyList(bussinessComplete);
         PageInfo pageInfo = new PageInfo(list);
         return AjaxResult.success(pageInfo);
