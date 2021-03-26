@@ -5,8 +5,6 @@ import org.apache.commons.fileupload.FileUploadException;
 
 /**
  * 文件上传 误异常类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class InvalidExtensionException extends FileUploadException
 {

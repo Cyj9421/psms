@@ -3,13 +3,19 @@ package com.psms.project.attendance.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.psms.common.utils.SecurityUtils;
+import com.psms.common.utils.StringUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.AttendanceAskOff;
 import com.psms.project.attendance.domain.AttendanceCardRep;
+import com.psms.project.attendance.domain.AttendanceInfo;
+import com.psms.project.attendance.domain.AttendanceLate;
 import com.psms.project.attendance.service.IAttendanceCardRepService;
+import com.psms.project.attendance.service.IAttendanceInfoService;
 import com.psms.project.attendance.service.IAttendanceLateService;
 import com.psms.project.attendance.service.IAttendanceSummaryService;
+import com.psms.project.system.domain.SysUserNumber;
+import com.psms.project.system.service.ISysUserNumberService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +33,10 @@ public class AttendanceCardRepController extends BaseController {
     private IAttendanceCardRepService attendanceCardRepService;
     @Autowired
     private IAttendanceSummaryService summaryService;
+    @Autowired
+    private ISysUserNumberService userNumberService;
+    @Autowired
+    private IAttendanceInfoService infoService;
     @Autowired
     private IAttendanceLateService lateService;
     /**
@@ -60,6 +70,25 @@ public class AttendanceCardRepController extends BaseController {
      */
     @PostMapping
     public AjaxResult addCardRep(@RequestBody AttendanceCardRep attendanceCardRep){
+        if(StringUtils.isEmpty(attendanceCardRep.getWorkNum())){
+            return AjaxResult.error(400,"工号不能为空");
+        }
+        SysUserNumber userNumber=userNumberService.numberByWorkNum(attendanceCardRep.getWorkNum());
+        if(userNumber ==null){
+            return AjaxResult.error(400,"请输入正确的工号!");
+        }if(attendanceCardRep.getAttendanceDate()==null){
+            return AjaxResult.error(400,"请输入考勤日期");
+        }
+        AttendanceInfo attendanceInfo=new AttendanceInfo();
+        attendanceInfo.setWorkNum(attendanceCardRep.getWorkNum());
+        attendanceInfo.setAttendanceDate(attendanceCardRep.getAttendanceDate());
+        AttendanceInfo attendance = infoService.attendateInfo(attendanceInfo);
+        if(attendance==null){
+            return AjaxResult.error(400,"没有该员工的考勤信息");
+        }
+        if(attendance.getAttendanceStatus()==1){
+            return AjaxResult.error(400,"考勤正常，不需要补卡");
+        }
         attendanceCardRep.setNickName(SecurityUtils.getUsername());
         return toAjax(attendanceCardRepService.addCardRep(attendanceCardRep));
     }
@@ -73,9 +102,28 @@ public class AttendanceCardRepController extends BaseController {
     public AjaxResult updateCard(@RequestBody AttendanceCardRep attendanceCardRep){
         attendanceCardRep.setUpdateBy(SecurityUtils.getUsername());
         attendanceCardRepService.updateCard(attendanceCardRep);
-//        if(attendanceCardRep.getCardStatus()==1){
-//            lateService.delLate();
-//        }
+        attendanceCardRep= attendanceCardRepService.cardRepInfo(attendanceCardRep.getReplacementId());
+        if(attendanceCardRep.getCardStatus()!=2){
+            return AjaxResult.error(400,"不能二次审核!");
+        }
+        if(attendanceCardRep.getCardStatus()==1) {
+            AttendanceInfo attendanceInfo=new AttendanceInfo();
+            attendanceInfo.setWorkNum(attendanceCardRep.getWorkNum());
+            attendanceInfo.setAttendanceDate(attendanceCardRep.getAttendanceDate());
+            attendanceInfo = infoService.attendateInfo(attendanceInfo);
+            if (attendanceInfo.getIsLate() == 2) {
+                AttendanceLate attendanceLate = new AttendanceLate();
+                attendanceLate.setWorkNum(attendanceCardRep.getWorkNum());
+                attendanceLate.setLateDate(attendanceCardRep.getAttendanceDate());
+                attendanceLate = lateService.lateInfoByAttendance(attendanceLate);
+                lateService.delLate(attendanceLate.getLateId());
+            }
+            attendanceInfo.setAttendanceStatus(1);
+            attendanceInfo.setIsLate(1);
+            attendanceInfo.setIsEarly(1);
+            attendanceInfo.setIsAbsenteeism(1);
+            infoService.updateAttendance(attendanceInfo);
+        }
         return AjaxResult.success();
     }
     @DeleteMapping("/{replacementIds}")

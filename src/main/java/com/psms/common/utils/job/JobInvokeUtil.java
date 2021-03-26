@@ -11,8 +11,6 @@ import com.psms.project.monitor.domain.SysJob;
 
 /**
  * 任务执行工具
- *
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class JobInvokeUtil
 {

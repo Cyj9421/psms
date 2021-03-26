@@ -18,11 +18,8 @@ import static io.netty.handler.codec.DateFormatter.format;
 @Slf4j
 public class Test1 {
     public static void main(String[] args) {
+        String password=SecurityUtils.encryptPassword("9421");
+        System.out.println(password);
 
-        String body="http://103.149.27.155:18080/profile/upload/2021/03/17/a61e48e4-b00a-41a0-994e-024987680f8f.jpg";
-        int index=body.indexOf("/");
-        index=body.indexOf("/",index+4);
-        String str=body.substring(index);
-        System.out.println(str.substring(9));
     }
 }

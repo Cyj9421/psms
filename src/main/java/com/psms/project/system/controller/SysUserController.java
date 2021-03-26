@@ -55,8 +55,8 @@ public class SysUserController extends BaseController
     @Autowired
     private TokenService tokenService;
 
-//    @Autowired
-//    private ISysUserNumberService sysUserNumberService;
+    @Autowired
+    private ISysUserNumberService sysUserNumberService;
 //
 //    @Autowired
 //    private ISysWorkNumHeadService sysWorkNumHeadService;
@@ -148,32 +148,15 @@ public class SysUserController extends BaseController
         if(StringUtils.isEmpty(user.getWorkNum())){
             return AjaxResult.error(400,"工号不能为空");
         }
-//        SysWorkNumHead sysWorkNumHead=sysWorkNumHeadService.selectHeadByDeptId(user.getDeptId(),user.getPostId());
-//        String head=sysWorkNumHead.getWorkNumHead();
-//        //根据部门id查找工号开头
-//        if(workHead!=null && !workHead.equals(head)) {
-//            i=1;
-//        }
-//        String body=String.format("%06d",i);
-//        String workNum=head+body;
-//        //生成工号
-//        SysUserNumber sysUserNumber=new SysUserNumber();
-//        sysUserNumber.setWorkNum(workNum);
-//        sysUserNumber.setHeadId(sysWorkNumHead.getHeadId());
-//        sysUserNumber.setPostId(user.getPostId());
-//        sysUserNumber.setDeptId(user.getDeptId());
-//        sysUserNumber.setFullName(user.getNickName());
-//        sysUserNumber.setCreateBy(SecurityUtils.getUsername());
-//        sysUserNumber.setCreateTime(new Date());
-//        SysUserNumber numberinfo=sysUserNumberService.checkNum(sysUserNumber.getFullName());
-//        if(numberinfo != null){
-//            numberinfo.setUpdateBy(SecurityUtils.getUsername());
-//            numberinfo.setUpdateTime(new Date());
-//            sysUserNumberService.saveNewNum(numberinfo);
-//            return AjaxResult.error("老员工,已生成新的工号");
-//        }
-//        sysUserNumberService.addNumber(sysUserNumber);
-//        i++;
+        if(sysUserNumberService.numberByWorkNum(user.getWorkNum())==null){
+            return AjaxResult.error(400,"请输入正确的工号");
+        }
+        if(UserConstants.NOT_UNIQUE.equals(userService.checkWorkNum(user.getWorkNum()))){
+            return AjaxResult.error(400,"一个工号只能绑定一个用户");
+        }
+        if(user.getRoleId()==null){
+            return AjaxResult.error(400,"角色不能为空!");
+        }
         user.setCreateBy(SecurityUtils.getUsername());
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         int res=userService.insertUser(user);

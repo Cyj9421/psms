@@ -57,8 +57,6 @@ import com.psms.framework.web.domain.AjaxResult;
 
 /**
  * Excel相关处理
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class ExcelUtil<T>
 {

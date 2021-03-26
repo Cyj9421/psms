@@ -27,6 +27,13 @@ public interface AttendanceLateMapper {
     public AttendanceLate lateInfo(int lateId);
 
     /**
+     * 迟到详情
+     * @param attendanceLate
+     * @return
+     */
+    public AttendanceLate lateInfoByAttendance(AttendanceLate attendanceLate);
+
+    /**
      * 新增迟到记录
      * @param attendanceLate
      * @return

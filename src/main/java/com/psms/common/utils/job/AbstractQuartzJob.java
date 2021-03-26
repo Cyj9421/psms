@@ -19,8 +19,6 @@ import com.psms.project.monitor.service.ISysJobLogService;
 
 /**
  * 抽象quartz调用
- *
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public abstract class AbstractQuartzJob implements Job
 {

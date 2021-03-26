@@ -78,6 +78,7 @@
             AND s.work_num like concat('%',#{workNum},'%')
             </if>
         </where>
+        order by s.schedule_id desc
     </select>
     <select id="scheduleInfo" parameterType="string" resultMap="scheduleResult">
         <include refid="selectScheduleVo"/>

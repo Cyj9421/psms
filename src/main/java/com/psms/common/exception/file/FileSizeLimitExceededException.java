@@ -2,8 +2,6 @@ package com.psms.common.exception.file;
 
 /**
  * 文件名大小限制异常类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class FileSizeLimitExceededException extends FileException
 {

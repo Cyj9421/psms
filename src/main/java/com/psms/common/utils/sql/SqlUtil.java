@@ -5,8 +5,6 @@ import com.psms.common.utils.StringUtils;
 
 /**
  * sql操作工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class SqlUtil
 {

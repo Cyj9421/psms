@@ -2,6 +2,7 @@ package com.psms.project.system.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.psms.common.utils.StringUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.AttendanceSummary;
@@ -64,9 +65,12 @@ public class SysUnitPriceController extends BaseController {
      */
     @PostMapping("/add")
     public AjaxResult addPrice(@RequestBody SysUnitPrice sysUnitPrice){
+            if(StringUtils.isEmpty(sysUnitPrice.getWorkNum())){
+                return AjaxResult.error(400,"工号不能为空");
+            }
            SysUserNumber sysUserNumber=sysUserNumberService.numberByWorkNum(sysUnitPrice.getWorkNum());
            if(sysUserNumber==null) {
-               return AjaxResult.success("工号输入错误");
+               return AjaxResult.error(400,"请输入正确的工号");
            }
         return toAjax(sysUnitPriceService.addPrice(sysUnitPrice));
     }

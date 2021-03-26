@@ -10,6 +10,7 @@
         <result property="leader" column="dept_leader"/>
         <result property="postName" column="post_name"/>
         <result property="postCode" column="post_code"/>
+        <result property="attendanceDate" column="attendance_date"/>
         <result property="fullName" column="full_name"/>
         <result property="reason" column="reason"/>
         <result property="repType" column="rep_type"/>
@@ -20,7 +21,7 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
     <sql id="cardRepVo">
-        select cr.replacement_id,cr.work_num,cr.reason,cr.rep_type,cr.card_status,cr.nick_name,cr.nick_time,cr.update_by,cr.update_time,
+        select cr.replacement_id,cr.work_num,cr.attendance_date,cr.reason,cr.rep_type,cr.card_status,cr.nick_name,cr.nick_time,cr.update_by,cr.update_time,
                d.dept_name,d.leader,
                p.post_name,p.post_code,
                n.full_name
@@ -30,8 +31,8 @@
         left join sys_post p on n.post_id=p.post_id
     </sql>
     <insert id="addCardRep" parameterType="com.psms.project.attendance.domain.AttendanceCardRep">
-        insert into attendance_card_rep(work_num,reason,rep_type,nick_name,nick_time)
-        values (#{workNum},#{reason},#{repType},#{nickName},sysdate())
+        insert into attendance_card_rep(work_num,attendance_date,reason,rep_type,nick_name,nick_time)
+        values (#{workNum},#{attendanceDate},#{reason},#{repType},#{nickName},sysdate())
     </insert>
     <update id="updateCard" parameterType="com.psms.project.attendance.domain.AttendanceCardRep">
         update attendance_card_rep set

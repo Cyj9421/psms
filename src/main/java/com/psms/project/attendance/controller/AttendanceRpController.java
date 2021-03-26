@@ -4,11 +4,14 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.psms.common.utils.SecurityUtils;
+import com.psms.common.utils.StringUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.AttendanceOvertime;
 import com.psms.project.attendance.domain.AttendanceRp;
 import com.psms.project.attendance.service.IAttendanceRpService;
+import com.psms.project.system.domain.SysUserNumber;
+import com.psms.project.system.service.ISysUserNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +24,8 @@ import java.util.List;
 public class AttendanceRpController extends BaseController {
     @Autowired
     private IAttendanceRpService attendanceRpService;
-
+    @Autowired
+    private ISysUserNumberService userNumberService;
     /**
      * 奖惩列表
      * @param attendanceRp
@@ -53,6 +57,13 @@ public class AttendanceRpController extends BaseController {
      */
     @PostMapping
     public AjaxResult addRp(@RequestBody AttendanceRp attendanceRp){
+        if(StringUtils.isEmpty(attendanceRp.getWorkNum())){
+            return AjaxResult.error(400,"工号不能为空");
+        }
+        SysUserNumber userNumber=userNumberService.numberByWorkNum(attendanceRp.getWorkNum());
+        if(userNumber ==null){
+            return AjaxResult.error(400,"请输入正确的工号!");
+        }
         attendanceRp.setNickName(SecurityUtils.getUsername());
         return toAjax(attendanceRpService.addRp(attendanceRp));
     }

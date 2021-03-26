@@ -75,4 +75,14 @@ public class AttendanceCardServiceImpl implements IAttendanceCardService {
     public AttendanceCard attendanceCardInfo(String cardNum) {
         return attendanceCardMapper.attendanceCardInfo(cardNum);
     }
+
+    /**
+     * 通过工号查找卡号列表
+     * @param workNum
+     * @return
+     */
+    @Override
+    public List<AttendanceCard> cardInfoByWorkNum(String workNum) {
+        return attendanceCardMapper.cardInfoByWorkNum(workNum);
+    }
 }

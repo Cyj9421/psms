@@ -4,8 +4,6 @@ import com.psms.common.utils.StringUtils;
 
 /**
  * 字符串格式化
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class StrFormatter
 {

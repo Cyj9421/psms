@@ -89,4 +89,14 @@ public class SysRoleSalaryImpl implements ISysRoleSalaryService {
     public AttendanceSummary calcSummary(AttendanceSummary attendanceSummary) {
         return sysRoleSalaryMapper.calcSummary(attendanceSummary);
     }
+
+    /**
+     * 删除薪资
+     * @param sysRoleSalary
+     * @return
+     */
+    @Override
+    public int delSalary(SysRoleSalary sysRoleSalary) {
+        return sysRoleSalaryMapper.delSalary(sysRoleSalary);
+    }
 }

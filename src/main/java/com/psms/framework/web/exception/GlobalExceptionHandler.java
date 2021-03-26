@@ -20,8 +20,7 @@ import com.psms.framework.web.domain.AjaxResult;
 
 /**
  * 全局异常处理器
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler

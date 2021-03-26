@@ -100,5 +100,9 @@
         <include refid="cardVo"/>
         where c.card_num=#{cardNum}
     </select>
+    <select id="cardInfoByWorkNum" resultMap="cardResult" parameterType="string">
+        <include refid="cardVo"/>
+        where c.work_num=#{workNum}
+    </select>
 
 </mapper>

@@ -108,15 +108,16 @@
                 AND i.attendance_date=#{attendanceDate}
             </if>
         </where>
+        group by i.attendance_id
         order by i.attendance_date desc
     </select>
     <select id="attendanceInfo" parameterType="int" resultMap="infoResult">
         <include refid="attendanceVo"/>
-        where i.attendance_id=#{attendanceId}
+        where i.attendance_id=#{attendanceId} and c.card_type=1
     </select>
     <select id="attendateInfo" resultMap="infoResult" parameterType="com.psms.project.attendance.domain.AttendanceInfo">
         <include refid="attendanceVo"/>
-        where i.work_num=#{workNum} and i.attendance_date=#{attendanceDate}
+        where i.work_num=#{workNum} and i.attendance_date=#{attendanceDate} and c.card_type=1
     </select>
     <select id="brushCardInfoByDoor" resultMap="brushCardInfoResult" parameterType="string">
         select n.work_num,n.full_name,

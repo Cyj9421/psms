@@ -2,8 +2,6 @@ package com.psms.common.exception.user;
 
 /**
  * 用户密码不正确或不符合规范异常类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class UserPasswordNotMatchException extends UserException
 {

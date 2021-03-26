@@ -62,6 +62,10 @@ public class BussinessCompleteController extends BaseController {
      */
     @PostMapping("/add")
     public AjaxResult addDestroy(@RequestBody BussinessComplete bussinessComplete){
+        BussinessTrip bussinessTrip = bussinessTripService.selectTripInfo(bussinessComplete.getTripId());
+        if(bussinessTrip.getTripStatus()==2){
+            return AjaxResult.error(400,"该出差未被审核,销差失败");
+        }
         bussinessComplete.setCreateDestroyBy(SecurityUtils.getUsername());
         bussinessComplete.setCreateDestroyTime(new Date());
         return toAjax(bussinessCompleteService.addDestroy(bussinessComplete));

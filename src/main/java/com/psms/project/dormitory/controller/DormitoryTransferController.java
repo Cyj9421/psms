@@ -9,6 +9,7 @@ import com.psms.project.dormitory.domain.DormitoryBuilding;
 import com.psms.project.dormitory.domain.DormitoryRoom;
 import com.psms.project.dormitory.domain.DormitoryTransfer;
 import com.psms.project.dormitory.domain.vo.InsertTransferVo;
+import com.psms.project.dormitory.domain.vo.UpdateRoomVo;
 import com.psms.project.dormitory.domain.vo.UpdateTransferVo;
 import com.psms.project.dormitory.service.IDormitoryRoomService;
 import com.psms.project.dormitory.service.IDormitoryTransferService;
@@ -82,6 +83,10 @@ public class DormitoryTransferController extends BaseController {
         }
         if(updateTransferVo.getTransferStatus()==1){
             DormitoryTransfer dormitoryTransfer = transferService.transferInfo(updateTransferVo.getTransferId());
+            DormitoryRoom dormitoryRoom = roomService.roomInfo(dormitoryTransfer.getRoomId());
+            UpdateRoomVo updateRoomVo=new UpdateRoomVo();
+            updateRoomVo.setRoomCapacity(dormitoryRoom.getRoomCapacity()-1);
+            roomService.updateRoom(updateRoomVo);
             InductionVo inductionVo = staffService.inductionInfoByWorkNum(dormitoryTransfer.getWorkNum());
             UpdateInductionVo updateInductionVo=new UpdateInductionVo();
             updateInductionVo.setInductionId(inductionVo.getInductionId());

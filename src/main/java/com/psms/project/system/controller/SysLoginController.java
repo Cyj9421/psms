@@ -73,6 +73,7 @@ public class SysLoginController
     {
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         SysUser user = loginUser.getUser();
+        user.setAvatar(user.getAvatar().substring(1));
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(user);
         // 权限集合

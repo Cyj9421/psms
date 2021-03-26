@@ -7,9 +7,6 @@ import com.psms.project.monitor.domain.SysJob;
 
 /**
  * 定时任务处理（禁止并发执行）
- * 
- * @author jeethink  官方网址：www.jeethink.vip
- *
  */
 @DisallowConcurrentExecution
 public class QuartzDisallowConcurrentExecution extends AbstractQuartzJob

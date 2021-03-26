@@ -2,8 +2,6 @@ package com.psms.common.enums;
 
 /**
  * 用户状态
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public enum UserStatus
 {

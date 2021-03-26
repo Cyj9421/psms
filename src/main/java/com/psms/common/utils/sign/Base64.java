@@ -2,8 +2,6 @@ package com.psms.common.utils.sign;
 
 /**
  * Base64工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public final class Base64
 {

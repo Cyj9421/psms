@@ -2,8 +2,6 @@ package com.psms.common.exception.user;
 
 /**
  * 验证码错误异常类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class CaptchaException extends UserException
 {

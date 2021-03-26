@@ -4,8 +4,6 @@ import com.psms.common.exception.BaseException;
 
 /**
  * 文件信息异常类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class FileException extends BaseException
 {

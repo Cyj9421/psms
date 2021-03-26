@@ -14,8 +14,6 @@ import com.psms.common.utils.StringUtils;
 
 /**
  * Repeatable 过滤器
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class RepeatableFilter implements Filter
 {

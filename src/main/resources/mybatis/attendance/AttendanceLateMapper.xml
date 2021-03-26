@@ -59,4 +59,8 @@
         </where>
         order by l.late_id desc
     </select>
+    <select id="lateInfoByAttendance" resultMap="lateResult" parameterType="com.psms.project.attendance.domain.AttendanceLate">
+        <include refid="lateVo"/>
+        where l.work_num=#{workNum} and l.late_date=#{lateDate}
+    </select>
 </mapper>

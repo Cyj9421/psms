@@ -59,4 +59,11 @@ public interface SysRoleSalaryMapper {
      */
     public AttendanceSummary calcSummary(AttendanceSummary attendanceSummary);
 
+    /**
+     * 删除薪资
+     * @param sysRoleSalary
+     * @return
+     */
+    public int delSalary(SysRoleSalary sysRoleSalary);
+
 }

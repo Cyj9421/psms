@@ -17,7 +17,7 @@ public interface IBussinessTripService {
      * 查询出差详情
      * @return 出差详情
      */
-    public List<BussinessTrip> selectTripInfo(int tripId);
+    public BussinessTrip selectTripInfo(int tripId);
     /**
      * 新增出差申请
      * @param bussinessTrip

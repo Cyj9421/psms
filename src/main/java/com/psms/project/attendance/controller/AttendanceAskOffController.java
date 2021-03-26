@@ -3,10 +3,13 @@ package com.psms.project.attendance.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.psms.common.utils.SecurityUtils;
+import com.psms.common.utils.StringUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.AttendanceAskOff;
 import com.psms.project.attendance.service.IAttendanceAskOffService;
+import com.psms.project.system.domain.SysUserNumber;
+import com.psms.project.system.service.ISysUserNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +21,8 @@ import java.util.List;
 public class AttendanceAskOffController extends BaseController {
     @Autowired
     private IAttendanceAskOffService attendanceAskOffService;
-
+    @Autowired
+    private ISysUserNumberService userNumberService;
     /**
      * 请假列表
      * @return
@@ -48,6 +52,13 @@ public class AttendanceAskOffController extends BaseController {
      */
     @PostMapping("/add")
     public AjaxResult askOff(@RequestBody AttendanceAskOff attendanceAskOff){
+        if(StringUtils.isEmpty(attendanceAskOff.getWorkNum())){
+            return AjaxResult.error(400,"工号不能为空");
+        }
+        SysUserNumber userNumber=userNumberService.numberByWorkNum(attendanceAskOff.getWorkNum());
+        if(userNumber ==null){
+            return AjaxResult.error(400,"请输入正确的工号!");
+        }
         return toAjax(attendanceAskOffService.askOff(attendanceAskOff));
     }
 

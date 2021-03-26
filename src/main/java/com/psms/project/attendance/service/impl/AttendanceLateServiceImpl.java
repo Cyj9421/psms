@@ -37,6 +37,16 @@ public class AttendanceLateServiceImpl implements IAttendanceLateService {
     }
 
     /**
+     * 迟到详情
+     * @param attendanceLate
+     * @return
+     */
+    @Override
+    public AttendanceLate lateInfoByAttendance(AttendanceLate attendanceLate) {
+        return attendanceLateMapper.lateInfoByAttendance(attendanceLate);
+    }
+
+    /**
      * 添加迟到记录
      * @param attendanceLate
      * @return

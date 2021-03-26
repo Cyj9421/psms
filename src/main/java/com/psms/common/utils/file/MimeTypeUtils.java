@@ -2,8 +2,6 @@ package com.psms.common.utils.file;
 
 /**
  * 媒体类型工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class MimeTypeUtils
 {

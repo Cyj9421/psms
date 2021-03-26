@@ -14,8 +14,6 @@ import com.psms.common.utils.http.HttpHelper;
 
 /**
  * 构建可重复读取inputStream的request
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class RepeatedlyRequestWrapper extends HttpServletRequestWrapper
 {

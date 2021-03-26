@@ -79,9 +79,23 @@ public interface InductionStaffMapper {
     public int delInductions(int [] inductionIds);
 
     /**
+     * 删除入职申请
+     * @param inductionId
+     * @return
+     */
+    public int delInduction(int inductionId);
+
+    /**
      * 工牌信息
      * @param workNums
      * @return
      */
     public List<InductionWorkCard> cardList(String [] workNums);
+
+    /**
+     * 离职
+     * @param inductionId
+     * @return
+     */
+    public int updateWorkStatus(int inductionId);
 }

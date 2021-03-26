@@ -98,6 +98,12 @@
         <if test="salary != null and salary !=0">salary=#{salary}</if>
         where work_num=#{workNum}
     </update>
+    <delete id="delSalary" parameterType="com.psms.project.system.domain.SysRoleSalary">
+        delete from sys_role_salary where
+        work_num=#{workNum} and
+        salary_month=#{salaryMonth} and
+        salary_year=#{salaryYear}
+    </delete>
 
     <select id="salaryList" resultMap="salaryResult" parameterType="com.psms.project.system.domain.SysRoleSalary">
         <include refid="selectSalaryVo"/>
@@ -114,6 +120,7 @@
             <if test="fullName != null and fullName!=''">
                 AND n.full_name like concat ('%',#{fullName},'%')
             </if>
+            order by s.salary_id desc
     </select>
     <select id="salaryInfo" resultMap="salaryResult">
         <include refid="selectSalaryVo"/>

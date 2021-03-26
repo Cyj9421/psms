@@ -9,8 +9,6 @@ import com.psms.common.utils.html.EscapeUtil;
 
 /**
  * 获取IP方法
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class IpUtils
 {

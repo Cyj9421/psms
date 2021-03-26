@@ -87,8 +87,12 @@ public class AttendanceCardController extends BaseController {
         if(cardInfo !=null){
             return AjaxResult.error(400,"一张卡只能绑定一个人!");
         }else {
-            if (attendanceCardVo.getCardType() == 0 || attendanceCardVo.getCardType()==1) {
-                return AjaxResult.error(400, "该工号已经绑定过考勤卡了!");
+            List<AttendanceCard> attendanceCards = attendanceCardService.cardInfoByWorkNum(attendanceCardVo.getWorkNum());
+            for(int i=0;i<attendanceCards.size();i++){
+                AttendanceCard card=attendanceCards.get(i);
+                if(card.getCardType()==1){
+                    return AjaxResult.error(400,"该工号已经绑定过考勤卡了!");
+                }
             }
         }
         AttendanceCard attendanceCard=new AttendanceCard();
@@ -132,8 +136,12 @@ public class AttendanceCardController extends BaseController {
         if(cardInfo !=null){
             return AjaxResult.error(400,"一张卡只能绑定一个人!");
         }else {
-            if (attendanceCard.getCardType() == 0 || attendanceCard.getCardType()==1) {
-                return AjaxResult.error(400, "该工号已经绑定过考勤卡了!");
+            List<AttendanceCard> attendanceCards = attendanceCardService.cardInfoByWorkNum(attendanceCard.getWorkNum());
+            for(int i=0;i<attendanceCards.size();i++){
+                AttendanceCard card=attendanceCards.get(i);
+                if(card.getCardType()==1){
+                    return AjaxResult.error(400,"该工号已经绑定过考勤卡了!");
+                }
             }
         }
         if(attendanceCard.getCardType()==2) {

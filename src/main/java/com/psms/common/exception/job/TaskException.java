@@ -2,8 +2,6 @@ package com.psms.common.exception.job;
 
 /**
  * 计划策略异常
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class TaskException extends Exception
 {

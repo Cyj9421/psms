@@ -4,8 +4,7 @@ import io.jsonwebtoken.Claims;
 
 /**
  * 通用常量信息
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  */
 public class Constants
 {

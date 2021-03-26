@@ -16,8 +16,6 @@ import com.psms.framework.config.PsmsConfig;
 
 /**
  * 文件上传工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class FileUploadUtils
 {

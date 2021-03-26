@@ -3,10 +3,13 @@ package com.psms.project.bussiness.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.psms.common.utils.SecurityUtils;
+import com.psms.common.utils.StringUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.bussiness.domain.BussinessTrip;
 import com.psms.project.bussiness.service.IBussinessTripService;
+import com.psms.project.system.domain.SysUserNumber;
+import com.psms.project.system.service.ISysUserNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +24,8 @@ import java.util.List;
 public class BussinessTripController extends BaseController {
     @Autowired
     private IBussinessTripService bussinessTripService;
-
+    @Autowired
+    private ISysUserNumberService userNumberService;
     /**
      *查询出差列表
      */
@@ -40,7 +44,7 @@ public class BussinessTripController extends BaseController {
      */
     @GetMapping(value = "/{tripId}")
     public AjaxResult tripInfo(@PathVariable("tripId") int tripId){
-        List<BussinessTrip> info=bussinessTripService.selectTripInfo(tripId);
+        BussinessTrip info=bussinessTripService.selectTripInfo(tripId);
         return AjaxResult.success(info);
     }
 
@@ -50,6 +54,13 @@ public class BussinessTripController extends BaseController {
      */
     @PostMapping("/add")
     public AjaxResult addTrip(@RequestBody BussinessTrip bussinessTrip){
+        if(StringUtils.isEmpty(bussinessTrip.getWorkNum())){
+            return AjaxResult.error(400,"工号不能为空");
+        }
+        SysUserNumber userNumber=userNumberService.numberByWorkNum(bussinessTrip.getWorkNum());
+        if(userNumber ==null){
+            return AjaxResult.error(400,"请输入正确的工号!");
+        }
         bussinessTrip.setCreateTripBy(SecurityUtils.getUsername());
         bussinessTrip.setCreateTripTime(new Date());
         return toAjax( bussinessTripService.addTrip(bussinessTrip));

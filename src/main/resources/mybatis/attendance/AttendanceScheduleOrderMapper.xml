@@ -43,6 +43,7 @@
                 AND schedule_name like concat('%',#{scheduleName},'%')
             </if>
         </where>
+        order by order_id desc
     </select>
     <select id="orderInfo" parameterType="int" resultMap="orderResult">
         <include refid="selectOrderVo"/>

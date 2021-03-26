@@ -104,6 +104,8 @@ public class InductionVo {
     private int probationMonth;
     @ApiModelProperty("试用期-日")
     private int probationDay;
+    @ApiModelProperty("入职状态(1已批准,2审核中(默认),3入职失败)")
+    private int inductionStatus;
     @ApiModelProperty("试用期状态(1已转正,2试用中(默认))")
     private int probationStatus;
 }

@@ -51,21 +51,32 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+<!--		&lt;!&ndash; 引入Swagger3依赖 &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>io.springfox</groupId>-->
+<!--			<artifactId>springfox-boot-starter</artifactId>-->
+<!--			<version>3.0.0</version>-->
+<!--		</dependency>-->
+
 		<dependency>
 			<groupId>com.documents4j</groupId>
 			<artifactId>documents4j-local</artifactId>
 			<version>1.0.3</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.documents4j</groupId>
 			<artifactId>documents4j-transformer-msoffice-word</artifactId>
 			<version>1.0.3</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>20.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
@@ -83,6 +94,7 @@
 			<artifactId>poi</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
+
 		<!-- excel工具 -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -215,7 +227,7 @@
 			<artifactId>jjwt</artifactId>
 			<version>${jwt.version}</version>
 		</dependency>
-		
+
 		<!-- swagger2-->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -232,20 +244,20 @@
 			    </exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!--防止进入swagger页面报类型转换错误，排除2.9.2中的引用，手动增加1.5.21版本-->
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.21</version>
         </dependency>
-        
+
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-models</artifactId>
             <version>1.5.21</version>
         </dependency>
-        
+
 		<!-- swagger2-UI-->
 		<dependency>
 			<groupId>io.springfox</groupId>

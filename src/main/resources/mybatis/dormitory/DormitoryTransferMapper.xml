@@ -18,6 +18,10 @@
         <result property="updateDate" column="update_date"/>
         <result property="remark" column="remark"/>
     </resultMap>
+    <resultMap id="updateTransferVo" type="com.psms.project.dormitory.domain.vo.UpdateTransferVo">
+        <id property="transferId" column="transfer_id"/>
+        <result property="transferStatus" column="transfer_status"/>
+    </resultMap>
     <sql id="selectTransferVo">
         select t.transfer_id,t.dormitory_id,t.room_id,t.work_num,t.transfer_status,t.create_date,t.update_date,t.remark,
                i.first_name,i.last_name,
@@ -49,7 +53,9 @@
     </insert>
     <update id="updateTransfer" parameterType="com.psms.project.dormitory.domain.vo.UpdateTransferVo">
         update dormitory_transfer set
+        <if test="transferStatus != null and transferStatus !=0">
         transfer_status=#{transferStatus},
+        </if>
         update_date=sysdate()
         where transfer_id=#{transferId}  and transfer_status=2
     </update>
@@ -61,6 +67,7 @@
     </delete>
     <select id="transferList" resultMap="transferResult">
         <include refid="selectTransferVo"/>
+        order by t.transfer_id desc
     </select>
     <select id="transferInfo" resultMap="transferResult" parameterType="int">
         <include refid="selectTransferVo"/>

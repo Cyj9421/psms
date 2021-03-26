@@ -71,7 +71,7 @@
                 AND rp.rp_status=#{rpStatus}
             </if>
         </where>
-        order by rp_id desc
+        order by rp.rp_id desc
     </select>
     <select id="selectR" parameterType="string" resultType="double">
         select sum(cash_amount) from attendance_rp

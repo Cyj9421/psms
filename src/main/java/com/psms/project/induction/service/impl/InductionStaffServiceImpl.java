@@ -120,6 +120,16 @@ public class InductionStaffServiceImpl implements IInductionStaffService {
     }
 
     /**
+     * 删除入职申请
+     * @param inductionId
+     * @return
+     */
+    @Override
+    public int delInduction(int inductionId) {
+        return inductionStaffMapper.delInduction(inductionId);
+    }
+
+    /**
      * 工牌信息
      * @param workNums
      * @return
@@ -127,6 +137,16 @@ public class InductionStaffServiceImpl implements IInductionStaffService {
     @Override
     public List<InductionWorkCard> cardList(String[] workNums) {
         return inductionStaffMapper.cardList(workNums);
+    }
+
+    /**
+     * 离职
+     * @param inductionId
+     * @return
+     */
+    @Override
+    public int updateWorkStatus(int inductionId) {
+        return inductionStaffMapper.updateWorkStatus(inductionId);
     }
 
     /**

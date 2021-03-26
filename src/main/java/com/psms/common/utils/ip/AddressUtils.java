@@ -10,8 +10,6 @@ import com.psms.framework.config.PsmsConfig;
 
 /**
  * 获取地址类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class AddressUtils
 {

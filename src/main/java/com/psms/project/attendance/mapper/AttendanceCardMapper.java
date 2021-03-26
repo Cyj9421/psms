@@ -52,4 +52,11 @@ public interface AttendanceCardMapper {
      * @return
      */
     public AttendanceCard attendanceCardInfo(String cardNum);
+
+    /**
+     * 通过工号查找卡号列表
+     * @param workNum
+     * @return
+     */
+    public List<AttendanceCard> cardInfoByWorkNum(String workNum);
 }

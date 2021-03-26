@@ -1,6 +1,8 @@
 package com.psms.project.system.controller;
 
 import java.io.IOException;
+
+import com.psms.framework.config.ServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +40,9 @@ public class SysProfileController extends BaseController
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private ServerConfig serverConfig;
+
     /**
      * 个人信息
      */
@@ -46,6 +51,7 @@ public class SysProfileController extends BaseController
     {
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         SysUser user = loginUser.getUser();
+        user.setAvatar(serverConfig.getUrl()+user.getAvatar());
         AjaxResult ajax = AjaxResult.success(user);
         ajax.put("roleGroup", userService.selectUserRoleGroup(loginUser.getUsername()));
         ajax.put("postGroup", userService.selectUserPostGroup(loginUser.getUsername()));

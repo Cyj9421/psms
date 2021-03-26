@@ -28,7 +28,7 @@ public class BussinessTripServiceImpl implements IBussinessTripService {
      * @return 出差详情
      */
     @Override
-    public List<BussinessTrip> selectTripInfo(int tripId) {
+    public BussinessTrip selectTripInfo(int tripId) {
         return bussinessTripMapper.selectTripInfo(tripId);
     }
     /**

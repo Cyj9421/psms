@@ -2,6 +2,7 @@ package com.psms.project.attendance.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.psms.common.utils.StringUtils;
 import com.psms.framework.web.controller.BaseController;
 import com.psms.framework.web.domain.AjaxResult;
 import com.psms.project.attendance.domain.AttendanceInfo;
@@ -87,7 +88,8 @@ public class AttendanceSummaryController extends BaseController {
      * @return
      */
     @GetMapping("/dept/list")
-    public AjaxResult sumReportByDept(AttendanceReportDateVo attendanceReportDateVo,@RequestParam(value="pageNum",defaultValue = "1")int pageNum,
+    public AjaxResult sumReportByDept(AttendanceReportDateVo attendanceReportDateVo,
+                                      @RequestParam(value="pageNum",defaultValue = "1")int pageNum,
                                       @RequestParam(value = "pageSize",defaultValue = "5")int pageSize) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c=Calendar.getInstance();
@@ -101,6 +103,11 @@ public class AttendanceSummaryController extends BaseController {
         }
         int days=(int)(new Date().getTime()-(sdf.parse(sdf.format(attendanceReportDateVo.getStartDate()))).getTime())/(60*60*24*1000);
         List<AttendanceSummaryVo> attendanceSummaryVoList = attendanceSummaryService.summaryVoList(attendanceReportDateVo);
+        if(StringUtils.isEmpty(attendanceReportDateVo.getWorkNum())==false){
+            if(attendanceSummaryVoList.size()==0){
+                return AjaxResult.error(400,"没有该部门的考勤信息!");
+            }
+        }
         List<AttendanceRpVo> attendanceRpVoList = attendanceSummaryService.attendanceRpVoList(attendanceReportDateVo);
         for(int i=0;i<attendanceSummaryVoList.size();i++){
             AttendanceSummaryVo attendanceSummaryVo = attendanceSummaryVoList.get(i);

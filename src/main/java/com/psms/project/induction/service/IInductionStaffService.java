@@ -78,6 +78,13 @@ public interface IInductionStaffService {
     public int delInductions(int [] inductionIds);
 
     /**
+     * 删除入职申请
+     * @param inductionId
+     * @return
+     */
+    public int delInduction(int inductionId);
+
+    /**
      * 根据出生日期计算年龄
      * @param bornDate
      * @return
@@ -90,4 +97,11 @@ public interface IInductionStaffService {
      * @return
      */
     public List<InductionWorkCard> cardList(String [] workNums);
+
+    /**
+     * 离职
+     * @param inductionId
+     * @return
+     */
+    public int updateWorkStatus(int inductionId);
 }

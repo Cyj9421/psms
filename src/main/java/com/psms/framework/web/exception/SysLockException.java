@@ -49,6 +49,7 @@ public class SysLockException {
     @Autowired
     private IAttendanceAskOffService attendanceAskOffService;
     @Scheduled(cron = "0 0 0 * * ?")     //每天凌晨12点执行一次
+//    @Scheduled(cron = "0 */1 * * * ?")  //每分钟执行一次
     public void sysLock() throws InterruptedException, ParseException {
         SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -62,7 +63,7 @@ public class SysLockException {
         List<String> numList = userNumberService.numList(null);
         for(int i=0;i<numList.size();i++){
             AttendanceSchedule attendanceSchedule = scheduleService.scheduleInfo(numList.get(i));
-            if(attendanceSchedule.getStartDate().after(nowDate) && attendanceSchedule.getEndDate().before(nowDate)){
+            if(attendanceSchedule.getStartDate().before(nowDate) && attendanceSchedule.getEndDate().after(nowDate)){
                 calendar.setTime(nowDate);
                 calendar.add(Calendar.DAY_OF_MONTH,-1);
                 AttendanceInfo attendance=new AttendanceInfo();

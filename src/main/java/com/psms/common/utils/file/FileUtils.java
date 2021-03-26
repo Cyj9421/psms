@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 文件处理工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class FileUtils extends org.apache.commons.io.FileUtils
 {

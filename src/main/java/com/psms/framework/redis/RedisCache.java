@@ -13,8 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * spring redis 工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
+ *
  **/
 @SuppressWarnings(value = { "unchecked", "rawtypes" })
 @Component

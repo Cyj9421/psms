@@ -19,7 +19,7 @@
     FROM
 	( SELECT ( TIMESTAMPDIFF(minute ,start_time,end_time)/60 ) AS workTime
 	FROM attendance_info
-	WHERE attendance_date BETWEEN #{startDate} AND #{endDate}
+	WHERE attendance_date BETWEEN date_format(#{startDate},'%y%m%d') and date_format(#{endDate},'%y%m%d')
 	group by attendance_id) AS work_time
     </select>
     <select id="salaryCost" resultType="java.lang.Double">

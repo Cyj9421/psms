@@ -156,6 +156,14 @@ public interface ISysUserService
     public int deleteUserByIds(Long[] userIds);
 
     /**
+     * 校验工号是否唯一
+     *
+     * @param workNum
+     * @return
+     */
+    public SysUser checkWorkNum(String workNum);
+
+    /**
      * 导入用户数据
      * 
      * @param userList 用户数据列表

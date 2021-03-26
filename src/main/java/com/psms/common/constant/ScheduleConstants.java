@@ -2,8 +2,6 @@ package com.psms.common.constant;
 
 /**
  * 任务调度通用常量
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class ScheduleConstants
 {

@@ -5,8 +5,6 @@ import com.psms.common.utils.StringUtils;
 
 /**
  * 基础异常
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class BaseException extends RuntimeException
 {

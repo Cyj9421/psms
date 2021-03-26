@@ -11,8 +11,6 @@ import com.psms.common.utils.StringUtils;
 
 /**
  * 类型转换器
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class Convert
 {

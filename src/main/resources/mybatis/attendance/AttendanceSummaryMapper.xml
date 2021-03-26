@@ -192,6 +192,7 @@
         <if test="selectType != null and selectType ==1">
             AND s.afd_num >0
         </if>
+
         <if test="selectType != null and selectType ==2">
             AND s.vacate_num >0
         </if>

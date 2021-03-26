@@ -18,8 +18,6 @@ import com.psms.project.monitor.domain.SysJob;
 
 /**
  * 定时任务工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  *
  */
 public class ScheduleUtils

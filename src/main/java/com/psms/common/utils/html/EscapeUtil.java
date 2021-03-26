@@ -4,8 +4,6 @@ import com.psms.common.utils.StringUtils;
 
 /**
  * 转义和反转义工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class EscapeUtil
 {

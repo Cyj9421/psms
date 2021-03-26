@@ -24,6 +24,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -97,14 +98,9 @@ public class InductionStaffController extends BaseController {
         if(StringUtils.isEmpty(insertInductionVo.getWorkNum())){
             return AjaxResult.error(400,"工号不能为空");
         }
-//        SysUserNumber userNumber=userNumberService.numberByWorkNum(insertInductionVo.getWorkNum());
-//        if(userNumber ==null){
-//
-//            return AjaxResult.error(400,"请输入正确的工号!");
-//        }
         InductionVo inductionVo=inductionStaffService.inductionInfoByWorkNum(insertInductionVo.getWorkNum());
         if(inductionVo!=null){
-            return AjaxResult.error(400,"已有该工号的信息");
+            return AjaxResult.error(400,"已有该工号的信息,建议您手动输入新的工号!");
         }
         if(insertInductionVo.getDormitoryId()==0){
             return AjaxResult.error(400,"请选择宿舍!");
@@ -112,11 +108,23 @@ public class InductionStaffController extends BaseController {
         if(insertInductionVo.getRoomId()==0){
             return AjaxResult.error(400,"请选择房间!");
         }
-        if(inductionStaffService.inductionInfoByIdCard(insertInductionVo.getIdCard())!=null){
+        InductionVo inductionInfoByIdCard = inductionStaffService.inductionInfoByIdCard(insertInductionVo.getIdCard());
+        if(inductionInfoByIdCard!=null){
             if(StringUtils.isEmpty(insertInductionVo.getRemark())){
                 insertInductionVo.setRemark("以前上过班,老员工");
+            }else {
+                insertInductionVo.setRemark(insertInductionVo.getRemark() + "(以前上过班,老员工)");
             }
-            insertInductionVo.setRemark(insertInductionVo.getRemark()+"(以前上过班,老员工)");
+            inductionStaffService.updateInductionStatus(inductionInfoByIdCard.getInductionId(),2);
+            DormitoryRoom dormitoryRoom = roomService.roomInfo(insertInductionVo.getRoomId());
+            if(dormitoryRoom.getRoomCapacity()<=0){
+                return AjaxResult.error(400,"该房间入住人员已满");
+            }
+            UpdateRoomVo roomVo=new UpdateRoomVo();
+            roomVo.setRoomId(dormitoryRoom.getRoomId());
+            roomVo.setRoomCapacity(dormitoryRoom.getRoomCapacity()-1);
+            roomService.updateRoom(roomVo);
+            return AjaxResult.success("以前上过班，老员工");
         }
         DormitoryRoom dormitoryRoom = roomService.roomInfo(insertInductionVo.getRoomId());
             if(dormitoryRoom.getRoomCapacity()<=0){
@@ -138,8 +146,15 @@ public class InductionStaffController extends BaseController {
     @ApiOperation(value = "入职审核",notes = "入职审核")
     public AjaxResult updateStatus(@ApiParam("入职id") @RequestParam(value = "inductionId") int inductionId,
                                    @ApiParam("入职状态(1审核通过,2审核中,3未通过)") @RequestParam(value = "inductionStatus") int inductionStatus){
+        SysUserNumber userNumber=new SysUserNumber();
+        try {
+            userNumber.setCreateBy(SecurityUtils.getUsername());
+        }catch (Exception e){
+            e.printStackTrace();
+            return AjaxResult.error(400,"登陆失效");
+        }
         int row=inductionStaffService.updateInductionStatus(inductionId,inductionStatus);
-        if(row >=0){
+        if(row ==0){
             return AjaxResult.error(400,"不能二次审核!");
         }
         UpdateInductionVo updateInductionVo=new UpdateInductionVo();
@@ -147,26 +162,33 @@ public class InductionStaffController extends BaseController {
         updateInductionVo.setInductionId(inductionId);
         inductionStaffService.updateInduction(updateInductionVo);
         InductionVo inductionVo = inductionStaffService.inductionInfo(inductionId);
-        InductionProbation probation=new InductionProbation();
-        probation.setProbationId(probationService.maxProbationId()+1);
-        probation.setProbationMonth(inductionVo.getProbationMonth());
-        probation.setProbationDay(inductionVo.getProbationDay());
-        if(probation.getProbationMonth()==0 && probation.getProbationDay()==0){
-            probation.setProbationStatus(1);
+        if(inductionStatus==1) {
+            InductionProbation probation = new InductionProbation();
+            probation.setProbationId(probationService.maxProbationId() + 1);
+            probation.setProbationMonth(inductionVo.getProbationMonth());
+            probation.setProbationDay(inductionVo.getProbationDay());
+            if (probation.getProbationMonth() == 0 && probation.getProbationDay() == 0) {
+                probation.setProbationStatus(1);
+            }
+            probation.setWorkNum(inductionVo.getWorkNum());
+            probationService.addProbation(probation);
+            SysWorkNumHead sysWorkNumHead = sysWorkNumHeadService.selectHeadByDeptId(inductionVo.getDeptId(), inductionVo.getPostId());
+            userNumber.setWorkNum(inductionVo.getWorkNum());
+            userNumber.setDeptId(inductionVo.getDeptId());
+            userNumber.setPostId(inductionVo.getPostId());
+            userNumber.setFullName(inductionVo.getFullName());
+            userNumber.setHeadId(sysWorkNumHead.getHeadId());
+            userNumber.setCreateTime(new Date());
+            userNumberService.addNumber(userNumber);
+        }if(inductionStatus==3) {
+            DormitoryRoom dormitoryRoom = roomService.roomInfo(inductionVo.getRoomId());
+            UpdateRoomVo roomVo=new UpdateRoomVo();
+            roomVo.setRoomId(dormitoryRoom.getRoomId());
+            roomVo.setRoomCapacity(dormitoryRoom.getRoomCapacity()+1);
+            roomService.updateRoom(roomVo);
+            inductionStaffService.delInduction(inductionId);
         }
-        probation.setWorkNum(inductionVo.getWorkNum());
-        probationService.addProbation(probation);
-        SysWorkNumHead sysWorkNumHead = sysWorkNumHeadService.selectHeadByDeptId(inductionVo.getDeptId(), inductionVo.getPostId());
-        SysUserNumber userNumber=new SysUserNumber();
-        userNumber.setWorkNum(inductionVo.getWorkNum());
-        userNumber.setDeptId(inductionVo.getDeptId());
-        userNumber.setPostId(inductionVo.getPostId());
-        userNumber.setFullName(inductionVo.getFullName());
-        userNumber.setHeadId(sysWorkNumHead.getHeadId());
-        userNumber.setCreateBy(SecurityUtils.getUsername());
-        userNumber.setCreateTime(new Date());
-        userNumberService.addNumber(userNumber);
-        return AjaxResult.success();
+            return AjaxResult.success();
     }
     @PutMapping("/positive")
     @ApiOperation(value = "提前转正",notes = "提前转正")
@@ -180,5 +202,26 @@ public class InductionStaffController extends BaseController {
     @ApiOperation(value = "批量删除入职记录",notes = "批量删除入职记录")
     public AjaxResult delInduction(@ApiParam("入职id数组") @RequestParam(value = "inductionIds") int [] inductionIds){
         return toAjax(inductionStaffService.delInductions(inductionIds));
+    }
+    @PutMapping("/leave")
+    @ApiOperation(value = "离职",notes = "离职")
+    public AjaxResult updateWorkStatus(@ApiParam("入职id") @RequestParam(value = "inductionIds") int inductionId){
+        InductionVo inductionVo = inductionStaffService.inductionInfo(inductionId);
+        if(inductionVo.getInductionStatus()==2){
+            return AjaxResult.error(400,"员工"+inductionVo.getWorkNum()+"未入职!");
+        }
+        if(inductionVo.getInductionStatus()==4){
+            return AjaxResult.error(400,"员工"+inductionVo.getWorkNum()+"已离职!");
+        }
+        inductionStaffService.updateWorkStatus(inductionId);
+        SysUserNumber sysUserNumber = userNumberService.numberByWorkNum(inductionVo.getWorkNum());
+        sysUserNumber.setUpdateBy(SecurityUtils.getUsername());
+        userNumberService.delNumbers(sysUserNumber);
+        DormitoryRoom dormitoryRoom = roomService.roomInfo(inductionVo.getRoomId());
+        UpdateRoomVo roomVo=new UpdateRoomVo();
+        roomVo.setRoomId(dormitoryRoom.getRoomId());
+        roomVo.setRoomCapacity(dormitoryRoom.getRoomCapacity()+1);
+        roomService.updateRoom(roomVo);
+        return AjaxResult.success();
     }
 }

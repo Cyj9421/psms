@@ -2,8 +2,6 @@ package com.psms.common.exception;
 
 /**
  * 工具类异常
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class UtilException extends RuntimeException
 {

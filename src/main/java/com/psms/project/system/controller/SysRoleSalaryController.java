@@ -90,7 +90,16 @@ public class SysRoleSalaryController extends BaseController {
             summary.setSummaryQuarter(c.get(Calendar.MONTH)/3+1);
             summary.setSummaryYear(c.get(Calendar.YEAR));
             summary.setWorkNum(list.get(i));
-            SysUnitPrice sysUnitPrice = sysUnitPriceService.priceInfo(list.get(i));
+            SysUnitPrice sysUnitPrice=new SysUnitPrice();
+            try {
+                sysUnitPrice= sysUnitPriceService.priceInfo(list.get(i));
+                if(sysUnitPrice==null){
+                    return AjaxResult.error(400,"请先设置工号"+list.get(i)+"的工资单价");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                return AjaxResult.error(400,"请先设置工号"+list.get(i)+"的工资单价");
+            }
             SysRoleSalary sysRoleSalary = new SysRoleSalary();
             summary= sysRoleSalaryService.calcSummary(summary);
             sysRoleSalary.setWorkNum(list.get(i));
@@ -108,6 +117,11 @@ public class SysRoleSalaryController extends BaseController {
             sysRoleSalary.setSalary(salary);
             sysRoleSalary.setSalaryMonth(c.get(Calendar.MONTH)+1);
             sysRoleSalary.setSalaryYear(c.get(Calendar.YEAR));
+            SysRoleSalary sysSalary = new SysRoleSalary();
+            sysSalary.setWorkNum(sysRoleSalary.getWorkNum());
+            sysSalary.setSalaryMonth(sysRoleSalary.getSalaryMonth());
+            sysSalary.setSalaryYear(sysRoleSalary.getSalaryYear());
+            sysRoleSalaryService.delSalary(sysSalary);
             sysRoleSalaryService.addSalary(sysRoleSalary);
         }
         return AjaxResult.success();

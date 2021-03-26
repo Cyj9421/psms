@@ -48,6 +48,7 @@
         <result property="probationMonth" column="probation_month"/>
         <result property="citizenshipName" column="citizenship_name"/>
         <result property="currencyName" column="currency_name"/>
+        <result property="inductionStatus" column="induction_status"/>
         <result property="probationStatus" column="probation_status"/>
     </resultMap>
     <resultMap id="InductionWorkCardResult" type="com.psms.project.induction.domain.InductionWorkCard">
@@ -66,7 +67,7 @@
         select a.induction_id,a.currency_id,a.citizenship_id,a.dept_id,a.post_id,a.probation_id,
                a.dormitory_id,a.order_id,a.room_id,a.work_num,a.salary,a.full_name,a.first_name_national,a.last_name_national,a.first_name,
                a.last_name,a.sex,a.age,a.personal_photo,a.passport,a.national,a.id_card,a.contact,a.education_id,
-               a.is_married,a.born_date,a.phone_number,a.born_address,a.born_province,a.born_area,
+               a.is_married,a.born_date,a.phone_number,a.born_address,a.born_province,a.born_area,a.induction_status,
                a.now_address,a.now_province,a.now_area,a.create_time,a.update_time,a.remark,a.payday,a.deposit,
                b.post_name,
                c.probation_day,c.probation_month,c.probation_status,
@@ -169,7 +170,7 @@
         <if test="postId != null and postId !=0">post_id=#{postId},</if>
         <if test="probationId != null and probationId !=0">probation_id=#{probationId},</if>
         <if test="dormitoryId != null and dormitoryId !=0">dormitory_id=#{dormitoryId},</if>
-        <if test="roomId != null and roomId=0">room_id=#{roomId},</if>
+        <if test="roomId != null and roomId !=0">room_id=#{roomId},</if>
         <if test="orderId != null and orderId !=0">order_id=#{orderId},</if>
         <if test="salary != null and salary !=0">salary=#{salary},</if>
         <if test="payDay != null and payDay != ''">payday=#{payDay},</if>
@@ -205,11 +206,19 @@
         update induction_staff set induction_status=#{param2}
         where induction_status=2 and induction_id=#{param1}
     </update>
+    <update id="updateWorkStatus" parameterType="int">
+        update induction_staff set induction_status=4
+        where induction_status !=2 and induction_id=#{inductionId}
+    </update>
     <delete id="delInductions" parameterType="int">
         delete from induction_staff where induction_id in
         <foreach collection="array" item="inductionId" open="(" separator="," close= ")">
             #{inductionId}
         </foreach>
+    </delete>
+    <delete id="delInduction" parameterType="int">
+        delete from induction_staff
+        where induction_id=#{inductionId}
     </delete>
     <select id="inductionList" resultMap="inductionStaffResult" parameterType="com.psms.project.induction.domain.vo.SelectInductionVo">
         <include refid="inductionVo"/>
@@ -229,7 +238,14 @@
             <if test="probationStatus != null and probationStatus != 0">
                 AND c.probation_status=#{probationStatus}
             </if>
+            <if test="inductionStatus != null and inductionStatus !=0">
+                AND a.induction_status=#{inductionStatus}
+            </if>
+            <if test="inductionStatus ==0">
+                AND a.induction_status!=3 and a.induction_status!=4
+            </if>
         </where>
+        order by a.induction_id desc
     </select>
     <select id="inductionInfo" resultMap="inductionStaffResult" parameterType="int">
         <include refid="inductionVo"/>

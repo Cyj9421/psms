@@ -7,8 +7,6 @@ import com.psms.common.utils.StringUtils;
 
 /**
  * 字符集工具类
- * 
- * @author jeethink  官方网址：www.jeethink.vip
  */
 public class CharsetKit
 {
